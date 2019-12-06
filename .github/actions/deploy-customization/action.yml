@@ -1,0 +1,23 @@
+name: 'Deploy Customization'
+description: 'Customize Mubernetes manifest with Kustomize'
+inputs:
+  kubernetes-deploy-directory:
+    description: 'Kubernetes Configuration Directory'
+    required: true
+    default: '.deploy'
+  stage:
+    description: 'Stage'
+    required: true
+  commit-hash:
+    description: 'Commit Hash'
+    required: true
+outputs:
+  manifest-path:
+    description: 'Customized Kubernetes Manifest Path'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.kubernetes-deploy-directory }}
+    - ${{ inputs.stage }}
+    - ${{ inputs.commit-hash }}
