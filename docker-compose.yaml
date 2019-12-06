@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+    webserver:
+        build: docker/webserver
+        volumes: 
+            - ./dist:/app/public
