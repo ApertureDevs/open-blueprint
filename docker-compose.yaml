@@ -5,3 +5,8 @@ services:
         build: docker/webserver
         volumes: 
             - ./dist:/app/public
+    nodejs:
+        image: node:lts
+        working_dir: /app
+        volumes:
+            - .:/app
