@@ -26,3 +26,7 @@ jobs:
     - name: NPM audit
       run: |
         docker-compose run --rm --no-deps nodejs npm audit
+
+    - name: SASS linter
+      run: |
+        make sass-linter-dry-run

@@ -9,3 +9,13 @@ dist: dist/css
 
 dist/css: node_modules
 	$(dcr) nodejs node_modules/.bin/node-sass --output-style compressed src/scss --output dist/css
+
+# CODING STYLE
+
+cs: sass-linter
+
+sass-linter: node_modules
+	$(dcr) nodejs node_modules/.bin/stylelint 'src/**/*.scss' --fix
+
+sass-linter-dry-run: node_modules
+	$(dcr) nodejs node_modules/.bin/stylelint 'src/**/*.scss'
