@@ -26,3 +26,6 @@ sass-linter: node_modules
 
 sass-linter-dry-run: node_modules
 	$(dcr) nodejs node_modules/.bin/stylelint 'src/**/*.scss'
+
+html-linter-dry-run: node_modules
+	$(dcr) nodejs node_modules/.bin/htmlhint '{dist,src}/**/*.html'

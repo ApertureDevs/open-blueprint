@@ -30,3 +30,8 @@ jobs:
     - name: SASS linter
       run: |
         make sass-linter-dry-run
+
+    - name: HTML linter
+      run: |
+        make html-linter-dry-run
+  

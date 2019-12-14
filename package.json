@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ApertureDevs/open-blueprint#readme",
   "devDependencies": {
+    "htmlhint": "^0.11.0",
     "node-sass": "^4.13.0",
     "stylelint": "^12.0.0",
     "stylelint-config-standard": "^19.0.0"
