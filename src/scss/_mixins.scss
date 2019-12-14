@@ -1,0 +1,23 @@
+@import './variables';
+
+@mixin flexCenter($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin textStyle {
+  color: $theme-color4;
+  font-family: 'Open Sans', sans-serif;
+}
+
+@mixin transitionEase {
+  transition: all 0.5s ease-in-out;
+}
+
+@mixin mobile {
+  @media (max-width: $mobile-width) {
+    @content;
+  }
+}

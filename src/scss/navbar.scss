@@ -1,0 +1,58 @@
+@import './variables';
+@import './mixins';
+
+.menu-nav {
+  z-index: 1;
+  position: fixed;
+  height: 100vh;
+  overflow: hidden;
+  top: $menu-size;
+  left: 0;
+  width: 100vw;
+  visibility: hidden;
+  transform: translateX(-100%);
+  background-color: $theme-color1;
+
+  @include transitionEase;
+
+  &.open {
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  &__item {
+    height: $menu-size;
+    color: $theme-color2;
+    border-top: 1px solid $theme-color2;
+
+    @include transitionEase;
+
+    &:last-child {
+      border-bottom: 1px solid $theme-color2;
+    }
+
+    &:hover {
+      padding-left: 20px;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &__link {
+    display: block;
+    height: 100%;
+  }
+
+  &__icon {
+    font-size: 30px;
+    width: $menu-size;
+    text-align: center;
+  }
+
+  &__label {
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 35px;
+    color: $theme-color2;
+    height: 100%;
+  }
+}

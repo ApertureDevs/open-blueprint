@@ -1,25 +1,70 @@
 @import './variables';
+@import './mixins';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+@import './button';
+@import './menu';
+@import './navbar';
+@import './landing';
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  background: url('../media/blueprint.jpg') repeat;
-}
-
-header {
-  width: 100%;
+  margin: 0;
 }
 
 main {
-  background-color: #fff;
-  max-width: 1400px;
+  top: $menu-size;
+  background-color: $theme-color2;
+  max-width: $max-width;
   min-width: 375px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  height: 100%;
 }
 
 footer {
   width: 100%;
+  position: fixed;
+}
+
+a {
+  @include textStyle;
+
+  text-decoration: none;
+
+  &:hover {
+    @include transitionEase;
+
+    color: $theme-color1;
+  }
+}
+
+p {
+  @include textStyle;
+}
+
+li {
+  @include textStyle;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include textStyle;
+
+  color: $theme-color3;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+i {
+  &.fas {
+    color: $theme-color2;
+  }
 }

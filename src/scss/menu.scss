@@ -1,0 +1,113 @@
+@import './variables';
+@import './mixins';
+
+.menu {
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $menu-size;
+  background: $theme-color1;
+  z-index: 1;
+  min-width: 350px;
+
+  &-btn {
+    display: inline-block;
+    position: relative;
+    width: $menu-size;
+    height: 100%;
+
+    &__burger {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      width: 50%;
+      height: 4px;
+      background-color: $theme-color2;
+      transform: translateX(-50%) translateY(-50%);
+
+      @include transitionEase;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 4px;
+        background-color: $theme-color2;
+
+        @include transitionEase;
+      }
+
+      &::before {
+        transform: translateY(-10px);
+      }
+
+      &::after {
+        transform: translateY(10px);
+      }
+    }
+
+    &:hover {
+      .menu-btn__burger {
+        &::before {
+          transform: translateY(-15px);
+        }
+
+        &::after {
+          transform: translateY(15px);
+        }
+      }
+    }
+
+    &.open {
+      .menu-btn__burger {
+        background: transparent;
+
+        @include transitionEase;
+
+        &::before,
+        &::after {
+          transform-origin: 50% 50%;
+        }
+
+        &::before {
+          transform: translateY(0) rotate(45deg);
+        }
+
+        &::after {
+          transform: translateY(0) rotate(-45deg);
+        }
+      }
+    }
+  }
+
+  &-logo {
+    display: inline-block;
+    width: 150px;
+    height: 100%;
+
+    .obp-logo {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &-top {
+    width: 125px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 10px;
+    height: $menu-size;
+
+    &__item {
+      font-size: 30px;
+    }
+  }
+}
