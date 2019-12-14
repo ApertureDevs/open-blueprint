@@ -1,0 +1,5 @@
+name: 'NPM Audit'
+description: 'NPM dependencies security check'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
