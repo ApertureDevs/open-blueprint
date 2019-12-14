@@ -6,32 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="./../css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" integrity="sha384-REHJTs1r2ErKBuJB0fCK99gCYsVjwxHrSU0N7I1zl9vZbggVJXRMsv/sLlOAGb4M" crossorigin="anonymous">
 </head>
 <body>
-    <header>
+    <header class="menu">
         <div class="menu-btn">
             <span class="menu-btn__burger"></span>
         </div>
-        
-        <nav class="nav">
-            <ul class="menu-nav">
-                <li class="menu-nav__item active"><a href="#" class="menu-nav__link">Home</a></li>
-                <li class="menu-nav__item"><a href="#" class="menu-nav__link">Make</a></li>
-                <li class="menu-nav__item"><a href="#" class="menu-nav__link">Design</a></li>
-                <li class="menu-nav__item"><a href="#" class="menu-nav__link">Shop</a></li>
-                <li class="menu-nav__item"><a href="#" class="menu-nav__link">About</a></li>
-            </ul>
-        </nav>
+
+        <div class="menu-logo">
+            <a href="#"><img class="obp-logo" src="../media/obp-logo.svg" /></a>
+        </div>
+
+        <div class="menu-top">
+            <a href="#"><div class="menu-top__item"><i class="fas fa-bell"></i></div></a>
+            <a href="#"><div class="menu-top__item"><i class="fas fa-user"></i></div></a>
+        </div>
     </header>
 
-    <main>
+    <nav class="menu-nav">
+        <div class="menu-nav__list">
+            <div class="menu-nav__item active"><a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-tools"></i><span class="menu-nav__label">Make</span></a></div>
+            <div class="menu-nav__item"><a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-drafting-compass"></i><span class="menu-nav__label">Design</span></a></div>
+            <div class="menu-nav__item"><a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-store"></i><span class="menu-nav__label">Store</span></a></div>
+            <div class="menu-nav__item"><a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-info"></i><span class="menu-nav__label">About</span></a></div>
+        </div>
+    </nav>
+
+    <main class="landing">
         <div class="jumbotron">
-            <h1>Open Blueprint</h1>
-            <h2>How to build a MOTHERFUCKING TOASTER!!!</h2>
+            <h1 class="jumbotron__main_title">Open Blueprint</h1>
+            <p class="jumbotron__baseline">An Open Plaform to increase creativity</p>
+            <p class="jumbotron__presentation">Open Blueprint is an open platform to help makers to create, design, fix and improve projects.</p>
+            <a href="#" class="btn btn-primary">Start</a>
+        </div>
+
+        <div class="landing-section make">
+            <h2 class="make__title">Make</h2>
+            <p class="make__presentation">Open Blueprint provide an repository of Blueprints. Blueprints are makers projects shared with the community. Each Blueprints explain every step to make what you whant with the community help.</p>
+            <a href="#" class="btn btn-primary">Browse repository</a>
+        </div>
+
+        <div class="landing-section design">
+            <h2 class="design__title">Design</h2>
+            <p class="design__presentation">Open Blueprint can help you to bring to life your project with the community contribution.</p>
+            <a href="#" class="btn btn-primary">Design a Blueprint</a>
+        </div>
+
+        <div class="landing-section contribute">
+            <h2 class="contribute__title">Contribute</h2>
+            <p class="contribute__presentation">Open mean contribution and everybody can contribute to a Blueprint or even to Open Blueprint platform, no mather what you skill are.</p>
+            <p class="contribute__presentation">Every contribution are welcome, it can be :</p>
+            <ul class="contribute__list">
+                <li>an enhancement proposal</li>
+                <li>a problem report</li>
+                <li>a simple question</li>
+            </ul>
+            <a href="#" class="btn btn-primary">Contribute</a>
         </div>
     </main>
 
     <footer>
     </footer>
 </body>
+<script src="./../js/main.js"></script>
+<script src="https://kit.fontawesome.com/1725cbf5e6.js" crossorigin="anonymous"></script>
 </html>

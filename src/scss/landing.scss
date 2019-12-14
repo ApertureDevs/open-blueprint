@@ -1,0 +1,17 @@
+.landing {
+  align-items: center;
+  text-align: center;
+
+  .jumbotron {
+    margin-bottom: 50px;
+  }
+
+  &-section {
+    margin-bottom: 50px;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+  }
+}
