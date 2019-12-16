@@ -1,39 +1,30 @@
 @import './variables';
 @import './mixins';
 
+$item-size: 50px;
+
 .menu-nav {
-  z-index: 1;
   position: fixed;
-  height: 100vh;
-  overflow: hidden;
   top: $menu-size;
   left: 0;
-  width: 100vw;
-  visibility: hidden;
   transform: translateX(-100%);
-  background-color: $theme-color1;
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: lighten($theme-color1, 5%);
 
-  @include transitionEase;
-
-  &.open {
-    visibility: visible;
-    transform: translateX(0);
-  }
+  @include transition-ease;
 
   &__item {
-    height: $menu-size;
+    height: $item-size;
     color: $theme-color2;
-    border-top: 1px solid $theme-color2;
+    border-top: 1px solid darken($theme-color1, 10%);
 
-    @include transitionEase;
+    @include transition-ease;
 
     &:last-child {
-      border-bottom: 1px solid $theme-color2;
-    }
-
-    &:hover {
-      padding-left: 20px;
-      background-color: rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid darken($theme-color1, 10%);
     }
   }
 
@@ -43,16 +34,48 @@
   }
 
   &__icon {
-    font-size: 30px;
     width: $menu-size;
+    line-height: $item-size !important;
+    font-size: 23px;
     text-align: center;
   }
 
   &__label {
     display: inline-block;
-    margin-left: 20px;
-    font-size: 35px;
-    color: $theme-color2;
     height: 100%;
+    margin-left: 20px;
+    font-size: 20px;
+    color: $theme-color2;
+  }
+
+  &.open {
+    &.menu-nav {
+      transform: translateX(0);
+    }
+  }
+
+  @include md-screen {
+    transform: translateX(0);
+    width: $menu-size;
+    box-shadow: 2px 0 10px $theme-color1;
+
+    &__label {
+      visibility: hidden;
+    }
+
+    &.open,
+    &:hover {
+      width: 250px;
+
+      .menu-nav__item:hover {
+        padding-left: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .menu-nav__item .menu-nav__label {
+        visibility: visible;
+        transition-delay: 0.5s;
+      }
+    }
   }
 }

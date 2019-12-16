@@ -14,7 +14,7 @@
   line-height: 1.5;
   border-radius: 0.25rem;
 
-  @include transitionEase;
+  @include transition-ease;
 
   &-primary {
     color: $theme-color2;
