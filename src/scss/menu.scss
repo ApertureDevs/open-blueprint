@@ -28,7 +28,7 @@
       background-color: $theme-color2;
       transform: translateX(-50%) translateY(-50%);
 
-      @include transitionEase;
+      @include transition-ease;
 
       &::before,
       &::after {
@@ -39,7 +39,7 @@
         height: 4px;
         background-color: $theme-color2;
 
-        @include transitionEase;
+        @include transition-ease;
       }
 
       &::before {
@@ -67,7 +67,7 @@
       .menu-btn__burger {
         background: transparent;
 
-        @include transitionEase;
+        @include transition-ease;
 
         &::before,
         &::after {
