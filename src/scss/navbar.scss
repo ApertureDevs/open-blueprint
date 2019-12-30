@@ -12,10 +12,16 @@ $transition-duration: 300ms;
   transform: translateX(-100%);
   transition: transform $transition-duration;
 
-  &__list {
-    top: $menu-size;
+  &__list,
+  &__sub-list {
     height: 100vh;
     width: 50vw;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__list {
+    top: $menu-size;
     background-color: $theme-color3;
   }
 
@@ -23,8 +29,6 @@ $transition-duration: 300ms;
     position: absolute;
     top: 0;
     left: 50vw;
-    width: 50vw;
-    height: 100vh;
     background-color: $theme-color4;
     opacity: 0;
     visibility: hidden;

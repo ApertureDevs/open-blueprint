@@ -1,16 +1,11 @@
 @import './variables';
+@import '../node_modules/normalize.css/normalize.css';
 @import './mixins';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 @import './button';
 @import './menu';
 @import './navbar';
 @import './landing';
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 main {
   top: $menu-size;
