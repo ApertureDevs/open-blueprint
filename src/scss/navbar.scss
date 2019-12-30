@@ -1,80 +1,177 @@
 @import './variables';
 @import './mixins';
 
-$item-size: 50px;
+$item-size: 3rem;
+$transition-duration: 300ms;
 
 .menu-nav {
   position: fixed;
   top: $menu-size;
   left: 0;
-  transform: translateX(-100%);
   z-index: 1;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  background-color: lighten($theme-color1, 5%);
+  transform: translateX(-100%);
+  transition: transform $transition-duration;
 
-  @include transition-ease;
+  &__list {
+    top: $menu-size;
+    height: 100vh;
+    width: 50vw;
+    background-color: $theme-color3;
+  }
+
+  &__sub-list {
+    position: absolute;
+    top: 0;
+    left: 50vw;
+    width: 50vw;
+    height: 100vh;
+    background-color: $theme-color4;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity $transition-duration,
+      visibility $transition-duration;
+  }
+
+  &__item,
+  &__sub-item {
+    display: flex;
+    align-items: center;
+    height: $item-size;
+    border-bottom: solid 1px darken($theme-color4, 10%);
+    overflow: hidden;
+  }
 
   &__item {
-    height: $item-size;
-    color: $theme-color2;
-    border-top: 1px solid darken($theme-color1, 10%);
+    &.open {
+      .menu-nav__list {
+        width: 100vw;
+      }
 
-    @include transition-ease;
+      .menu-nav__sub-list {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
 
-    &:last-child {
-      border-bottom: 1px solid darken($theme-color1, 10%);
+    &:hover {
+      background-color: $theme-color4;
     }
   }
 
-  &__link {
-    display: block;
-    height: 100%;
+  &__toogle {
+    line-height: $item-size !important;
+    width: $item-size;
+    height: $item-size;
+    text-align: center;
+    color: $theme-color2;
+    opacity: 1;
+    visibility: visible;
+    cursor: pointer;
+    transition:
+      visibility $transition-duration,
+      opacity $transition-duration;
+  }
+
+  &__link,
+  &__sub-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    color: $theme-color2;
+    text-decoration: none;
   }
 
   &__icon {
     width: $menu-size;
-    line-height: $item-size !important;
-    font-size: 23px;
+    font-size: 1.5rem;
     text-align: center;
   }
 
-  &__label {
-    display: inline-block;
-    height: 100%;
-    margin-left: 20px;
-    font-size: 20px;
-    color: $theme-color2;
+  &__label,
+  &__sub-label {
+    font-size: 1rem;
+    line-height: $item-size;
+  }
+
+  &__sub-label {
+    width: 100%;
+    text-align: center;
   }
 
   &.open {
-    &.menu-nav {
-      transform: translateX(0);
+    transform: translateX(0);
+  }
+
+  &.wide-open {
+    .menu-nav {
+      &__list {
+        width: 100vw;
+      }
+
+      &__item {
+        width: 50%;
+      }
+
+      &__toogle {
+        visibility: hidden;
+        opacity: 0;
+      }
+
+      &__item.open .menu-nav__toogle {
+        visibility: visible;
+        opacity: 1;
+      }
     }
   }
 
   @include md-screen {
     transform: translateX(0);
-    width: $menu-size;
-    box-shadow: 2px 0 10px $theme-color1;
 
-    &__label {
-      visibility: hidden;
+    &__list {
+      width: $menu-size;
+      overflow: hidden;
     }
 
-    &.open,
-    &:hover {
-      width: 250px;
+    &__icon {
+      flex-shrink: 0;
+    }
 
-      .menu-nav__item:hover {
-        padding-left: 20px;
-        background-color: rgba(255, 255, 255, 0.2);
+    &__sub-list {
+      left: 50%;
+      transform: translateX(-100%);
+      transition: opacity $transition-duration;
+    }
+
+    &:hover,
+    &.open {
+      .menu-nav {
+        &__list {
+          width: 13rem;
+          transition: width $transition-duration;
+        }
       }
+    }
 
-      .menu-nav__item .menu-nav__label {
-        visibility: visible;
-        transition-delay: 0.5s;
+    &.wide-open {
+      width: 10vw;
+      min-width: 26rem;
+
+      .menu-nav {
+        &__list,
+        &__sub-list {
+          width: 10vw;
+          min-width: 13rem;
+        }
+
+        &__sub-list {
+          transform: translateX(0);
+        }
+
+        &__item {
+          width: 100%;
+        }
       }
     }
   }

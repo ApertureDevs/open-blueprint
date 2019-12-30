@@ -34,8 +34,6 @@ a {
   text-decoration: none;
 
   &:hover {
-    @include transition-ease;
-
     color: $theme-color1;
   }
 }
@@ -68,5 +66,7 @@ i {
 }
 
 .has-sidebar {
-  margin-left: $menu-size;
+  @include md-screen {
+    margin-left: $menu-size;
+  }
 }

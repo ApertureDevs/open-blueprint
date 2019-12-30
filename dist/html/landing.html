@@ -25,12 +25,27 @@
     </header>
 
     <nav class="menu-nav">
-        <div class="menu-nav__list">
-            <div class="menu-nav__item active"><a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-tools"></i><span class="menu-nav__label">Make</span></a></div>
-            <div class="menu-nav__item"><a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-drafting-compass"></i><span class="menu-nav__label">Design</span></a></div>
-            <div class="menu-nav__item"><a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-store"></i><span class="menu-nav__label">Store</span></a></div>
-            <div class="menu-nav__item"><a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-info"></i><span class="menu-nav__label">About</span></a></div>
-        </div>
+        <ul class="menu-nav__list">
+            <li class="menu-nav__item active">
+                <a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-tools"></i><span class="menu-nav__label">Make</span></a>
+                <i class="menu-nav__toogle fas fa-chevron-right"></i>
+                <ul class="menu-nav__sub-list">
+                    <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">Garden</span></a></li>
+                    <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">Kitchen</span></a></li>
+                </ul>
+            </li>
+
+            <li class="menu-nav__item"><a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-drafting-compass"></i><span class="menu-nav__label">Design</span></a></li>
+            <li class="menu-nav__item"><a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-store"></i><span class="menu-nav__label">Store</span></a></li>
+            <li class="menu-nav__item">
+                <a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-info"></i><span class="menu-nav__label">About</span></a>
+                <i class="menu-nav__toogle fas fa-chevron-right"></i>
+                <ul class="menu-nav__sub-list">
+                    <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">Open Blueprint project</span></a></li>
+                    <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">Contribute</span></a></li>
+                </ul>
+            </li>
+        </ul>
     </nav>
 
     <main class="has-sidebar landing">

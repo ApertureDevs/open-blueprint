@@ -5,10 +5,6 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-@mixin transition-ease {
-  transition: all 0.3s ease-in-out;
-}
-
 @mixin md-screen {
   @media (min-width: $xs-screen-width) {
     @content;

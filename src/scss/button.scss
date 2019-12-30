@@ -1,6 +1,8 @@
 @import './variables';
 @import './mixins';
 
+$transition-duration: 300ms;
+
 .btn {
   display: inline-block;
   font-weight: 400;
@@ -13,8 +15,9 @@
   font-size: 1rem;
   line-height: 1.5;
   border-radius: 0.25rem;
-
-  @include transition-ease;
+  transition:
+    color $transition-duration,
+    background-color $transition-duration;
 
   &-primary {
     color: $theme-color2;
