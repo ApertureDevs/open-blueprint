@@ -5,6 +5,10 @@
   .jumbotron {
     margin-top: 1rem;
     margin-bottom: 2rem;
+
+    &__image {
+      width: 60%;
+    }
   }
 
   &-section {
