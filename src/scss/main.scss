@@ -60,8 +60,8 @@ i {
   }
 }
 
-.has-sidebar {
-  @include md-screen {
-    margin-left: $menu-size;
+@include md-screen {
+  main {
+    padding-left: $menu-size;
   }
 }
