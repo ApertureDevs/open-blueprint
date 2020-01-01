@@ -47,7 +47,7 @@ $transition-duration: 300ms;
   }
 
   &__item {
-    &.open {
+    &.menu-nav--open {
       .menu-nav__list {
         width: 100vw;
       }
@@ -104,11 +104,11 @@ $transition-duration: 300ms;
     text-align: center;
   }
 
-  &.open {
+  &.menu-nav--open {
     transform: translateX(0);
   }
 
-  &.wide-open {
+  &.menu-nav--wide-open {
     .menu-nav {
       &__list {
         width: 100vw;
@@ -123,7 +123,7 @@ $transition-duration: 300ms;
         opacity: 0;
       }
 
-      &__item.open .menu-nav__toogle {
+      &__item.menu-nav--open .menu-nav__toogle {
         visibility: visible;
         opacity: 1;
       }
@@ -149,7 +149,7 @@ $transition-duration: 300ms;
     }
 
     &:hover,
-    &.open {
+    &.menu-nav--open {
       .menu-nav {
         &__list {
           width: 13rem;
@@ -158,7 +158,7 @@ $transition-duration: 300ms;
       }
     }
 
-    &.wide-open {
+    &.menu-nav--wide-open {
       width: 10vw;
       min-width: 26rem;
 
