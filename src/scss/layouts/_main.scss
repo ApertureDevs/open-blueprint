@@ -1,0 +1,19 @@
+@import '../base/variables';
+@import '../base/responsive';
+
+main {
+  top: $menu-size;
+  background-color: $theme-color2;
+  max-width: $max-width;
+  min-width: 375px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  height: 100%;
+  align-items: center;
+  text-align: center;
+
+  @include md-screen {
+    padding-left: $menu-size;
+  }
+}

@@ -1,0 +1,15 @@
+@import '../../base/variables';
+
+.landing-section {
+  padding: 1.5rem;
+
+  &__icon {
+    color: $theme-color1;
+    font-size: 4rem;
+  }
+
+  &__list {
+    list-style-type: none;
+    padding: 0;
+  }
+}

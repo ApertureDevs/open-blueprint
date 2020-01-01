@@ -1,0 +1,37 @@
+@import 'variables';
+
+@mixin text-style {
+  color: $theme-color4;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  @include text-style;
+
+  text-decoration: none;
+
+  &:hover {
+    color: $theme-color1;
+  }
+}
+
+p {
+  @include text-style;
+}
+
+li {
+  @include text-style;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include text-style;
+
+  color: $theme-color1;
+  text-transform: uppercase;
+  line-height: 1.2;
+}

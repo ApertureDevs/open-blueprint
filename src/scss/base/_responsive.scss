@@ -1,10 +1,3 @@
-@import './variables';
-
-@mixin text-style {
-  color: $theme-color4;
-  font-family: 'Open Sans', sans-serif;
-}
-
 @mixin md-screen {
   @media (min-width: $xs-screen-width) {
     @content;

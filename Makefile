@@ -8,7 +8,7 @@ node_modules: package-lock.json
 dist: dist/css
 
 dist/css: node_modules
-	$(dcr) nodejs node_modules/.bin/node-sass --output-style compressed src/scss --output dist/css
+	$(dcr) nodejs node_modules/.bin/node-sass --output-style compressed src/scss/styles.scss --output dist/css
 
 # TESTS
 

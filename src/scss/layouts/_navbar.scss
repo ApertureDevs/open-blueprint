@@ -1,5 +1,5 @@
-@import './variables';
-@import './mixins';
+@import '../base/variables';
+@import '../base/responsive';
 
 $item-size: 3rem;
 $transition-duration: 300ms;
