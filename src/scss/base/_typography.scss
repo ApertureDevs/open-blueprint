@@ -32,6 +32,6 @@ h6 {
   @include text-style;
 
   color: $theme-color1;
-  text-transform: uppercase;
   line-height: 1.2;
+  text-transform: uppercase;
 }

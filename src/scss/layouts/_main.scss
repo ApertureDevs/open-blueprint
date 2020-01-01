@@ -2,16 +2,16 @@
 @import '../base/responsive';
 
 main {
-  top: $menu-size;
-  background-color: $theme-color2;
-  max-width: $max-width;
-  min-width: 375px;
-  margin-left: auto;
-  margin-right: auto;
   position: relative;
-  height: 100%;
+  top: $menu-size;
   align-items: center;
+  min-width: 375px;
+  max-width: $max-width;
+  height: 100%;
+  margin-right: auto;
+  margin-left: auto;
   text-align: center;
+  background-color: $theme-color2;
 
   @include md-screen {
     padding-left: $menu-size;
