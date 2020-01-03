@@ -14,24 +14,32 @@ jobs:
     - name: Docker Build
       run: |
         docker-compose build
-    
+
     - name: Docker Up
       run: |
         docker-compose up -d
 
-    - name: Make
+    - name: Add Task runner
       run: |
-        make
+        curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
+
+    - name: Build
+      run: |
+        task build --summary
+        task build
 
     - name: NPM audit
       run: |
-        make npm-audit
+        task npm-audit --summary
+        task npm-audit
 
     - name: SASS linter
       run: |
-        make sass-linter-dry-run
+        task sass-linter-dry-run --summary
+        task sass-linter-dry-run
 
     - name: HTML linter
       run: |
-        make html-linter-dry-run
+        task html-linter-dry-run --summary
+        task html-linter-dry-run
   

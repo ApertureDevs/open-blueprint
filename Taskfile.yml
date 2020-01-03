@@ -1,0 +1,71 @@
+version: '2'
+
+
+tasks:
+  build:
+    desc: Build Open Blueprint Project
+    cmds:
+      - task: js-dependencies
+      - task: css
+
+  test:
+    desc: Launch tests suites
+    cmds:
+      - task: npm-audit
+      - task: sass-linter-dry-run
+      - task: linter-linter-dry-run
+
+  lint:
+    desc: Lint SASS sources
+    cmds:
+      - task: sass-linter
+
+  css:
+    desc: Compile SASS sources into CSS
+    cmds:
+      - docker-compose run --rm --no-deps nodejs node_modules/.bin/node-sass --output-style compressed src/scss/styles.scss --output dist/css
+    sources:
+      - src/scss/styles.scss
+    generates:
+      - dist/css/*
+    method: checksum
+    deps:
+      - js-dependencies
+
+  js-dependencies:
+    desc: Install NPM vendors
+    cmds:
+      - docker-compose run --rm --no-deps nodejs npm ci
+    sources:
+      - ./package-lock.json
+    generates:
+      - node_modules/**/*
+    method: checksum
+
+  npm-audit:
+    desc: Execute NPM security audit
+    cmds:
+      - docker-compose run --rm --no-deps nodejs npm audit
+    deps:
+      - js-dependencies
+
+  sass-linter:
+    desc: Apply linter rules to SASS sources
+    cmds:
+      - docker-compose run --rm --no-deps nodejs node_modules/.bin/stylelint 'src/**/*.scss' --fix
+    deps:
+      - js-dependencies
+
+  sass-linter-dry-run:
+    desc: Check linter rules to SASS sources
+    cmds:
+      - docker-compose run --rm --no-deps nodejs node_modules/.bin/stylelint 'src/**/*.scss'
+    deps:
+      - js-dependencies
+
+  html-linter-dry-run:
+    desc: Check linter rules to HTML sources
+    cmds:
+      - docker-compose run --rm --no-deps nodejs node_modules/.bin/htmlhint '{dist,src}/**/*.html'
+    deps:
+      - js-dependencies
