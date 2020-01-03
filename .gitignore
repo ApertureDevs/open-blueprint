@@ -3,3 +3,9 @@ docker-compose.override.yaml
 
 # Js
 node_modules
+
+# Task
+.task
+
+# Assets
+dist/css

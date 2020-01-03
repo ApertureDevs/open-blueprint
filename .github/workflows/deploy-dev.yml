@@ -25,8 +25,17 @@ jobs:
         version: '270.0.0'
         service_account_email: ${{ secrets.GKE_EMAIL }}
         service_account_key: ${{ secrets.GKE_KEY }}
-      
-    - name: Build
+
+    - name: Add Task runner
+      run: |
+        curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
+
+    - name: Build Sources
+      run: |
+        task build --summary
+        task build
+
+    - name: Build Docker Images
       run: |
         docker build --file .deploy/build/webserver/Dockerfile --tag eu.gcr.io/"$GKE_PROJECT"/webserver:${{ github.sha }} .
     
