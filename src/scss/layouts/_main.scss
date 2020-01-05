@@ -1,7 +1,7 @@
 @import '../base/variables';
 @import '../base/responsive';
 
-main {
+.content {
   position: relative;
   top: $menu-size;
   align-items: center;
@@ -10,8 +10,6 @@ main {
   height: 100%;
   margin-right: auto;
   margin-left: auto;
-  text-align: center;
-  background-color: $theme-color2;
 
   @include md-screen {
     padding-left: $menu-size;

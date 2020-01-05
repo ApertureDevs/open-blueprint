@@ -5,6 +5,7 @@ $transition-duration: 300ms;
 .btn {
   display: inline-block;
   padding: 0.375rem 0.75rem;
+  color: #fff;
   font-weight: 400;
   font-size: 1rem;
   line-height: 1.5;
@@ -13,19 +14,22 @@ $transition-duration: 300ms;
   vertical-align: middle;
   border: 1px solid transparent;
   border-radius: 0.25rem;
-  transition:
-    color $transition-duration,
-    background-color $transition-duration;
+  transition: background-color $transition-duration;
   user-select: none;
 
-  &-primary {
-    color: $theme-color2;
-    background-color: $theme-color1;
-    border-color: $theme-color1;
+  &--primary {
+    background-color: $theme-color-main;
 
     &:hover {
-      color: $theme-color2;
-      background-color: darken($theme-color1, 20%);
+      background-color: $theme-color-hover;
     }
+
+    &:active {
+      background-color: $theme-color-active;
+    }
+  }
+
+  &--big {
+    font-size: 1.5rem;
   }
 }

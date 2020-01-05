@@ -1,0 +1,9 @@
+@function svg-encode-color($color) {
+  @if type-of($color) == 'color' {
+    $hex: str-slice(ie-hex-str($color), 4);
+    $color:unquote("#{$hex}");
+  }
+  $color: '%23' + $color;
+
+  @return $color;
+}

@@ -1,0 +1,19 @@
+@import '../base/variables';
+
+.explorer {
+  padding: 2rem;
+
+  &__search {
+    margin-bottom: 2rem;
+  }
+
+  &__results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    &__item {
+      margin-bottom: 2rem;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import '../../base/variables';
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: $input-height;
+  padding: ($input-height * 0.1) ($input-height / 2);
+  color: $form-color;
+  background-color: $form-background-color;
+  background-clip: padding-box;
+  border: $form-border-width solid $form-border-color;
+  border-radius: $input-height / 2;
+
+  &:focus {
+    border-color: $form-focus-border-color;
+    outline: 0;
+  }
+
+  &::placeholder {
+    color: $form-placeholder-color;
+  }
+
+  &:disabled,
+  &[readonly] {
+    background-color: $form-disabled-background-color;
+    border-color: $form-disabled-border-color;
+  }
+}

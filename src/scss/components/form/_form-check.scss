@@ -1,0 +1,91 @@
+@import '../../base/variables';
+
+.form-check {
+  display: flex;
+  min-height: $check-size;
+
+  .form-check__input {
+    width: $check-size;
+    height: $check-size;
+    background-color: $form-background-color;
+    border: $form-border-width solid $form-border-color;
+    cursor: pointer;
+    appearance: none;
+
+    &[type="checkbox"] {
+      border-radius: $check-size * 0.1;
+    }
+
+    &[type="radio"] {
+      border-radius: $check-size / 2;
+    }
+
+    &:focus {
+      border-color: $form-focus-border-color;
+      outline: 0;
+    }
+
+    &:checked {
+      background-color: $check-background-color;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: $check-size * 0.75;
+
+      &[type="checkbox"] {
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{svg-encode-color($check-color)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M4 8.5L6.5 11l6-6'/></svg>");
+      }
+
+      &[type="radio"] {
+        background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{svg-encode-color($check-color)}'/></svg>");
+      }
+    }
+
+    &:disabled {
+      cursor: none;
+      pointer-events: none;
+    }
+
+    &--switch[type="checkbox"] {
+      position: relative;
+      width: $check-size * 2;
+      height: $check-size;
+      background-color: $switch-background-color;
+      border: 0;
+      border-radius: $check-size / 2;
+      transition: background-color 0.3s;
+
+      &::after {
+        position: absolute;
+        top: $check-size * 0.05;
+        left: $check-size * 0.05;
+        width: $check-size * 0.9;
+        height: $check-size * 0.9;
+        background: #fff;
+        border-radius: $check-size * 0.9;
+        transition: transform 0.3s;
+        content: '';
+      }
+
+      &:checked {
+        background-color: $check-color;
+        background-image: none;
+
+        &::after {
+          transform: translateX(+110%);
+        }
+      }
+    }
+  }
+
+  &__label {
+    display: flex;
+    align-items: center;
+    padding-left: $check-size / 2;
+    font-size: $check-size * 0.75;
+    cursor: pointer;
+  }
+
+  &--inline {
+    display: inline-flex;
+  }
+}
