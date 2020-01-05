@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Open Blueprint - Landing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../media/favicon.ico">
+    <link href="./../css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-btn">
+            <span class="menu-btn__burger"></span>
+        </div>
+
+        <div class="header-logo">
+            <a class="header-logo__link" href="#">
+                <img class="header-logo__image" src="../media/obp-logo.svg" />
+                <span class="header-logo__label">Open Blueprint</span>
+            </a>
+        </div>
+
+        <div class="header-account">
+            <a href="#"><i class="header-account__item icon icon--notification"></i></a>
+            <a href="#"><i class="header-account__item icon icon--user"></i></a>
+        </div>
+    </header>
+
+    <nav class="menu-nav">
+        <ul class="menu-nav__list">
+            <li class="menu-nav__item menu-nav--active">
+                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--make"></i><span class="menu-nav__label">Make</span></a>
+                <div class="menu-nav__toogle">
+                    <i class="icon icon--chevron-right"></i>
+                </div>
+                <ul class="menu-nav__sub-list">
+                    <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">Browse</span></a></li>
+                    <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">History</span></a></li>
+                </ul>
+            </li>
+            <li class="menu-nav__item">
+                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--design"></i><span class="menu-nav__label">Design</span></a>
+                <div class="menu-nav__toogle">
+                    <i class="icon icon--chevron-right"></i>
+                </div>
+                <ul class="menu-nav__sub-list">
+                    <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">My Blueprints</span></a></li>
+                    <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">Create New</span></a></li>
+                </ul>
+            </li>
+            <li class="menu-nav__item">
+                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--contribute"></i><span class="menu-nav__label">Contribute</span></a>
+            </li>
+            <li class="menu-nav__item">
+                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--store"></i><span class="menu-nav__label">Store</span></a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="content explore">
+        <div class="hero">
+            <h1 class="hero__title">Explore</h1>
+            <p class="hero__description">Explore all blueprints created by makers community.</p>
+        </div>
+
+        <div class="explorer">
+            <div class="explorer__search">
+                <form name="search-form">
+                    <div class="input-group">
+                        <input id="search" type="search" class="form-control" placeholder="Search">
+                        <div class="input-group__append">
+                            <i class="input-group__icon icon icon--search"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-check form-check--inline">
+                        <input class="form-check__input form-check__input--switch" type="checkbox" id="official" checked>
+                        <label class="form-check__label" for="official">Official</label>
+                    </div>
+
+                    <div class="form-check form-check--inline">
+                        <input class="form-check__input form-check__input--switch" type="checkbox" id="community" checked>
+                        <label class="form-check__label" for="community">Community</label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="explorer__results">
+                <a href="#" class="explorer__results__item blueprint-card blueprint-card--official">
+                    <div class="blueprint-card__thumb">
+                        <img class="blueprint-card__thumb__image" src="http://placehold.it/250x150" alt="image"/>
+                        <div class="blueprint-card__thumb__overlay">
+                            <div class="blueprint-card__thumb__overlay__difficulty">
+                                <div class="blueprint-card__thumb__overlay__difficulty__label">Difficulty</div>
+                                <div class="icon-group">
+                                    <i class="icon-group__icon icon icon--difficulty"></i>
+                                    <span class="icon-group__label">Easy</span>
+                                </div>
+                            </div>
+                            <div class="blueprint-card__thumb__overlay__skill-list">
+                                <div class="blueprint-card__thumb__overlay__skill-list__label">Skills</div>
+                                <div class="blueprint-card__thumb__overlay__skill-list__item icon-group">
+                                    <i class="icon-group__icon icon icon--electronic"></i>
+                                    <span class="icon-group__label">Electronic</span>
+                                </div>
+                                <div class="blueprint-card__thumb__overlay__skill-list__item icon-group">
+                                    <i class="icon-group__icon icon icon--3dprint"></i>
+                                    <span class="icon-group__label">3D Print</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blueprint-card__content">
+                        <div class="blueprint-card__content__belt">
+                            <div class="blueprint-card__content__belt__loves icon-group">
+                                <span class="icon-group__label">83</span>
+                                <i class="icon-group__icon icon icon--love"></i>
+                            </div>
+                        </div>
+                        <div class="blueprint-card__content__title">Toaster</div>
+                        <div class="blueprint-card__content__footer">
+                            <div class="blueprint-card__content__footer__maker">By Wheatley</div>
+                            <div class="blueprint-card__content__footer__date">01/02/20</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="explorer__results__item blueprint-card">
+                    <div class="blueprint-card__thumb">
+                        <img class="blueprint-card__thumb__image" src="http://placehold.it/250x150" alt="image"/>
+                        <div class="blueprint-card__thumb__overlay">
+                            <div class="blueprint-card__thumb__overlay__difficulty">
+                                <div class="blueprint-card__thumb__overlay__difficulty__label">Difficulty</div>
+                                <div class="icon-group">
+                                    <i class="icon-group__icon icon icon--difficulty"></i>
+                                    <span class="icon-group__label">Hard</span>
+                                </div>
+                            </div>
+                            <div class="blueprint-card__thumb__overlay__skill-list">
+                                <div class="blueprint-card__thumb__overlay__skill-list__label">Skills</div>
+                                <div class="blueprint-card__thumb__overlay__skill-list__item icon-group">
+                                    <i class="icon-group__icon icon icon--electricity"></i>
+                                    <span class="icon-group__label">Electricity</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="blueprint-card__content">
+                        <div class="blueprint-card__content__belt">
+                            <div class="blueprint-card__content__belt__loves icon-group">
+                                <span class="icon-group__label">1083</span>
+                                <i class="icon-group__icon icon icon--love icon--active"></i>
+                            </div>
+                        </div>
+                        <div class="blueprint-card__content__title">Wind turbine</div>
+                        <div class="blueprint-card__content__footer">
+                            <div class="blueprint-card__content__footer__maker">By Glados</div>
+                            <div class="blueprint-card__content__footer__date">10/02/20</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+</body>
+<script src="./../js/main.js"></script>
+</html>

@@ -1,0 +1,50 @@
+@import "../../base/variables";
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+
+  &__prepend,
+  &__append {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: $form-border-color;
+    border: $form-border-width solid $form-border-color;
+    border-radius: $input-height / 2;
+  }
+
+  &__prepend {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &__append {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &__icon {
+    margin: 0.2rem 0.4rem;
+  }
+
+  .form-control {
+    flex: 1 1 0;
+    min-width: 0;
+    margin-bottom: 0;
+
+    &:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
