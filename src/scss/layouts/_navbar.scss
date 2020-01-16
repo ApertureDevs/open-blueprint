@@ -1,7 +1,6 @@
 @import '../base/variables';
 @import '../base/responsive';
 
-$item-size: 3rem;
 $transition-duration: 300ms;
 
 .menu-nav {
@@ -22,28 +21,19 @@ $transition-duration: 300ms;
 
   &__list {
     top: $menu-size;
-    background-color: $theme-color3;
+    background-color: $menu-nav-color;
   }
 
   &__sub-list {
     position: absolute;
     top: 0;
     left: 50vw;
-    background-color: $theme-color4;
+    background-color: lighten($menu-nav-color, 10%);
     visibility: hidden;
     opacity: 0;
     transition:
       opacity $transition-duration,
       visibility $transition-duration;
-  }
-
-  &__item,
-  &__sub-item {
-    display: flex;
-    align-items: center;
-    height: $item-size;
-    overflow: hidden;
-    border-bottom: solid 1px darken($theme-color4, 10%);
   }
 
   &__item {
@@ -57,18 +47,27 @@ $transition-duration: 300ms;
         opacity: 1;
       }
     }
+  }
+
+  &__item,
+  &__sub-item {
+    display: flex;
+    align-items: center;
+    height: $menu-nav-item-size;
+    overflow: hidden;
+    border-bottom: solid 1px $theme-color-gray-dark;
 
     &:hover {
-      background-color: $theme-color4;
+      background-color: $theme-color-hover;
     }
   }
 
   &__toogle {
-    width: $item-size;
-    height: $item-size;
-    color: $theme-color2;
-    line-height: $item-size !important;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $menu-nav-item-size;
+    height: $menu-nav-item-size;
     visibility: visible;
     cursor: pointer;
     opacity: 1;
@@ -83,20 +82,23 @@ $transition-duration: 300ms;
     flex-direction: row;
     align-items: center;
     width: 100%;
-    color: $theme-color2;
+    color: #fff;
     text-decoration: none;
+
+    &:hover {
+      color: #fff;
+    }
   }
 
   &__icon {
     width: $menu-size;
-    font-size: 1.5rem;
-    text-align: center;
+    height: $menu-icon-size;
   }
 
   &__label,
   &__sub-label {
     font-size: 1rem;
-    line-height: $item-size;
+    line-height: $menu-nav-item-size;
   }
 
   &__sub-label {

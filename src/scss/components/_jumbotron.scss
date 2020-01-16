@@ -1,13 +1,14 @@
-@import '../../base/variables';
+@import '../base/variables';
 
 .jumbotron {
   padding: 2rem;
+  text-align: center;
 
   &__image {
     width: 60%;
   }
 
   &__main-title {
-    color: $theme-color1;
+    color: $theme-color-main;
   }
 }

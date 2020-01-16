@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="../media/favicon.ico">
     <link href="./../css/styles.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" integrity="sha384-REHJTs1r2ErKBuJB0fCK99gCYsVjwxHrSU0N7I1zl9vZbggVJXRMsv/sLlOAGb4M" crossorigin="anonymous">
 </head>
 <body>
     <header class="header">
@@ -23,72 +22,76 @@
         </div>
 
         <div class="header-account">
-            <a href="#"><div class="header-account__item"><i class="fas fa-bell"></i></div></a>
-            <a href="#"><div class="header-account__item"><i class="fas fa-user"></i></div></a>
+            <a href="#"><i class="header-account__item icon icon--notification"></i></a>
+            <a href="#"><i class="header-account__item icon icon--user"></i></a>
         </div>
     </header>
 
     <nav class="menu-nav">
         <ul class="menu-nav__list">
             <li class="menu-nav__item menu-nav--active">
-                <a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-tools"></i><span class="menu-nav__label">Make</span></a>
-                <i class="menu-nav__toogle fas fa-chevron-right"></i>
+                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--make"></i><span class="menu-nav__label">Make</span></a>
+                <div class="menu-nav__toogle">
+                    <i class="icon icon--chevron-right"></i>
+                </div>
                 <ul class="menu-nav__sub-list">
                     <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">Browse</span></a></li>
                     <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">History</span></a></li>
                 </ul>
             </li>
             <li class="menu-nav__item">
-                <a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-drafting-compass"></i><span class="menu-nav__label">Design</span></a>
-                <i class="menu-nav__toogle fas fa-chevron-right"></i>
+                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--design"></i><span class="menu-nav__label">Design</span></a>
+                <div class="menu-nav__toogle">
+                    <i class="icon icon--chevron-right"></i>
+                </div>
                 <ul class="menu-nav__sub-list">
                     <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">My Blueprints</span></a></li>
                     <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">Create New</span></a></li>
                 </ul>
             </li>
             <li class="menu-nav__item">
-                <a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-hands-helping"></i><span class="menu-nav__label">Contribute</span></a>
+                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--contribute"></i><span class="menu-nav__label">Contribute</span></a>
             </li>
             <li class="menu-nav__item">
-                <a href="#" class="menu-nav__link"><i class="menu-nav__icon fas fa-store"></i><span class="menu-nav__label">Store</span></a>
+                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--store"></i><span class="menu-nav__label">Store</span></a>
             </li>
         </ul>
     </nav>
 
-    <main class="content">
+    <main class="content landing">
         <div class="jumbotron">
             <img class="jumbotron__image" src="../media/obp-logo.svg" />
             <h1 class="jumbotron__main-title">Open Blueprint</h1>
             <p class="jumbotron__baseline">An Open Plaform to increase creativity</p>
             <p class="jumbotron__presentation">Open Blueprint is an open platform to help makers to create, design, fix and improve projects.</p>
-            <a href="#" class="btn btn-primary">Start</a>
+            <a href="#" class="btn btn--primary btn--big">Start</a>
         </div>
 
-        <div class="landing-section">
-            <i class="landing-section__icon fas fa-tools"></i>
-            <h2 class="landing-section__title">Make</h2>
-            <p class="landing-section__presentation">Open Blueprint provide an repository of Blueprints. Blueprints are makers projects shared with the community. Each Blueprints explain every step to make what you whant with the community help.</p>
-            <a href="#" class="btn btn-primary">Browse repository</a>
+        <div class="presentation-section">
+            <i class="presentation-section__icon icon icon--make"></i>
+            <h2 class="presentation-section__title">Make</h2>
+            <p class="presentation-section__presentation">Open Blueprint provide an repository of Blueprints. Blueprints are makers projects shared with the community. Each Blueprints explain every step to make what you whant with the community help.</p>
+            <a href="#" class="btn btn--primary btn--big">Browse repository</a>
         </div>
 
-        <div class="landing-section">
-            <i class="landing-section__icon fas fa-drafting-compass"></i>
-            <h2 class="landing-section__title">Design</h2>
-            <p class="landing-section__presentation">Open Blueprint can help you to bring to life your project with the community contribution.</p>
-            <a href="#" class="btn btn-primary">Design a Blueprint</a>
+        <div class="presentation-section">
+            <i class="presentation-section__icon icon icon--design"></i>
+            <h2 class="presentation-section__title">Design</h2>
+            <p class="presentation-section__presentation">Open Blueprint can help you to bring to life your project with the community contribution.</p>
+            <a href="#" class="btn btn--primary btn--big">Design a Blueprint</a>
         </div>
 
-        <div class="landing-section">
-            <i class="landing-section__icon fas fa-hands-helping"></i>
-            <h2 class="landing-section__title">Contribute</h2>
-            <p class="landing-section__presentation">Open mean contribution and everybody can contribute to a Blueprint or even to Open Blueprint platform, no mather what you skill are.</p>
-            <p class="landing-section__presentation">Every contribution are welcome, it can be :</p>
-            <ul class="landing-section__list">
+        <div class="presentation-section">
+            <i class="presentation-section__icon icon icon--contribute"></i>
+            <h2 class="presentation-section__title">Contribute</h2>
+            <p class="presentation-section__presentation">Open mean contribution and everybody can contribute to a Blueprint or even to Open Blueprint platform, no mather what you skill are.</p>
+            <p class="presentation-section__presentation">Every contribution are welcome, it can be :</p>
+            <ul class="presentation-section__list">
                 <li>an enhancement proposal</li>
                 <li>a problem report</li>
                 <li>a simple question</li>
             </ul>
-            <a href="#" class="btn btn-primary">Contribute</a>
+            <a href="#" class="btn btn--primary btn--big">Contribute</a>
         </div>
     </main>
 
@@ -96,5 +99,4 @@
     </footer>
 </body>
 <script src="./../js/main.js"></script>
-<script src="https://kit.fontawesome.com/1725cbf5e6.js" crossorigin="anonymous"></script>
 </html>

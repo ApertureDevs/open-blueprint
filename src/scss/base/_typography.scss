@@ -1,8 +1,8 @@
 @import 'variables';
 
 @mixin text-style {
-  color: $theme-color4;
-  font-family: 'Open Sans', sans-serif;
+  color: $font-color;
+  font-family: $font-family;
 }
 
 a {
@@ -11,15 +11,14 @@ a {
   text-decoration: none;
 
   &:hover {
-    color: $theme-color1;
+    color: $link-hover-color;
   }
 }
 
-p {
-  @include text-style;
-}
-
-li {
+p,
+li,
+input,
+label {
   @include text-style;
 }
 
@@ -31,7 +30,7 @@ h5,
 h6 {
   @include text-style;
 
-  color: $theme-color1;
+  color: $title-color;
   line-height: 1.2;
   text-transform: uppercase;
 }

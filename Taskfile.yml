@@ -13,7 +13,7 @@ tasks:
     cmds:
       - task: npm-audit
       - task: sass-linter-dry-run
-      - task: linter-linter-dry-run
+      - task: html-linter-dry-run
 
   lint:
     desc: Lint SASS sources
@@ -23,9 +23,9 @@ tasks:
   css:
     desc: Compile SASS sources into CSS
     cmds:
-      - docker-compose run --rm --no-deps nodejs node_modules/.bin/node-sass --output-style compressed src/scss/styles.scss --output dist/css
+      - docker-compose run --rm --no-deps nodejs npx gulp css
     sources:
-      - src/scss/styles.scss
+      - src/scss/**/*.scss
     generates:
       - dist/css/*
     method: checksum
@@ -49,23 +49,30 @@ tasks:
     deps:
       - js-dependencies
 
+  npm-audit-fix:
+    desc: Resolve NPM security vulnerabilities
+    cmds:
+      - docker-compose run --rm --no-deps nodejs npm audit fix
+    deps:
+      - js-dependencies
+
   sass-linter:
     desc: Apply linter rules to SASS sources
     cmds:
-      - docker-compose run --rm --no-deps nodejs node_modules/.bin/stylelint 'src/**/*.scss' --fix
+      - docker-compose run --rm --no-deps nodejs npx stylelint 'src/**/*.scss' --fix
     deps:
       - js-dependencies
 
   sass-linter-dry-run:
     desc: Check linter rules to SASS sources
     cmds:
-      - docker-compose run --rm --no-deps nodejs node_modules/.bin/stylelint 'src/**/*.scss'
+      - docker-compose run --rm --no-deps nodejs npx stylelint 'src/**/*.scss'
     deps:
       - js-dependencies
 
   html-linter-dry-run:
     desc: Check linter rules to HTML sources
     cmds:
-      - docker-compose run --rm --no-deps nodejs node_modules/.bin/htmlhint '{dist,src}/**/*.html'
+      - docker-compose run --rm --no-deps nodejs npx htmlhint '{dist,src}/**/*.html'
     deps:
       - js-dependencies
