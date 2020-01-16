@@ -23,7 +23,7 @@
     "gulp-postcss": "^8.0.0",
     "gulp-sass": "^4.0.2",
     "htmlhint": "^0.11.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1",
     "stylelint": "^12.0.0",
     "stylelint-config-rational-order": "^0.1.2",

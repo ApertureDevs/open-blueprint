@@ -49,6 +49,13 @@ tasks:
     deps:
       - js-dependencies
 
+  npm-audit-fix:
+    desc: Resolve NPM security vulnerabilities
+    cmds:
+      - docker-compose run --rm --no-deps nodejs npm audit fix
+    deps:
+      - js-dependencies
+
   sass-linter:
     desc: Apply linter rules to SASS sources
     cmds:
