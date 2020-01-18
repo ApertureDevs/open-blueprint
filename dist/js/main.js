@@ -1,18 +1,9 @@
-const menuButton = document.querySelector('.menu-btn')
+const menuButtons = document.querySelectorAll('.menu-btn')
 const menuNav = document.querySelector('.menu-nav')
 
-menuButton.addEventListener('click', toogleMenu)
-
-function toogleMenu() {
-    if (menuButton.classList.contains('menu-btn--open')) {
-        menuButton.classList.remove('menu-btn--open')
-        menuNav.classList.remove('menu-nav--open')
-        closeSubMenu();
-    } else {
-        menuButton.classList.add('menu-btn--open')
-        menuNav.classList.add('menu-nav--open')
-    }
-}
+menuButtons.forEach((menuButton) => {
+    menuButton.addEventListener('click', toogleMenu)
+})
 
 document.querySelectorAll('.menu-nav__toogle').forEach((toogle) => {
     toogle.addEventListener('click', toogleSubMenu)
@@ -22,21 +13,46 @@ document.querySelectorAll('.menu-nav__link').forEach((link) => {
     link.addEventListener('click', closeSubMenu)
 })
 
+function toogleMenu() {
+    if (isMenuOpen()) {
+        closeMenu()
+    } else {
+        openMenu()
+    }
+}
+
 function toogleSubMenu() {
-    let selectedMenuItem = this.parentNode;
+    let selectedMenuItem = this.parentNode.parentNode;
 
     if (selectedMenuItem.classList.contains('menu-nav--open')) {
         closeSubMenu();
     } else {
         closeSubMenu();
         selectedMenuItem.classList.add('menu-nav--open')
-        menuNav.classList.add('menu-nav--wide-open')
     }
 }
 
 function closeSubMenu() {
-    document.querySelectorAll('.menu-nav__item').forEach((item) => {
+    document.querySelectorAll('.menu-nav__item-group').forEach((item) => {
         item.classList.remove('menu-nav--open')
-        menuNav.classList.remove('menu-nav--wide-open')
     })
+}
+
+function isMenuOpen() {
+    return menuNav.classList.contains('menu-nav--open')
+}
+
+function closeMenu() {
+    menuButtons.forEach((menuButton) => {
+        menuButton.classList.remove('menu-btn--open')
+    })
+    closeSubMenu();
+    menuNav.classList.remove('menu-nav--open')
+}
+
+function openMenu() {
+    menuButtons.forEach((menuButton) => {
+        menuButton.classList.add('menu-btn--open')
+    })
+    menuNav.classList.add('menu-nav--open')
 }

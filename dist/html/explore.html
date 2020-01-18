@@ -10,50 +10,78 @@
 </head>
 <body>
     <header class="header">
-        <div class="menu-btn">
+        <div class="header__button menu-btn">
             <span class="menu-btn__burger"></span>
         </div>
 
-        <div class="header-logo">
-            <a class="header-logo__link" href="#">
-                <img class="header-logo__image" src="../media/obp-logo.svg" />
-                <span class="header-logo__label">Open Blueprint</span>
-            </a>
-        </div>
+        <a href="#" class="header__logo-group">
+            <img class="header__logo" src="../media/obp-logo.svg" />
+            <span class="header__title">Open Blueprint</span>
+        </a>
 
-        <div class="header-account">
-            <a href="#"><i class="header-account__item icon icon--notification"></i></a>
-            <a href="#"><i class="header-account__item icon icon--user"></i></a>
+        <div class="header__menu">
+            <a href="#"><i class="header__menu-item icon icon--notification"></i></a>
+            <a href="#"><i class="header__menu-item icon icon--user"></i></a>
         </div>
     </header>
 
     <nav class="menu-nav">
+        <div class="menu-nav__header">
+            <div class="menu-nav__button menu-btn">
+                <span class="menu-btn__burger"></span>
+            </div>
+
+            <a href="#" class="menu-nav__logo-group">
+                <img class="menu-nav__logo" src="../media/obp-logo.svg" />
+                <span class="menu-nav__title">Open Blueprint</span>
+            </a>
+        </div>
         <ul class="menu-nav__list">
-            <li class="menu-nav__item menu-nav--active">
-                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--make"></i><span class="menu-nav__label">Make</span></a>
-                <div class="menu-nav__toogle">
-                    <i class="icon icon--chevron-right"></i>
+            <li class="menu-nav__item-group menu-nav--active">
+                <div class="menu-nav__item">
+                    <a href="#" class="menu-nav__link">
+                        <i class="menu-nav__icon icon icon--make"></i>
+                        <span class="menu-nav__label">Make</span>
+                    </a>
+                    <div class="menu-nav__toogle">
+                        <i class="icon icon--chevron-down"></i>
+                    </div>
                 </div>
                 <ul class="menu-nav__sub-list">
                     <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">Browse</span></a></li>
                     <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">History</span></a></li>
                 </ul>
             </li>
-            <li class="menu-nav__item">
-                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--design"></i><span class="menu-nav__label">Design</span></a>
-                <div class="menu-nav__toogle">
-                    <i class="icon icon--chevron-right"></i>
+            <li class="menu-nav__item-group">
+                <div class="menu-nav__item">
+                    <a href="#" class="menu-nav__link">
+                        <i class="menu-nav__icon icon icon--design"></i>
+                        <span class="menu-nav__label">Design</span>
+                    </a>
+                    <div class="menu-nav__toogle">
+                        <i class="icon icon--chevron-down"></i>
+                    </div>
                 </div>
                 <ul class="menu-nav__sub-list">
                     <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">My Blueprints</span></a></li>
                     <li class="menu-nav__sub-item"><a href="#" class="menu-nav__sub-link"><span class="menu-nav__sub-label">Create New</span></a></li>
                 </ul>
             </li>
-            <li class="menu-nav__item">
-                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--contribute"></i><span class="menu-nav__label">Contribute</span></a>
+            <li class="menu-nav__item-group">
+                <div class="menu-nav__item">
+                    <a href="#" class="menu-nav__link">
+                        <i class="menu-nav__icon icon icon--contribute"></i>
+                        <span class="menu-nav__label">Contribute</span>
+                    </a>
+                </div>
             </li>
-            <li class="menu-nav__item">
-                <a href="#" class="menu-nav__link"><i class="menu-nav__icon icon icon--store"></i><span class="menu-nav__label">Store</span></a>
+            <li class="menu-nav__item-group">
+                <div class="menu-nav__item">
+                    <a href="#" class="menu-nav__link">
+                        <i class="menu-nav__icon icon icon--store"></i>
+                        <span class="menu-nav__label">Store</span>
+                    </a>
+                </div>
             </li>
         </ul>
     </nav>

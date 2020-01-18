@@ -5,57 +5,98 @@ $transition-duration: 300ms;
 
 .menu-nav {
   position: fixed;
-  top: $menu-size;
+  top: 0;
   left: 0;
   z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: $menu-nav-color;
   transform: translateX(-100%);
   transition: transform $transition-duration;
 
+  .menu-nav__header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: $menu-nav-header-size;
+    overflow: hidden;
+    border-bottom: solid 1px $theme-color-gray-dark;
+  }
+
+  &__button {
+    flex-shrink: 0;
+  }
+
+  &__logo-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    box-sizing: border-box;
+    height: $menu-nav-header-size;
+  }
+
+  &__logo {
+    box-sizing: border-box;
+    height: $menu-nav-header-size * 0.6;
+    margin: $menu-nav-header-size * 0.2;
+  }
+
+  &__title {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
   &__list,
   &__sub-list {
-    width: 50vw;
-    height: 100vh;
+    width: 100%;
     margin: 0;
     padding: 0;
-  }
-
-  &__list {
-    top: $menu-size;
-    background-color: $menu-nav-color;
+    overflow: hidden;
   }
 
   &__sub-list {
-    position: absolute;
-    top: 0;
-    left: 50vw;
-    background-color: lighten($menu-nav-color, 10%);
-    visibility: hidden;
-    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 0;
+    transform: scaleY(0);
     transition:
-      opacity $transition-duration,
-      visibility $transition-duration;
+      transform 300ms ease-in-out,
+      height 300ms ease-in-out;
   }
 
-  &__item {
-    &.menu-nav--open {
-      .menu-nav__list {
-        width: 100vw;
-      }
+  &__item-group {
+    flex-direction: column;
+    border-bottom: solid 1px $theme-color-gray-dark;
 
+    &.menu-nav--open {
       .menu-nav__sub-list {
-        visibility: visible;
-        opacity: 1;
+        height: auto;
+        transform: scaleY(1);
       }
     }
   }
 
-  &__item,
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: $menu-nav-item-size;
+  }
+
+  &__item-group,
   &__sub-item {
     display: flex;
     align-items: center;
-    height: $menu-nav-item-size;
+    min-height: $menu-nav-item-size;
     overflow: hidden;
-    border-bottom: solid 1px $theme-color-gray-dark;
 
     &:hover {
       background-color: $theme-color-hover;
@@ -66,22 +107,17 @@ $transition-duration: 300ms;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: $menu-nav-item-size;
-    height: $menu-nav-item-size;
-    visibility: visible;
+    min-width: $menu-nav-item-size;
+    min-height: $menu-nav-item-size;
     cursor: pointer;
-    opacity: 1;
-    transition:
-      visibility $transition-duration,
-      opacity $transition-duration;
   }
 
   &__link,
   &__sub-link {
     display: flex;
     flex-direction: row;
+    flex-grow: 1;
     align-items: center;
-    width: 100%;
     color: #fff;
     text-decoration: none;
 
@@ -97,12 +133,18 @@ $transition-duration: 300ms;
 
   &__label,
   &__sub-label {
-    font-size: 1rem;
+    font-weight: bold;
     line-height: $menu-nav-item-size;
+    text-transform: uppercase;
+  }
+
+  &__label {
+    font-size: 1rem;
   }
 
   &__sub-label {
     width: 100%;
+    font-size: 0.8rem;
     text-align: center;
   }
 
@@ -110,74 +152,101 @@ $transition-duration: 300ms;
     transform: translateX(0);
   }
 
-  &.menu-nav--wide-open {
-    .menu-nav {
-      &__list {
-        width: 100vw;
-      }
-
-      &__item {
-        width: 50%;
-      }
-
-      &__toogle {
-        visibility: hidden;
-        opacity: 0;
-      }
-
-      &__item.menu-nav--open .menu-nav__toogle {
-        visibility: visible;
-        opacity: 1;
-      }
+  &:not(&--open):not(:hover) {
+    .menu-nav__sub-list {
+      height: 0;
+      transform: scaleY(0);
     }
   }
 
   @include md-screen {
+    width: $menu-size;
     transform: translateX(0);
 
-    &__list {
-      width: $menu-size;
-      overflow: hidden;
+    &__label {
+      display: none;
     }
 
     &__icon {
       flex-shrink: 0;
     }
 
-    &__sub-list {
-      left: 50%;
-      transform: translateX(-100%);
-      transition: opacity $transition-duration;
-    }
-
     &:hover,
     &.menu-nav--open {
-      .menu-nav {
-        &__list {
-          width: 13rem;
-          transition: width $transition-duration;
-        }
+      width: $menu-open-width;
+      transition: width $transition-duration;
+
+      .menu-nav__label {
+        display: inline;
       }
     }
+  }
+}
 
-    &.menu-nav--wide-open {
-      width: 10vw;
-      min-width: 26rem;
+.menu-btn {
+  position: relative;
+  display: inline-block;
+  width: $menu-size;
+  height: $menu-size;
 
-      .menu-nav {
-        &__list,
-        &__sub-list {
-          width: 10vw;
-          min-width: 13rem;
-        }
+  &__burger {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 50%;
+    height: 4px;
+    background-color: #fff;
+    transform: translateX(-50%) translateY(-50%);
+    transition: all 0.3s ease-in-out;
 
-        &__sub-list {
-          transform: translateX(0);
-        }
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 4px;
+      background-color: #fff;
+      transition: all 0.3s ease-in-out;
+      content: '';
+    }
 
-        &__item {
-          width: 100%;
-        }
+    &::before {
+      transform: translateY(-10px);
+    }
+
+    &::after {
+      transform: translateY(10px);
+    }
+  }
+
+  &:hover {
+    .menu-btn__burger {
+      &::before {
+        transform: translateY(-15px);
+      }
+
+      &::after {
+        transform: translateY(15px);
+      }
+    }
+  }
+
+  &.menu-btn--open {
+    .menu-btn__burger {
+      background: transparent;
+
+      &::before,
+      &::after {
+        transform-origin: 50% 50%;
+      }
+
+      &::before {
+        transform: translateY(0) rotate(45deg);
+      }
+
+      &::after {
+        transform: translateY(0) rotate(-45deg);
       }
     }
   }
