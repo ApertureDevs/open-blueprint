@@ -9,7 +9,6 @@
   position: relative;
   width: 15rem;
   height: 15rem;
-  overflow: hidden;
   font-family: $font-family;
   text-align: center;
   border-radius: 0.3rem;
@@ -19,6 +18,8 @@
     position: relative;
     height: 10rem;
     overflow: hidden;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
 
     &__image {
       width: 100%;
@@ -47,6 +48,8 @@
   &__content {
     color: #fff;
     background-color: $theme-color-main-light;
+    border-bottom-right-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
 
     &__belt {
       display: flex;
@@ -94,6 +97,34 @@
   &:hover {
     .blueprint-card__thumb__overlay {
       opacity: 1;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: 0.5rem;
+    right: -0.5rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0.25rem;
+    padding-right: 0.5rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    background-color: $theme-color-dark;
+    border: solid 0.1rem $theme-color-gray-light;
+    border-radius: 0.1rem;
+
+    &__label {
+      margin-left: 0.5rem;
+      color: #fff;
+      font-size: 0.75rem;
+    }
+
+    &--official {
+      background-color: $theme-color-main-light;
     }
   }
 }
