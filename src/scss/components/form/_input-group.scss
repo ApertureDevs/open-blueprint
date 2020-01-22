@@ -5,7 +5,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  width: 100%;
 
   &__prepend,
   &__append {
@@ -15,7 +14,7 @@
     overflow: hidden;
     background-color: $form-border-color;
     border: $form-border-width solid $form-border-color;
-    border-radius: $input-height / 2;
+    border-radius: $input-height * 0.2;
   }
 
   &__prepend {
@@ -29,7 +28,23 @@
   }
 
   &__icon {
-    margin: 0.2rem 0.4rem;
+    margin-top: $input-height * 0.1;
+    margin-right: $input-height * 0.3;
+    margin-bottom: $input-height * 0.1;
+    margin-left: $input-height * 0.3;
+  }
+
+  &--big {
+    .form-control {
+      height: $input-big-height;
+    }
+
+    .input-group__icon {
+      margin-top: $input-big-height * 0.1;
+      margin-right: $input-big-height * 0.3;
+      margin-bottom: $input-big-height * 0.1;
+      margin-left: $input-big-height * 0.3;
+    }
   }
 
   .form-control {
