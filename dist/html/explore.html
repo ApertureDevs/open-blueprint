@@ -95,19 +95,19 @@
         <div class="explorer">
             <div class="explorer__search">
                 <form name="search-form">
-                    <div class="input-group">
+                    <div class="form-group input-group input-group--big">
                         <input id="search" type="search" class="form-control" placeholder="Search">
                         <div class="input-group__append">
                             <i class="input-group__icon icon icon--search"></i>
                         </div>
                     </div>
 
-                    <div class="form-check form-check--inline">
+                    <div class="form-group form-check form-check--inline">
                         <input class="form-check__input form-check__input--switch" type="checkbox" id="official" checked>
                         <label class="form-check__label" for="official">Official</label>
                     </div>
 
-                    <div class="form-check form-check--inline">
+                    <div class="form-group form-check form-check--inline">
                         <input class="form-check__input form-check__input--switch" type="checkbox" id="community" checked>
                         <label class="form-check__label" for="community">Community</label>
                     </div>
@@ -115,7 +115,11 @@
             </div>
 
             <div class="explorer__results">
-                <a href="#" class="explorer__results__item blueprint-card blueprint-card--official">
+                <a href="#" class="explorer__results__item blueprint-card">
+                    <div class="blueprint-card__badge blueprint-card__badge--official">
+                        <i class="blueprint-card__badge__icon icon icon--official"></i>
+                        <span class="blueprint-card__badge__label">official</span>
+                    </div>
                     <div class="blueprint-card__thumb">
                         <img class="blueprint-card__thumb__image" src="http://placehold.it/250x150" alt="image"/>
                         <div class="blueprint-card__thumb__overlay">

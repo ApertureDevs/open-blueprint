@@ -10,7 +10,7 @@
   background-color: $form-background-color;
   background-clip: padding-box;
   border: $form-border-width solid $form-border-color;
-  border-radius: $input-height / 2;
+  border-radius: $input-height * 0.2;
   appearance: none;
 
   &:focus {
