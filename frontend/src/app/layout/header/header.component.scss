@@ -1,0 +1,61 @@
+@import "../../../styles/scss/base/variables";
+
+$header-size: 4.5rem;
+$icon-size: 2rem;
+
+.header {
+  display: flex;
+  flex-direction: row;
+  height: $header-size;
+  overflow: hidden;
+  background: $theme-color-main;
+  border-bottom: solid 1px $theme-color-gray-dark;
+
+  &__button {
+    flex-shrink: 0;
+  }
+
+  &__logo-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    box-sizing: border-box;
+    height: $header-size;
+  }
+
+  &__logo {
+    box-sizing: border-box;
+    height: $header-size * 0.6;
+    margin: $header-size * 0.2;
+  }
+
+  &__title {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-grow: 1;
+    flex-shrink: 0;
+    align-items: center;
+    width: 125px;
+    height: $header-size;
+  }
+
+  &__menu-item {
+    width: $icon-size;
+    height: $icon-size;
+    margin: 1rem;
+    color: #fff;
+    font-size: $icon-size;
+    line-height: $icon-size;
+    text-align: center;
+    vertical-align: middle;
+  }
+}

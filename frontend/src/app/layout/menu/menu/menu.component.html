@@ -1,0 +1,14 @@
+<nav class="menu-nav" [class.menu-nav--open]="opened">
+    <div class="menu-nav__header">
+        <div class="menu-nav__button menu-btn">
+            <app-menu-button class="header__button"></app-menu-button>
+        </div>
+        <a routerLink="" class="menu-nav__logo-group">
+            <img alt="open blueprint logo" class="menu-nav__logo" src="assets/images/obp-logo.svg" />
+            <span class="menu-nav__title">Open Blueprint</span>
+        </a>
+    </div>
+    <div class="menu-nav__list">
+        <app-menu-item *ngFor="let item of items" [item]="item"></app-menu-item>
+    </div>
+</nav>

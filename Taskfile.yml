@@ -1,78 +1,121 @@
 version: '2'
 
-
 tasks:
-  build:
-    desc: Build Open Blueprint Project
+  install:
+    desc: Install Open Blueprint Project
     cmds:
       - task: js-dependencies
-      - task: css
+
+  build:
+    desc: Build dist folder
+    cmds:
+      - docker-compose run --rm --no-deps frontend-cli npx ng build --prod
+    deps:
+      - js-dependencies
+    sources:
+      - frontend/src/**/*
+      - frontend/angular.json
+      - frontend/package-lock.json
+    generates:
+      - frontend/dist/**/*
+    method: checksum
+
+  serve:
+    desc: Start a local development stack
+    cmds:
+      - docker-compose up -d frontend
+    deps:
+      - js-dependencies
 
   test:
     desc: Launch tests suites
     cmds:
-      - task: npm-audit
-      - task: sass-linter-dry-run
-      - task: html-linter-dry-run
+      - task: protractor
+      - task: karma
 
   lint:
     desc: Lint SASS sources
     cmds:
       - task: sass-linter
-
-  css:
-    desc: Compile SASS sources into CSS
-    cmds:
-      - docker-compose run --rm --no-deps nodejs npx gulp css
-    sources:
-      - src/scss/**/*.scss
-    generates:
-      - dist/css/*
-    method: checksum
-    deps:
-      - js-dependencies
+      - task: ts-linter
 
   js-dependencies:
     desc: Install NPM vendors
     cmds:
-      - docker-compose run --rm --no-deps nodejs npm ci
+      - docker-compose run --rm --no-deps frontend-cli npm ci
     sources:
-      - ./package-lock.json
+      - frontend/package-lock.json
     generates:
-      - node_modules/**/*
+      - frontend/node_modules/**/*
     method: checksum
 
-  npm-audit:
-    desc: Execute NPM security audit
+
+  protractor:
+    desc: Execute Protractor end to end test suites
     cmds:
-      - docker-compose run --rm --no-deps nodejs npm audit
+      - docker-compose run --rm frontend-cli npx ng e2e
     deps:
       - js-dependencies
 
-  npm-audit-fix:
+  karma:
+    desc: Execute Karma unit test suites
+    cmds:
+      - docker-compose run --rm --no-deps frontend-cli npx ng test --code-coverage --watch=false
+    deps:
+      - js-dependencies
+
+  karma-watch:
+    desc: Execute Karma unit test suites in watch mode
+    cmds:
+      - docker-compose run --rm --no-deps frontend-cli npx ng test --code-coverage
+    deps:
+      - js-dependencies
+
+  npm-audit-check:
+    desc: Execute NPM security audit
+    cmds:
+      - docker-compose run --rm --no-deps frontend-cli npm audit --production
+    deps:
+      - js-dependencies
+
+  npm-audit:
     desc: Resolve NPM security vulnerabilities
     cmds:
-      - docker-compose run --rm --no-deps nodejs npm audit fix
+      - docker-compose run --rm --no-deps frontend-cli npm audit fix
     deps:
       - js-dependencies
 
   sass-linter:
     desc: Apply linter rules to SASS sources
     cmds:
-      - docker-compose run --rm --no-deps nodejs npx stylelint 'src/**/*.scss' --fix
+      - docker-compose run --rm --no-deps frontend-cli npx stylelint 'src/**/*.scss' --fix
     deps:
       - js-dependencies
 
   sass-linter-dry-run:
     desc: Check linter rules to SASS sources
     cmds:
-      - docker-compose run --rm --no-deps nodejs npx stylelint 'src/**/*.scss'
+      - docker-compose run --rm --no-deps frontend-cli npx stylelint 'src/**/*.scss'
+    deps:
+      - js-dependencies
+
+  ts-linter:
+    desc: Apply linter rules to Typescript sources
+    cmds:
+      - docker-compose run --rm --no-deps frontend-cli npx tslint -p . --fix
+    deps:
+      - js-dependencies
+
+  ts-linter-dry-run:
+    desc: Check linter rules to Typescript sources
+    cmds:
+      - docker-compose run --rm --no-deps frontend-cli npx tslint -p .
     deps:
       - js-dependencies
 
   html-linter-dry-run:
     desc: Check linter rules to HTML sources
     cmds:
-      - docker-compose run --rm --no-deps nodejs npx htmlhint '{dist,src}/**/*.html'
+      - docker-compose run --rm --no-deps frontend-cli npx htmlhint 'src/**/*.html' -c .htmlhintrc
     deps:
       - js-dependencies

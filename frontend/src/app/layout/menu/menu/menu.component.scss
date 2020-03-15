@@ -1,0 +1,46 @@
+@import "../../../../styles/scss/base/variables";
+
+$header-height: 4.5rem;
+
+.menu-nav {
+  height: 100%;
+  overflow: hidden;
+  background-color: $theme-color-dark;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 4.5rem;
+    overflow: hidden;
+    border-bottom: solid 1px $theme-color-gray-dark;
+  }
+
+  &__button {
+    flex-shrink: 0;
+  }
+
+  &__logo-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    box-sizing: border-box;
+    height: $header-height;
+  }
+
+  &__logo {
+    box-sizing: border-box;
+    height: $header-height * 0.6;
+    margin: $header-height * 0.2;
+  }
+
+  &__title {
+    padding-right: 1rem;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+}

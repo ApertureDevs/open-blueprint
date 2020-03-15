@@ -1,0 +1,20 @@
+<div class="explore">
+    <div class="hero">
+        <h1 class="hero__title">Explore</h1>
+        <p class="hero__description">Explore all blueprints created by makers community.</p>
+    </div>
+
+    <div class="explorer">
+        <mat-card class="explorer__search">
+            <mat-form-field appearance="standard">
+                <mat-label>Search</mat-label>
+                <input matInput placeholder="Search a Blueprint">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </mat-card>
+
+        <div class="explorer__results">
+            <app-blueprint-card *ngFor="let blueprint of blueprints" [blueprint]="blueprint" class="explorer__results__item"></app-blueprint-card>
+        </div>
+    </div>
+</div>

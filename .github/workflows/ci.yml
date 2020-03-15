@@ -23,15 +23,15 @@ jobs:
       run: |
         curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
 
-    - name: Build
-      run: |
-        task build --summary
-        task build
-
     - name: NPM audit
       run: |
-        task npm-audit --summary
-        task npm-audit
+        task npm-audit-check --summary
+        task npm-audit-check
+
+    - name: Typescrypt linter
+      run: |
+        task ts-linter-dry-run --summary
+        task ts-linter-dry-run
 
     - name: SASS linter
       run: |
@@ -42,4 +42,18 @@ jobs:
       run: |
         task html-linter-dry-run --summary
         task html-linter-dry-run
-  
+
+    - name: Karma Test
+      run: |
+        task karma --summary
+        task karma
+
+    - name: Protractor Test
+      run: |
+        task protractor --summary
+        task protractor
+
+    - name: Build
+      run: |
+        task build --summary
+        task build

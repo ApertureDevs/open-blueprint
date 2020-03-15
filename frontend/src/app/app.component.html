@@ -1,0 +1,11 @@
+<mat-sidenav-container autosize>
+  <mat-sidenav role="navigation" mode="over" [opened]="menu.opened" fixedInViewport="true" (closed)="menu.menuService.close()">
+    <app-menu #menu></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="app-content">
+      <app-header></app-header>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

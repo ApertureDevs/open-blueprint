@@ -8,5 +8,5 @@ spec:
   ports:
   - port: 80
   selector:
-    app: webserver
+    app: frontend
   type: LoadBalancer

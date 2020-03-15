@@ -37,12 +37,12 @@ jobs:
 
     - name: Build Docker Images
       run: |
-        docker build --file .deploy/build/webserver/Dockerfile --tag eu.gcr.io/"$GKE_PROJECT"/webserver:${{ github.sha }} .
+        docker build --file docker/deploy/frontend/Dockerfile --tag eu.gcr.io/"$GKE_PROJECT"/frontend:${{ github.sha }} .
     
     - name: Publish
       run: |
         gcloud auth configure-docker
-        docker push eu.gcr.io/$GKE_PROJECT/webserver:${{ github.sha }}
+        docker push eu.gcr.io/$GKE_PROJECT/frontend:${{ github.sha }}
 
     - name: Customize deployment manifest for dev stage
       id: manifest-customization
