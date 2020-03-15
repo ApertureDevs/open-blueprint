@@ -12,7 +12,11 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@master
-      
+
+    - name: Add Task runner
+      run: |
+        curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
+
     - name: Audit
-      uses: ./.github/actions/npm-audit
-  
+      run: |
+        task npm-audit-check
