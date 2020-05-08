@@ -28,7 +28,7 @@ jobs:
         task npm-audit-check --summary
         task npm-audit-check
 
-    - name: Typescrypt linter
+    - name: Typescript linter
       run: |
         task ts-linter-dry-run --summary
         task ts-linter-dry-run

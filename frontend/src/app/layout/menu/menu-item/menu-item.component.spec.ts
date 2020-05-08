@@ -1,16 +1,8 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MenuItem } from './menu-item';
 import { MenuItemComponent } from './menu-item.component';
-
-@Component({
-  selector: 'app-menu-item',
-  template: '',
-})
-class MockMenuItemComponent {
-  @Input() public item!: MenuItem;
-}
 
 describe('MenuGroupComponent', () => {
   let component: MenuItemComponent;

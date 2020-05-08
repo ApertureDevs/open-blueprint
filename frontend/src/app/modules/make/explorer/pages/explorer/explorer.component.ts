@@ -4,7 +4,6 @@ import { Difficulty } from '@model/difficulty';
 import { Skill } from '@model/skill';
 
 @Component({
-  selector: 'app-explorer',
   templateUrl: './explorer.component.html',
   styleUrls: ['./explorer.component.scss'],
 })
