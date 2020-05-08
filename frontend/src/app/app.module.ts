@@ -7,8 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './layout/header/header.module';
 import { MenuModule } from './layout/menu/menu.module';
-import { ExplorerModule } from './modules/explorer/explorer.module';
-import { LandingModule } from './modules/landing/landing.module';
 
 @NgModule({
   declarations: [
@@ -21,8 +19,6 @@ import { LandingModule } from './modules/landing/landing.module';
     HttpClientModule,
     MenuModule,
     HeaderModule,
-    LandingModule,
-    ExplorerModule,
     CoreModule,
   ],
   bootstrap: [AppComponent],
