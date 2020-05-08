@@ -9,7 +9,7 @@ import { MenuItemComponent } from './menu-item.component';
   template: '',
 })
 class MockMenuItemComponent {
-  @Input() public item: MenuItem;
+  @Input() public item!: MenuItem;
 }
 
 describe('MenuGroupComponent', () => {
@@ -35,11 +35,11 @@ describe('MenuGroupComponent', () => {
   });
 
   it('should create an item without sub item', () => {
-    const item = new MenuItem(
-      'item_label',
-      'item_icon',
-      'item_link',
-    );
+    const item: MenuItem = {
+      label: 'item_label',
+      icon: 'item_icon',
+      link: 'item_link',
+    };
 
     component.item = item;
     fixture.detectChanges();
@@ -47,17 +47,17 @@ describe('MenuGroupComponent', () => {
   });
 
   it('should create an item with sub items', () => {
-    const item = new MenuItem(
-      'item_label',
-      'item_icon',
-      'item_link',
-      [
+    const item: MenuItem = {
+      label: 'item_label',
+      icon: 'item_icon',
+      link: 'item_link',
+      subItems: [
         {
           label: 'sub_label',
           link: 'sub_link',
         },
       ],
-    );
+    };
 
     component.item = item;
     fixture.detectChanges();

@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -6,8 +6,7 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 export class MenuService {
 
   public opened = false;
-
-  @Output() public stateChange: EventEmitter<boolean> = new EventEmitter();
+  public stateChange: EventEmitter<boolean> = new EventEmitter();
 
   public toogle(): void {
     this.opened = !this.opened;

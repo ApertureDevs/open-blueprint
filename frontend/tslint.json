@@ -102,6 +102,14 @@
       "check-type",
       "check-typecast",
       "check-type-operator"
+    ],
+    "no-any": true,
+    "no-unsafe-any": true,
+    "typedef": [
+      true,
+      "call-signature",
+      "parameter",
+      "property-declaration"
     ]
   },
   "rulesDirectory": [

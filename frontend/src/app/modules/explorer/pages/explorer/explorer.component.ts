@@ -10,7 +10,7 @@ import { Skill } from '@model/skill';
 })
 export class ExplorerComponent implements OnInit {
 
-  public blueprints: Blueprint[];
+  public blueprints: Blueprint[] = [];
 
   public ngOnInit(): void {
     this.blueprints = [
