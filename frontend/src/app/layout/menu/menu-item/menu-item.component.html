@@ -4,11 +4,11 @@
             <mat-icon class="menu-nav-item__icon" [svgIcon]="item.icon"></mat-icon>
             <span class="menu-nav-item__label">{{ item.label }}</span>
         </a>
-        <div *ngIf="item.subItems.length !== 0" class="menu-nav-item__toogle" (click)="toogle()">
+        <div *ngIf="item.subItems && item.subItems.length !== 0" class="menu-nav-item__toogle" (click)="toogle()">
             <mat-icon class="menu-nav-item__expand">expand_more</mat-icon>
         </div>
     </div>
-    <div *ngIf="item.subItems.length !== 0" class="menu-nav-item__sub-list">
+    <div *ngIf="item.subItems && item.subItems.length !== 0" class="menu-nav-item__sub-list">
         <div *ngFor="let subItem of item.subItems" class="menu-nav-item__sub-item">
             <a [routerLink]="subItem.link" class="menu-nav-item__sub-link"><span class="menu-nav-item__sub-label">{{ subItem.label }}</span></a>
         </div>

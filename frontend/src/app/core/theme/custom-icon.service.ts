@@ -10,7 +10,7 @@ export class CustomIconService {
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
   ) { }
-  public init() {
+  public init(): void {
     this.matIconRegistry.addSvgIcon('make', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/tools-solid.svg'));
     this.matIconRegistry.addSvgIcon('design', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/drafting-compass-solid.svg'));
     this.matIconRegistry.addSvgIcon('contribute', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/hands-helping-solid.svg'));
