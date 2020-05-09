@@ -18,12 +18,12 @@ export class MenuComponent implements OnInit, OnDestroy {
   constructor(
     public menuService: MenuService,
   ) {
-    this.items.push(
-      new MenuItem(
-        'make',
-        'make',
-        'make',
-        [
+    this.items = [
+      {
+        label: 'make',
+        icon: 'make',
+        link: 'make',
+        subItems: [
           {
             label: 'browse',
             link: 'make/explore',
@@ -33,14 +33,12 @@ export class MenuComponent implements OnInit, OnDestroy {
             link: 'make/history',
           },
         ],
-      ),
-    );
-    this.items.push(
-      new MenuItem(
-        'design',
-        'design',
-        'design',
-        [
+      },
+      {
+        label: 'design',
+        icon: 'design',
+        link: 'design',
+        subItems: [
           {
             label: 'my blueprints',
             link: 'design/list',
@@ -50,26 +48,22 @@ export class MenuComponent implements OnInit, OnDestroy {
             link: 'design/create',
           },
         ],
-      ),
-    );
-    this.items.push(
-      new MenuItem(
-        'contribute',
-        'contribute',
-        'contribute',
-      ),
-    );
-    this.items.push(
-      new MenuItem(
-        'store',
-        'store',
-        'store',
-      ),
-    );
+      },
+      {
+        label: 'contribute',
+        icon: 'contribute',
+        link: 'contribute',
+      },
+      {
+        label: 'store',
+        icon: 'store',
+        link: 'store',
+      },
+    ]
   }
 
   public ngOnInit(): void {
-    this.subscriptions.push(this.menuService.stateChange.subscribe((opened) => {
+    this.subscriptions.push(this.menuService.stateChange.subscribe((opened: boolean) => {
       this.opened = opened;
     }));
   }

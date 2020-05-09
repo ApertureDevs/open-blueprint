@@ -2,14 +2,14 @@ import { Difficulty } from './difficulty';
 import { Skill } from './skill';
 import { User } from './user';
 
-export class Blueprint {
-  public owner: User;
-  public title: string;
-  public isOfficial: boolean;
-  public thumbnail: string;
-  public difficulty: Difficulty;
-  public skills: Skill[];
-  public likeCount: number;
-  public createDate: Date;
-  public updateDate: Date;
+export interface Blueprint {
+  owner: User,
+  title: string,
+  isOfficial: boolean,
+  thumbnail: string,
+  difficulty: Difficulty,
+  skills: Skill[],
+  likeCount: number,
+  createDate: Date,
+  updateDate: Date
 }

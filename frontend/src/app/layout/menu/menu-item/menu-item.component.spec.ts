@@ -1,16 +1,8 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MenuItem } from './menu-item';
 import { MenuItemComponent } from './menu-item.component';
-
-@Component({
-  selector: 'app-menu-item',
-  template: '',
-})
-class MockMenuItemComponent {
-  @Input() public item: MenuItem;
-}
 
 describe('MenuGroupComponent', () => {
   let component: MenuItemComponent;
@@ -35,11 +27,11 @@ describe('MenuGroupComponent', () => {
   });
 
   it('should create an item without sub item', () => {
-    const item = new MenuItem(
-      'item_label',
-      'item_icon',
-      'item_link',
-    );
+    const item: MenuItem = {
+      label: 'item_label',
+      icon: 'item_icon',
+      link: 'item_link',
+    };
 
     component.item = item;
     fixture.detectChanges();
@@ -47,17 +39,17 @@ describe('MenuGroupComponent', () => {
   });
 
   it('should create an item with sub items', () => {
-    const item = new MenuItem(
-      'item_label',
-      'item_icon',
-      'item_link',
-      [
+    const item: MenuItem = {
+      label: 'item_label',
+      icon: 'item_icon',
+      link: 'item_link',
+      subItems: [
         {
           label: 'sub_label',
           link: 'sub_link',
         },
       ],
-    );
+    };
 
     component.item = item;
     fixture.detectChanges();

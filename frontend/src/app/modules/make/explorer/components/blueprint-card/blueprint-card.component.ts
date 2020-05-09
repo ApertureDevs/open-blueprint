@@ -8,5 +8,5 @@ import { Blueprint } from '@model/blueprint';
 })
 export class BlueprintCardComponent {
 
-  @Input() public blueprint: Blueprint;
+  @Input() public blueprint!: Blueprint;
 }

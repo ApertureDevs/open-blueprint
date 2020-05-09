@@ -8,7 +8,7 @@ import { MenuComponent } from './menu.component';
   template: '<div>menu item</div>',
 })
 class MockMenuItemComponent {
-  @Input() public item: MenuItem;
+  @Input() public item!: MenuItem;
 }
 
 describe('MenuComponent', () => {

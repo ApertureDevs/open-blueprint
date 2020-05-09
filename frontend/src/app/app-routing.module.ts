@@ -1,22 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ExplorerComponent } from './modules/explorer/pages/explorer/explorer.component';
-import { LandingComponent } from './modules/landing/pages/landing/landing.component';
 
 const routes: Routes = [
   {
     path: 'landing',
-    component: LandingComponent,
+    loadChildren: () => import('./modules/landing/landing.module').then((module) => module.LandingModule),
   },
   {
     path: 'make',
-    component: ExplorerComponent,
-    children: [
-      {
-        path: 'explore',
-        component: ExplorerComponent,
-      },
-    ],
+    loadChildren: () => import('./modules/make/make.module').then((module) => module.MakeModule),
   },
   {
     path: '**',

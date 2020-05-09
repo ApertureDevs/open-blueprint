@@ -4,13 +4,12 @@ import { Difficulty } from '@model/difficulty';
 import { Skill } from '@model/skill';
 
 @Component({
-  selector: 'app-explorer',
   templateUrl: './explorer.component.html',
   styleUrls: ['./explorer.component.scss'],
 })
 export class ExplorerComponent implements OnInit {
 
-  public blueprints: Blueprint[];
+  public blueprints: Blueprint[] = [];
 
   public ngOnInit(): void {
     this.blueprints = [

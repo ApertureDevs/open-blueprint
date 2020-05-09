@@ -8,7 +8,7 @@ import { MenuItem } from './menu-item';
 })
 export class MenuItemComponent {
 
-  @Input() public item: MenuItem;
+  @Input() public item!: MenuItem;
   public opened = false;
 
   public toogle(): void {

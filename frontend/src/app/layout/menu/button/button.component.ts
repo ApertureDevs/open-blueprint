@@ -17,8 +17,8 @@ export class ButtonComponent implements OnInit, OnDestroy {
     private menuService: MenuService,
   ) { }
 
-  public ngOnInit() {
-    this.subscriptions.push(this.menuService.stateChange.subscribe((opened) => {
+  public ngOnInit(): void {
+    this.subscriptions.push(this.menuService.stateChange.subscribe((opened: boolean) => {
       this.opened = opened;
     }));
   }
@@ -29,7 +29,7 @@ export class ButtonComponent implements OnInit, OnDestroy {
     });
   }
 
-  public onClick() {
+  public onClick(): void {
     this.menuService.toogle();
   }
 }
