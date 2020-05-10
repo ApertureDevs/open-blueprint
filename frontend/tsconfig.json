@@ -30,7 +30,8 @@
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "resolveJsonModule": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

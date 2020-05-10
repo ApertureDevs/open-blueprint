@@ -1,4 +1,6 @@
-.app-content {
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
   min-width: 350px;
   min-height: 100vh;
 }
