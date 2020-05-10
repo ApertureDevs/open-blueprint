@@ -1,0 +1,77 @@
+@import "../../../styles/scss/base/variables";
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  color: #fff;
+  background-color: $theme-color-main;
+
+  a {
+    color: #fff;
+  }
+
+  a:hover {
+    color: $theme-color-gray-light;
+  }
+
+  &__social {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    &__item {
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+    }
+  }
+
+  &__help {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    &__item {
+      padding: 0.5rem;
+      font-weight: bold;
+    }
+  }
+
+  &__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &__small {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 0.6rem;
+  }
+
+  &__open-source {
+    width: 100%;
+    text-align: center;
+  }
+
+  &__author,
+  &__licence,
+  &__version {
+    box-sizing: border-box;
+    width: 30%;
+  }
+
+  &__version {
+    text-align: right;
+  }
+
+  &__author {
+    text-align: center;
+  }
+
+  &__divider {
+    width: 50%;
+  }
+}

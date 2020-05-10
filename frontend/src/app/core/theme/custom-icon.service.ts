@@ -18,5 +18,7 @@ export class CustomIconService {
     this.matIconRegistry.addSvgIcon('print', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/print-solid.svg'));
     this.matIconRegistry.addSvgIcon('electronic', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/microchip-solid.svg'));
     this.matIconRegistry.addSvgIcon('official', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/medal-solid.svg'));
+    this.matIconRegistry.addSvgIcon('github', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/github-square-brands.svg'));
+    this.matIconRegistry.addSvgIcon('twitter', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/twitter-square-brands.svg'));
   }
 }

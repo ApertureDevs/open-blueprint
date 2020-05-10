@@ -6,6 +6,7 @@ import { CoreModule } from '@core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DataModule } from './data/data.module';
+import { FooterModule } from './layout/footer/footer.module';
 import { HeaderModule } from './layout/header/header.module';
 import { MenuModule } from './layout/menu/menu.module';
 
@@ -21,6 +22,7 @@ import { MenuModule } from './layout/menu/menu.module';
     DataModule,
     MenuModule,
     HeaderModule,
+    FooterModule,
     CoreModule,
   ],
   bootstrap: [AppComponent],
