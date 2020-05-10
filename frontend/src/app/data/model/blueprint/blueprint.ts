@@ -1,6 +1,6 @@
+import { User } from '@model/user/user';
 import { Difficulty } from './difficulty';
 import { Skill } from './skill';
-import { User } from './user';
 
 export interface Blueprint {
   owner: User,
@@ -9,6 +9,7 @@ export interface Blueprint {
   thumbnail: string,
   difficulty: Difficulty,
   skills: Skill[],
+  tags: string[],
   likeCount: number,
   createDate: Date,
   updateDate: Date
