@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '@core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DataModule } from './data/data.module';
 import { HeaderModule } from './layout/header/header.module';
 import { MenuModule } from './layout/menu/menu.module';
 
@@ -17,6 +18,7 @@ import { MenuModule } from './layout/menu/menu.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    DataModule,
     MenuModule,
     HeaderModule,
     CoreModule,

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Blueprint } from '@model/blueprint';
+import { Blueprint } from '@model/blueprint/blueprint';
 
 @Component({
   selector: 'app-blueprint-card',

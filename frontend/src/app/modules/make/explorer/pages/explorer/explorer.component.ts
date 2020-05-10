@@ -1,60 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-import { Blueprint } from '@model/blueprint';
-import { Difficulty } from '@model/difficulty';
-import { Skill } from '@model/skill';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Blueprint } from '@model/blueprint/blueprint';
+import { Subscription } from 'rxjs';
+import { BlueprintService } from '../../../../../data/services/blueprint.service';
 
 @Component({
   templateUrl: './explorer.component.html',
   styleUrls: ['./explorer.component.scss'],
 })
-export class ExplorerComponent implements OnInit {
+export class ExplorerComponent implements OnInit, OnDestroy {
 
   public blueprints: Blueprint[] = [];
 
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    private blueprintService: BlueprintService,
+  ) { }
+
   public ngOnInit(): void {
-    this.blueprints = [
-      {
-        owner: {
-          email: 'foo@gmail.com',
-          name: 'foo',
-        },
-        title: 'toaster',
-        difficulty: Difficulty.Easy,
-        thumbnail: 'http://placehold.it/250x150',
-        skills: [Skill.Print, Skill.Electronic],
-        isOfficial: true,
-        likeCount: 83,
-        createDate: new Date('01-01-2020'),
-        updateDate: new Date('02-01-2020'),
-      },
-      {
-        owner: {
-          email: 'foo@gmail.com',
-          name: 'foo',
-        },
-        title: 'toaster',
-        difficulty: Difficulty.Easy,
-        thumbnail: 'http://placehold.it/250x150',
-        skills: [Skill.Print, Skill.Electronic],
-        isOfficial: true,
-        likeCount: 83,
-        createDate: new Date('01-01-2020'),
-        updateDate: new Date('02-01-2020'),
-      },
-      {
-        owner: {
-          email: 'foo@gmail.com',
-          name: 'foo',
-        },
-        title: 'toaster',
-        difficulty: Difficulty.Easy,
-        thumbnail: 'http://placehold.it/250x150',
-        skills: [Skill.Print, Skill.Electronic],
-        isOfficial: true,
-        likeCount: 83,
-        createDate: new Date('01-01-2020'),
-        updateDate: new Date('02-01-2020'),
-      },
-    ];
+    const subscription = this.blueprintService.getCollection().subscribe((blueprints) => this.blueprints = blueprints);
+
+    this.subscriptions.push(subscription)
+  }
+
+  public ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

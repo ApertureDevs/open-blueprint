@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Difficulty } from '@model/difficulty';
-import { Skill } from '@model/skill';
+import { Difficulty } from '@model/blueprint/difficulty';
+import { Skill } from '@model/blueprint/skill';
 import { BlueprintCardComponent } from './blueprint-card.component';
 
 describe('BlueprintCardComponent', () => {
@@ -31,7 +31,8 @@ describe('BlueprintCardComponent', () => {
         name: 'foo',
       },
       title: 'toaster',
-      difficulty: Difficulty.Easy,
+      tags: ['çooking', 'breakfast'],
+      difficulty: Difficulty.Hard,
       thumbnail: 'http://placehold.it/250x150',
       skills: [Skill.Print, Skill.Electronic],
       isOfficial: true,
