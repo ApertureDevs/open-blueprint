@@ -1,0 +1,187 @@
+@import "~styles/scss/variables";
+@import "~styles/scss/mixins";
+
+.blueprint-information {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "sidebar"
+    "main";
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+
+  &__header {
+    position: relative;
+    grid-area: header;
+    height: 30vh;
+    min-height: 10rem;
+    max-height: 30rem;
+
+    &__background {
+      width: 100%;
+      height: 100%;
+      filter: blur(5px);
+    }
+
+    &__overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
+
+  &__name {
+    color: #fff;
+    font-weight: bold;
+    font-size: 3rem;
+    text-transform: uppercase;
+  }
+
+  &__sidebar {
+    display: flex;
+    flex-direction: column;
+    grid-area: sidebar;
+    padding: 1rem;
+    color: $theme-color-dark;
+    background-color: $theme-color-gray-light;
+
+    &__item {
+      padding-bottom: 0.5rem;
+
+      &__label {
+        margin-right: 0.5rem;
+        color: $theme-color-main;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__team {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__action__item {
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+  }
+
+  &__main {
+    display: grid;
+    grid-area: main;
+    grid-template-areas:
+      "description"
+      "difficulty"
+      "skill"
+      "component"
+      "tag"
+      "size"
+      "photo";
+    grid-template-rows: auto;
+    grid-template-columns: auto;
+    padding: 1rem;
+  }
+
+  &__description,
+  &__difficulty,
+  &__skill,
+  &__component,
+  &__size,
+  &__tag,
+  &__photo {
+    margin-bottom: 2rem;
+
+    &__label {
+      display: block;
+      margin-bottom: 1rem;
+      color: $theme-color-main;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+  }
+
+  &__description {
+    grid-area: description;
+  }
+
+  &__component {
+    grid-area: component;
+  }
+
+  &__photo {
+    grid-area: photo;
+
+    &__items {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &__item {
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__difficulty {
+    display: inline-block;
+    grid-area: difficulty;
+  }
+
+  &__skill {
+    grid-area: skill;
+
+    &__items {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &__item {
+      margin-right: 1rem;
+    }
+  }
+
+  &__size {
+    grid-area: size;
+
+    &__items {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__item {
+      &__label {
+        margin-right: 0.5rem;
+        font-weight: bold;
+      }
+    }
+  }
+
+  @include md-screen {
+    grid-template-areas:
+      "header header"
+      "main sidebar";
+    grid-template-columns: 1fr auto;
+
+    &__sidebar {
+      max-width: 30rem;
+    }
+  }
+
+  @include lg-screen {
+    &__main {
+      grid-template-areas:
+        "description skill"
+        "tag component"
+        "difficulty component"
+        "size component"
+        "photo photo";
+      grid-template-columns: 1fr auto;
+    }
+  }
+}

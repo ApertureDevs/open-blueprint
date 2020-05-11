@@ -1,0 +1,119 @@
+<div *ngIf="!loading" class="blueprint-information">
+    <div class="blueprint-information__header">
+        <img class="blueprint-information__header__background" src="{{blueprint.thumbnail}}" alt="image"/>
+        <div class="blueprint-information__header__overlay">
+            <h1 class="blueprint-information__name">{{blueprint.name}}</h1>
+        </div>
+    </div>
+    <div class="blueprint-information__sidebar">
+        <div class="blueprint-information__sidebar__item blueprint-information__release-selector">
+            <app-release-selector
+                    [selectedRelease]="selectedRelease"
+                    [availableReleases]="blueprint.releases"
+                    (releaseChange)="onSelectedReleaseChange($event)"
+            ></app-release-selector>
+        </div>
+
+        <div class="blueprint-information__sidebar__item blueprint-information__release-date">
+            <span class="blueprint-information__sidebar__item__label">Release Date</span><span>{{selectedRelease.date | date:'dd-MM-yyyy'}}</span>
+        </div>
+
+        <div class="blueprint-information__sidebar__item blueprint-information__type">
+            <span class="blueprint-information__sidebar__item__label">Project type</span><span>{{blueprint.isOfficial === true ? 'official' : 'community'}}</span>
+        </div>
+
+        <div *ngIf="blueprint.forkFrom" class="blueprint-information__sidebar__item blueprint-information__fork-from">
+            <span class="blueprint-information__sidebar__item__label">Forked from</span><a routerLink=""><span>{{blueprint.forkFrom.name}} ({{blueprint.forkFrom.releases[0].tag}})</span></a>
+        </div>
+
+        <div class="blueprint-information__sidebar__item blueprint-information__team">
+            <div *ngFor="let member of blueprint.team.members" class="blueprint-information__team__member">
+                <app-user-badge [user]="member.user"></app-user-badge>
+            </div>
+        </div>
+
+        <div class="blueprint-information__sidebar__item blueprint-information__favorite">
+            <app-favorite-counter [blueprint]="blueprint" [isFavorite]="isFavorite"
+                                  (favoriteToggle)="onFavoriteToggle($event)"></app-favorite-counter>
+        </div>
+
+        <div class="blueprint-information__sidebar__item blueprint-information__issue">
+            <app-issue-counter [blueprint]="blueprint"></app-issue-counter>
+        </div>
+
+        <div class="blueprint-information__sidebar__item blueprint-information__fork">
+            <app-fork-counter [blueprint]="blueprint"></app-fork-counter>
+        </div>
+
+        <div class="blueprint-information__sidebar__item blueprint-information__action">
+            <a routerLink="" mat-mini-fab color="primary" class="blueprint-information__action__item"><mat-icon svgIcon="make"></mat-icon></a>
+            <a routerLink="" mat-mini-fab color="primary" class="blueprint-information__action__item"><mat-icon svgIcon="issue"></mat-icon></a>
+            <a routerLink="" mat-mini-fab color="primary" class="blueprint-information__action__item"><mat-icon svgIcon="fork"></mat-icon></a>
+        </div>
+    </div>
+    <div class="blueprint-information__main">
+        <div class="blueprint-information__description">
+            <span class="blueprint-information__description__label">Description</span>
+            <span class="blueprint-information__description__content">{{blueprint.longDescription}}</span>
+        </div>
+
+        <div class="blueprint-information__difficulty">
+            <span class="blueprint-information__difficulty__label">Difficulty</span>
+            <div class="blueprint-information__difficulty__content">
+                <app-difficulty-badge [difficulty]="blueprint.difficulty"></app-difficulty-badge>
+            </div>
+        </div>
+
+        <div class="blueprint-information__skill">
+            <span class="blueprint-information__skill__label">Skills Required</span>
+            <div class="blueprint-information__skill__items">
+                <app-skill-badge *ngFor="let skill of selectedRelease.requirements.skills" class="blueprint-information__skill__item" [skill]="skill"></app-skill-badge>
+            </div>
+        </div>
+
+        <div class="blueprint-information__component">
+            <span class="blueprint-information__component__label">Component List</span>
+            <div class="blueprint-information__component__list">
+                <app-components-list [release]="selectedRelease"></app-components-list>
+            </div>
+        </div>
+
+        <div class="blueprint-information__tag">
+            <span class="blueprint-information__tag__label">Tags</span>
+            <div class="blueprint-information__skill__items">
+                <mat-chip-list>
+                    <mat-chip *ngFor="let tag of blueprint.tags">{{tag}}</mat-chip>
+                </mat-chip-list>
+            </div>
+        </div>
+
+        <div class="blueprint-information__size">
+            <span class="blueprint-information__size__label">Size</span>
+            <div class="blueprint-information__size__items">
+                <div class="blueprint-information__size__item">
+                    <span class="blueprint-information__size__item__label">Width</span>
+                    <span class="blueprint-information__size__item__value">{{selectedRelease.size.width}} mm</span>
+                </div>
+                <div class="blueprint-information__size__item">
+                    <span class="blueprint-information__size__item__label">Length</span>
+                    <span class="blueprint-information__size__item__value">{{selectedRelease.size.length}} mm</span>
+                </div>
+                <div class="blueprint-information__size__item">
+                    <span class="blueprint-information__size__item__label">Height</span>
+                    <span class="blueprint-information__size__item__value">{{selectedRelease.size.height}} mm</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="blueprint-information__photo">
+            <span class="blueprint-information__photo__label">Photos</span>
+            <div class="blueprint-information__photo__items">
+                <div *ngFor="let photo of selectedRelease.photos" class="blueprint-information__photo__item">
+                    <img src="{{photo}}" alt="{{blueprint.name}} photo">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
