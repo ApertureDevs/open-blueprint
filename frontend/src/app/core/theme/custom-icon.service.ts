@@ -20,5 +20,9 @@ export class CustomIconService {
     this.matIconRegistry.addSvgIcon('official', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/medal-solid.svg'));
     this.matIconRegistry.addSvgIcon('github', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/github-square-brands.svg'));
     this.matIconRegistry.addSvgIcon('twitter', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/twitter-square-brands.svg'));
+    this.matIconRegistry.addSvgIcon('fork', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/code-branch-solid.svg'));
+    this.matIconRegistry.addSvgIcon('issue', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/exclamation-circle-solid.svg'));
+    this.matIconRegistry.addSvgIcon('difficulty', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/cogs-solid.svg'));
+    this.matIconRegistry.addSvgIcon('favorite', this.domSanitizer.bypassSecurityTrustResourceUrl('../../assets/images/heart-solid.svg'));
   }
 }

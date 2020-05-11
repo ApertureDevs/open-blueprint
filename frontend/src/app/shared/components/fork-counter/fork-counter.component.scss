@@ -1,0 +1,50 @@
+@import "~styles/scss/variables";
+
+.fork-counter {
+  position: relative;
+  display: inline-flex;
+  box-sizing: border-box;
+  height: 1.5rem;
+  overflow: hidden;
+  border: 1px solid $theme-color-accent;
+  border-radius: 0.4rem;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    color: #fff;
+    background-color: $theme-color-main;
+    border-right: 1px solid $theme-color-accent;
+
+    &:hover {
+      background-color: $theme-color-hover;
+    }
+  }
+
+  &__icon {
+    width: 1rem;
+    height: 1rem;
+    padding-right: 0.3rem;
+  }
+
+  &__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    color: $theme-color-accent;
+    font-weight: bold;
+    background-color: #fff;
+
+    &:hover {
+      color: $theme-color-hover;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<div *ngIf="blueprint" class="blueprint-card">
+    <a [routerLink]="['/explore/blueprint', blueprint.id]">
+        <div *ngIf="blueprint.isOfficial" class="blueprint-card__badge blueprint-card__badge--official">
+            <mat-icon svgIcon="official" class="blueprint-card__badge__icon"></mat-icon>
+            <span class="blueprint-card__badge__label">official</span>
+        </div>
+        <div class="blueprint-card__thumb">
+            <img class="blueprint-card__image" src="{{blueprint.thumbnail}}" alt="image"/>
+            <div class="blueprint-card__overlay">
+                <div class="blueprint-card__difficulty">
+                    <mat-icon class="blueprint-card__difficulty__icon">speed</mat-icon>
+                    <span class="blueprint-card__difficulty__label">{{blueprint.difficulty}}</span>
+                </div>
+                <div *ngIf="lastRelease" class="blueprint-card__skill-list">
+                    <div *ngFor="let skill of lastRelease.requirements.skills" class="blueprint-card__skill-list__item">
+                        <mat-icon class="blueprint-card__skill-list__item__icon" svgIcon="{{skill}}"></mat-icon>
+                        <span class="blueprint-card__skill-list__item__label">{{skill}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="blueprint-card__content">
+            <div class="blueprint-card__belt">
+                <div class="blueprint-card__favorite">
+                    <span class="blueprint-card__favorite__label">{{blueprint.favoritesCount}}</span>
+                    <mat-icon class="blueprint-card__favorite__icon">favorite</mat-icon>
+                </div>
+            </div>
+            <div class="blueprint-card__content__name">{{blueprint.name}}</div>
+            <div class="blueprint-card__content__footer">
+                <div class="blueprint-card__content__footer__maker">
+                    <ng-container *ngIf="lastRelease !== null">
+                        {{lastRelease.tag}}
+                    </ng-container>
+                </div>
+                <div class="blueprint-card__content__footer__date">{{blueprint.updateDate | date:'dd-MM-yyyy'}}</div>
+            </div>
+        </div>
+    </a>
+</div>

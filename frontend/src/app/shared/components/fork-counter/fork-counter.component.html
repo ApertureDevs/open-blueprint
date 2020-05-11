@@ -1,0 +1,13 @@
+<div class="fork-counter">
+    <a routerLink="">
+        <div class="fork-counter__label">
+            <mat-icon class="fork-counter__icon" svgIcon="fork" inline="true"></mat-icon>
+            <span>{{ blueprint.forksCount | i18nPlural: labelMapping}}</span>
+        </div>
+    </a>
+    <a routerLink="">
+        <div class="fork-counter__count">
+            <span>{{ blueprint.forksCount }}</span>
+        </div>
+    </a>
+</div>

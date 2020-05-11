@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit, OnDestroy {
         subItems: [
           {
             label: 'browse',
-            link: 'make/explore',
+            link: 'explore/blueprint',
           },
           {
             label: 'history',

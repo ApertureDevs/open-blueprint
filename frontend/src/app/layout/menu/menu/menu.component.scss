@@ -1,8 +1,10 @@
-@import "../../../../styles/scss/base/variables";
+@import "~styles/scss/variables";
+@import "~styles/scss/mixins";
 
 $header-height: 4.5rem;
 
 .menu-nav {
+  min-width: 15rem;
   height: 100%;
   overflow: hidden;
   background-color: $theme-color-dark;
@@ -36,11 +38,18 @@ $header-height: 4.5rem;
   }
 
   &__title {
+    display: none;
     padding-right: 1rem;
     color: #fff;
     font-weight: bold;
     font-size: 1rem;
     white-space: nowrap;
     text-transform: uppercase;
+  }
+
+  @include md-screen {
+    &__title {
+      display: block;
+    }
   }
 }

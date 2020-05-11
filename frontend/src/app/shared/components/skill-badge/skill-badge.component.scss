@@ -1,0 +1,31 @@
+@import "~styles/scss/variables";
+
+.skill-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.25rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.75rem;
+  color: #fff;
+  background-color: $theme-color-main;
+  border: 3px solid $theme-color-dark;
+  border-radius: 1rem;
+
+  &__icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+  }
+
+  &--print {
+    background-color: $print-color-main;
+    border-color: $print-color-accent;
+  }
+
+  &--electronic {
+    background-color: $electronic-color-main;
+    border-color: $electronic-color-accent;
+  }
+}

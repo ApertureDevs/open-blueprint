@@ -1,0 +1,6 @@
+<mat-form-field>
+    <mat-label>release</mat-label>
+    <mat-select [(ngModel)]="selectedReleaseTag" (valueChange)="onReleaseChange($event)">
+        <mat-option *ngFor="let availableRelease of availableReleases" [value]="availableRelease.tag">{{availableRelease.tag}}</mat-option>
+    </mat-select>
+</mat-form-field>

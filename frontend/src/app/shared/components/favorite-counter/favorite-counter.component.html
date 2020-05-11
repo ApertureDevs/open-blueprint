@@ -1,0 +1,11 @@
+<div class="favorite-counter" [class.favorite-counter--favorite]="isFavorite">
+    <div class="favorite-counter__label" (click)="onFavoriteToggle()">
+        <mat-icon class="favorite-counter__icon" inline="true" svgIcon="favorite"></mat-icon>
+        <span>{{favoritesCount | i18nPlural: labelMapping}}</span>
+    </div>
+    <a routerLink="">
+        <div class="favorite-counter__count">
+            <span>{{ favoritesCount }}</span>
+        </div>
+    </a>
+</div>

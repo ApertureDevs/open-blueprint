@@ -1,0 +1,13 @@
+<div class="issue-counter">
+    <a routerLink="">
+        <div class="issue-counter__label">
+            <mat-icon class="issue-counter__icon" svgIcon="issue" inline="true"></mat-icon>
+            <span>{{ blueprint.openIssuesCount | i18nPlural: labelMapping }}</span>
+        </div>
+    </a>
+    <a routerLink="">
+        <div class="issue-counter__count">
+            <span>{{ blueprint.openIssuesCount }}</span>
+        </div>
+    </a>
+</div>

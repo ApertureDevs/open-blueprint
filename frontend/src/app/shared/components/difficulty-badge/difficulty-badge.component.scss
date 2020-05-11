@@ -1,0 +1,36 @@
+.difficulty-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.25rem;
+  padding-right: 0.75rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.75rem;
+  color: #fff;
+  border: 3px solid #fff;
+
+  &__icon {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 0.5rem;
+  }
+
+  &__label {
+    font-weight: bold;
+  }
+
+  &--easy {
+    color: #039c31;
+    border-color: #027d27;
+  }
+
+  &--medium {
+    color: #d6a315;
+    border-color: #c49614;
+  }
+
+  &--hard {
+    color: #bd4419;
+    border-color: #a33914;
+  }
+}

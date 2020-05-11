@@ -7,8 +7,8 @@ const routes: Routes = [
     loadChildren: () => import('./modules/landing/landing.module').then((module) => module.LandingModule),
   },
   {
-    path: 'make',
-    loadChildren: () => import('./modules/make/make.module').then((module) => module.MakeModule),
+    path: 'explore',
+    loadChildren: () => import('./modules/explore/explore.module').then((module) => module.ExploreModule),
   },
   {
     path: '**',
