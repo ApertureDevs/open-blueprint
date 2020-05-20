@@ -1,5 +1,6 @@
 FROM golang:1
-RUN GO111MODULE=on go get sigs.k8s.io/kustomize/kustomize/v3
+RUN curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+RUN mv kustomize /usr/local/bin
 
 COPY entrypoint.sh /entrypoint.sh
 
