@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-webserver
+  labels:
+    project: obp
+    app: frontend-webserver
+    layer: frontend
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-webserver
+  template:
+    metadata:
+      labels:
+        project: obp
+        app: frontend-webserver
+        layer: frontend
+    spec:
+      containers:
+      - name: frontend-webserver
+        image: eu.gcr.io/aperture-devs/obp-frontend-webserver:stable
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "248Mi"
+          requests:
+            cpu: "100m"
+            memory: "128Mi"

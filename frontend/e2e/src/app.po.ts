@@ -2,7 +2,7 @@ import { browser } from 'protractor';
 
 export class AppPage {
   public navigateTo(): Promise<unknown> {
-    return browser.get('http://frontend:4200/') as Promise<unknown>;
+    return browser.get('http://frontend-webserver:4200/') as Promise<unknown>;
   }
 
   public getTitleText(): Promise<string> {

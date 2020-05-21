@@ -6,9 +6,9 @@ on:
     - develop
 
 env:
-  GKE_PROJECT: open-blueprint
+  GKE_PROJECT: aperture-devs
   GKE_ZONE: europe-west3-a
-  GKE_CLUSTER: open-blueprint
+  GKE_CLUSTER: aperture-devs
 
 jobs:
   setup-build-publish-deploy:
@@ -30,19 +30,23 @@ jobs:
       run: |
         curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
 
-    - name: Build Sources
+    - name: Build "frontend" Docker Image
       run: |
-        task build --summary
-        task build
+        task frontend-build --summary
+        BUILD_ENV=dev task frontend-build
+        docker build --file .deploy/docker/frontend-webserver/Dockerfile --build-arg DIST_DIR=frontend/dist/dev --tag eu.gcr.io/"$GKE_PROJECT"/obp-frontend-webserver:${{ github.sha }} .
 
-    - name: Build Docker Images
+    - name: Build "api" Docker Image
       run: |
-        docker build --file docker/deploy/frontend/Dockerfile --tag eu.gcr.io/"$GKE_PROJECT"/frontend:${{ github.sha }} .
-    
-    - name: Publish
+        task api-build --summary
+        BUILD_ENV=dev task api-build
+        docker build --file .deploy/docker/api-php/Dockerfile --build-arg DIST_DIR=api/dist/dev --tag eu.gcr.io/"$GKE_PROJECT"/obp-api-php:${{ github.sha }} .
+
+    - name: Publish Docker Images
       run: |
         gcloud auth configure-docker
-        docker push eu.gcr.io/$GKE_PROJECT/frontend:${{ github.sha }}
+        docker push eu.gcr.io/$GKE_PROJECT/obp-frontend-webserver:${{ github.sha }}
+        docker push eu.gcr.io/$GKE_PROJECT/obp-api-php:${{ github.sha }}
 
     - name: Customize deployment manifest for dev stage
       id: manifest-customization
@@ -55,4 +59,3 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
         cat ${{ steps.manifest-customization.outputs.manifest-path }} | kubectl apply -f -
-        kubectl get services --output wide --namespace dev

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-webserver-http-service
+  labels:
+    project: obp
+    layer: frontend
+spec:
+  ports:
+    - port: 80
+  selector:
+    app: frontend-webserver
+  clusterIP: None

@@ -5,8 +5,8 @@ on:
     - cron: '0 8 * * *'
 
 jobs:
-  npm-audit:
-    name: NPM Audit
+  frontend-audit:
+    name: Frontend Security Audit
     runs-on: ubuntu-latest
     steps:
 
@@ -17,6 +17,6 @@ jobs:
       run: |
         curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
 
-    - name: Audit
+    - name: Audit NPM modules
       run: |
-        task npm-audit-check
+        task frontend-npm-audit-check

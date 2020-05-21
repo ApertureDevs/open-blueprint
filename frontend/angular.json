@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/open-blueprint",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -33,6 +33,7 @@
           },
           "configurations": {
             "production": {
+              "outputPath": "dist/prod",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -59,6 +60,23 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "outputPath": "dist/dev",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "extractCss": false,
+              "namedChunks": true,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "buildOptimizer": false
             }
           }
         },
