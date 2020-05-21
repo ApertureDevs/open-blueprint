@@ -28,7 +28,7 @@ describe('ComponentListComponent', () => {
       id: '7f9fcfef-c030-41a6-a2cc-329f169e85e5',
       changelog: null,
       tag: '1.0.0',
-      date: new Date('12-01-2020'),
+      date: new Date('2020-12-01'),
       requirements: {
         skills: [],
         components: [],

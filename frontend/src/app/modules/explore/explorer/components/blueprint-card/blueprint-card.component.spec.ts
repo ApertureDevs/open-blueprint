@@ -55,8 +55,8 @@ describe('BlueprintCardComponent', () => {
         }],
       },
       releases: [],
-      createDate: new Date('01-01-2020'),
-      updateDate: new Date('02-01-2020'),
+      createDate: new Date('2020-01-01'),
+      updateDate: new Date('2020-02-01'),
     };
     fixture.detectChanges();
 
