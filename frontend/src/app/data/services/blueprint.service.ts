@@ -49,7 +49,7 @@ export class BlueprintService {
             id: '29c7fd57-89cf-4638-9eea-6a5ace4cd1ad',
             changelog: null,
             tag: '1.0.1',
-            date: new Date('12-02-2020'),
+            date: new Date('2020-12-02'),
             requirements: {
               skills: [
                 Skill.Electronic,
@@ -90,7 +90,7 @@ export class BlueprintService {
             id: '3652ea73-90d4-4a22-b32d-f900eb657d2c',
             changelog: null,
             tag: '1.0.0',
-            date: new Date('12-01-2020'),
+            date: new Date('2020-12-01'),
             requirements: {
               skills: [
                 Skill.Electronic,
@@ -151,8 +151,8 @@ export class BlueprintService {
             },
           ],
         },
-        createDate: new Date('12-01-2020'),
-        updateDate: new Date('12-31-2020'),
+        createDate: new Date('2020-12-01'),
+        updateDate: new Date('2020-12-02'),
       },
       forksCount: 10,
       openIssuesCount: 3,
@@ -161,7 +161,7 @@ export class BlueprintService {
           id: '48306725-e902-4a6e-851f-9d3efc7dee5e',
           changelog: null,
           tag: '1.1.0',
-          date: new Date('12-31-2020'),
+          date: new Date('2020-12-31'),
           requirements: {
             skills: [
               Skill.Electronic,
@@ -203,7 +203,7 @@ export class BlueprintService {
           id: '29c7fd57-89cf-4638-9eea-6a5ace4cd1ad',
           changelog: null,
           tag: '1.0.1',
-          date: new Date('12-02-2020'),
+          date: new Date('2020-12-02'),
           requirements: {
             skills: [
               Skill.Electronic,
@@ -244,7 +244,7 @@ export class BlueprintService {
           id: '3652ea73-90d4-4a22-b32d-f900eb657d2c',
           changelog: null,
           tag: '1.0.0',
-          date: new Date('12-01-2020'),
+          date: new Date('2020-12-01'),
           requirements: {
             skills: [
               Skill.Electronic,
@@ -305,8 +305,8 @@ export class BlueprintService {
           },
         ],
       },
-      createDate: new Date('12-01-2020'),
-      updateDate: new Date('12-31-2020'),
+      createDate: new Date('2020-12-01'),
+      updateDate: new Date('2020-12-31'),
     },
     {
       id: '0a0b8f59-1b8c-445b-b6c5-9a7a99376017',
@@ -329,7 +329,7 @@ export class BlueprintService {
           id: '7f9fcfef-c030-41a6-a2cc-329f169e85e5',
           changelog: null,
           tag: '1.0.0',
-          date: new Date('12-01-2020'),
+          date: new Date('2020-12-01'),
           requirements: {
             skills: [
               Skill.Print,
@@ -368,8 +368,8 @@ export class BlueprintService {
           },
         ],
       },
-      createDate: new Date('11-01-2020'),
-      updateDate: new Date('11-01-2020'),
+      createDate: new Date('2020-11-01'),
+      updateDate: new Date('2020-11-01'),
     },
   ];
 
