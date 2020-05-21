@@ -1,0 +1,7 @@
+App\Core\BoundedContext\Blueprint\Domain\Blueprint:
+    blueprint_simple:
+        __construct:
+            name: 'simple blueprint'
+    blueprint_with_multiple_releases:
+        __construct:
+            name: 'blueprint with multiple releases'

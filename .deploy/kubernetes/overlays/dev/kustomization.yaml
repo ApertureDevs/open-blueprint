@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: obp-dev
+commonLabels:
+  tier: dev
+resources:
+- ../../base
+- dev-namespace.yaml
+- api-database-migration-job.yaml
+patchesStrategicMerge:
+- api-configmap.yaml

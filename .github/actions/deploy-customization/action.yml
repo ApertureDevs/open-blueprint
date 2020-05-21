@@ -4,7 +4,7 @@ inputs:
   kubernetes-deploy-directory:
     description: 'Kubernetes Configuration Directory'
     required: true
-    default: '.deploy'
+    default: '.deploy/kubernetes'
   stage:
     description: 'Stage'
     required: true

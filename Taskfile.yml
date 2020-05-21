@@ -1,46 +1,71 @@
 version: '2'
 
 tasks:
+
+  ##########
+  # GLOBAL #
+  ##########
+
   install:
     desc: Install Open Blueprint Project
     cmds:
-      - task: js-dependencies
-
-  build:
-    desc: Build dist folder
-    cmds:
-      - docker-compose run --rm --no-deps frontend-cli npx ng build --prod
-    deps:
-      - js-dependencies
-    sources:
-      - frontend/src/**/*
-      - frontend/angular.json
-      - frontend/package-lock.json
-    generates:
-      - frontend/dist/**/*
-    method: checksum
+      - task: frontend-dependencies
+      - task: api-dependencies
+      - task: api-database-create
+      - task: api-database-migration
+      - task: api-database-fixture
 
   serve:
     desc: Start a local development stack
     cmds:
-      - docker-compose up -d frontend
+      - docker-compose up -d frontend-webserver
+      - docker-compose up -d api-webserver
     deps:
-      - js-dependencies
+      - frontend-dependencies
+      - api-dependencies
 
   test:
     desc: Launch tests suites
     cmds:
-      - task: protractor
-      - task: karma
+      - task: frontend-protractor
+      - task: frontend-karma
 
   lint:
     desc: Lint SASS sources
     cmds:
-      - task: sass-linter
-      - task: ts-linter
+      - task: frontend-sass-linter
+      - task: frontend-ts-linter
 
-  js-dependencies:
-    desc: Install NPM vendors
+  ############
+  # FRONTEND #
+  ############
+
+  frontend-build:
+    desc: |
+      Build frontend into dist folder
+      "BUILD_ENV=prod task frontend-build" to build in production mode (default)
+      "BUILD_ENV=dev task frontend-build" to build in development mode
+    cmds:
+      - docker-compose run --rm --no-deps frontend-cli npx ng build {{.BUILD_OPTIONS}}
+    deps:
+      - frontend-dependencies
+    vars:
+      BUILD_OPTIONS:
+        sh: |
+          if [ -z $BUILD_ENV ] || [ 'prod' = $BUILD_ENV ]
+          then
+            echo "--configuration=production"
+            exit 0
+          fi
+          if [ $BUILD_ENV = 'dev' ]
+          then
+            echo "--configuration=development"
+            exit 0
+          fi
+          exit 1
+
+  frontend-dependencies:
+    desc: Install frontend dependencies
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npm ci
     sources:
@@ -49,73 +74,173 @@ tasks:
       - frontend/node_modules/**/*
     method: checksum
 
-
-  protractor:
-    desc: Execute Protractor end to end test suites
+  frontend-protractor:
+    desc: Execute frontend Protractor end to end test suites
     cmds:
       - docker-compose run --rm frontend-cli npx ng e2e
     deps:
-      - js-dependencies
+      - frontend-dependencies
 
-  karma:
-    desc: Execute Karma unit test suites
+  frontend-karma:
+    desc: Execute frontend Karma unit test suites
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npx ng test --code-coverage --watch=false
     deps:
-      - js-dependencies
+      - frontend-dependencies
 
-  karma-watch:
-    desc: Execute Karma unit test suites in watch mode
+  frontend-karma-watch:
+    desc: Execute frontend Karma unit test suites in watch mode
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npx ng test --code-coverage
     deps:
-      - js-dependencies
+      - frontend-dependencies
 
-  npm-audit-check:
-    desc: Execute NPM security audit
+  frontend-npm-audit-check:
+    desc: Execute frontend NPM security audit
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npm audit --production
     deps:
-      - js-dependencies
+      - frontend-dependencies
 
-  npm-audit:
-    desc: Resolve NPM security vulnerabilities
+  frontend-npm-audit:
+    desc: Resolve frontend NPM security vulnerabilities
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npm audit fix
     deps:
-      - js-dependencies
+      - frontend-dependencies
 
-  sass-linter:
-    desc: Apply linter rules to SASS sources
+  frontend-sass-linter:
+    desc: Apply frontend linter rules to SASS sources
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npx stylelint 'src/**/*.scss' --fix
     deps:
-      - js-dependencies
+      - frontend-dependencies
 
-  sass-linter-dry-run:
-    desc: Check linter rules to SASS sources
+  frontend-sass-linter-dry-run:
+    desc: Check frontend linter rules to SASS sources
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npx stylelint 'src/**/*.scss'
     deps:
-      - js-dependencies
+      - frontend-dependencies
 
-  ts-linter:
-    desc: Apply linter rules to Typescript sources
+  frontend-ts-linter:
+    desc: Apply frontend linter rules to Typescript sources
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npx tslint -p . --fix
     deps:
-      - js-dependencies
+      - frontend-dependencies
 
-  ts-linter-dry-run:
-    desc: Check linter rules to Typescript sources
+  frontend-ts-linter-dry-run:
+    desc: Check frontend linter rules to Typescript sources
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npx tslint -p .
     deps:
-      - js-dependencies
+      - frontend-dependencies
 
-  html-linter-dry-run:
-    desc: Check linter rules to HTML sources
+  frontend-html-linter-dry-run:
+    desc: Check frontend linter rules to HTML sources
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npx htmlhint 'src/**/*.html' -c .htmlhintrc
     deps:
-      - js-dependencies
+      - frontend-dependencies
+
+  #######
+  # API #
+  #######
+
+  api-build:
+    desc: |
+      Build api into dist folder
+      "BUILD_ENV=prod task api-build" to build in production mode (default)
+      "BUILD_ENV=dev task api-build" to build in development mode
+    cmds:
+      - docker-compose run --rm --no-deps api-cli mkdir -p {{.BUILD_DIR}}
+      - docker-compose run --rm --no-deps api-cli rm -rf {{.BUILD_DIR}}/*
+      - docker-compose run --rm --no-deps api-cli cp -r bin config public fixtures src templates .env composer.json composer.lock symfony.lock {{.BUILD_DIR}}
+      - docker-compose run --rm --no-deps -e APP_ENV={{.APP_ENV}} api-cli composer install {{.BUILD_OPTIONS}} --working-dir {{.BUILD_DIR}}
+      - docker-compose run --rm --no-deps -e APP_ENV={{.APP_ENV}} api-cli {{.BUILD_DIR}}/bin/console cache:warmup
+    deps:
+      - frontend-dependencies
+    vars:
+      BUILD_OPTIONS:
+        sh: |
+          if [ -z $BUILD_ENV ] || [ 'prod' = $BUILD_ENV ]
+          then
+            echo "--prefer-dist --no-suggest --no-dev --optimize-autoloader --classmap-authoritative"
+            exit 0
+          fi
+          if [ $BUILD_ENV = 'dev' ]
+          then
+            echo "--prefer-dist --no-suggest"
+            exit 0
+          fi
+          exit 1
+      BUILD_DIR:
+        sh: |
+          if [ -z $BUILD_ENV ] || [ 'prod' = $BUILD_ENV ]
+          then
+            echo "dist/prod"
+            exit 0
+          fi
+          if [ $BUILD_ENV = 'dev' ]
+          then
+            echo "dist/dev"
+            exit 0
+          fi
+          exit 1
+      APP_ENV:
+        sh: |
+          if [ -z $BUILD_ENV ] || [ 'prod' = $BUILD_ENV ]
+          then
+            echo "prod"
+            exit 0
+          fi
+          if [ $BUILD_ENV = 'dev' ]
+          then
+            echo "dev"
+            exit 0
+          fi
+          exit 1
+
+  api-dependencies:
+    desc: Install API dependencies
+    cmds:
+      - docker-compose run --rm --no-deps api-cli composer install
+    sources:
+      - api/composer.lock
+    generates:
+      - api/vendor/**/*
+    method: checksum
+
+  api-database-create:
+    desc: Create/Recreate API database
+    cmds:
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:drop --force --if-exists
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:create
+    deps:
+      - api-dependencies
+
+  api-database-migration:
+    desc: Execute API database migrations
+    cmds:
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:migrate --no-interaction
+    deps:
+      - api-dependencies
+    sources:
+      - api/src/Infrastructure/Persistence/Migration
+
+  api-database-fixture:
+    desc: Generate API database fixtures
+    cmds:
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console hautelook:fixtures:load --no-interaction
+    deps:
+      - api-dependencies
+    sources:
+      - api/src/fixtures
+
+  api-database-schema-validate:
+    desc: Check if there is a difference between API database and ORM data mapping
+    cmds:
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:schema:validate
+    deps:
+      - api-dependencies
