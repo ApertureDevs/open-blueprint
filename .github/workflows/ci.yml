@@ -54,26 +54,18 @@ jobs:
       - name: Add Task runner
         run: |
           curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
-      - name: Database create
+      - name: Test Database
         run: |
-          task api-database-create --summary
-          task api-database-create
-      - name: Database migrations
-        run: |
-          task api-database-migration --summary
-          task api-database-migration
-      - name: Database fixtures
-        run: |
-          task api-database-fixture --summary
-          task api-database-fixture
-      - name: Database schema validate
-        run: |
-          task api-database-schema-validate --summary
-          task api-database-schema-validate
+          task api-database-test --summary
+          task api-database-test
       - name: PHP linter
         run: |
           task api-php-linter-dry-run --summary
           task api-php-linter-dry-run
+      - name: PHP static analysis
+        run: |
+          task api-php-static-analysis --summary
+          task api-php-static-analysis
       - name: Build Prod
         run: |
           task frontend-build --summary

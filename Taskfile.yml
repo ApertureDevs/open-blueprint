@@ -24,6 +24,15 @@ tasks:
       - frontend-dependencies
       - api-dependencies
 
+  check:
+    desc: Check and fix sources
+    cmds:
+      - task: lint
+      - task: frontend-html-linter-dry-run
+      - task: api-php-static-analysis
+      - task: test
+      - task: api-database-test
+
   test:
     desc: Launch tests suites
     cmds:
@@ -31,10 +40,11 @@ tasks:
       - task: frontend-karma
 
   lint:
-    desc: Lint SASS sources
+    desc: Lint sources
     cmds:
       - task: frontend-sass-linter
       - task: frontend-ts-linter
+      - task: api-php-linter
 
   ############
   # FRONTEND #
@@ -212,6 +222,14 @@ tasks:
       - api/vendor/**/*
     method: checksum
 
+  api-database-test:
+    desc: Test API database
+    cmds:
+      - task: api-database-create
+      - task: api-database-migration
+      - task: api-database-fixture
+      - task: api-database-schema-validate
+
   api-database-create:
     desc: Create/Recreate API database
     cmds:
@@ -246,15 +264,22 @@ tasks:
       - api-dependencies
 
   api-php-linter:
-    desc: Apply api linter rules to PHP sources
+    desc: Apply API linter rules to PHP sources
     cmds:
       - docker-compose run --rm --no-deps api-cli vendor/bin/php-cs-fixer fix -v --show-progress=dots --diff-format=udiff
     deps:
       - api-dependencies
 
   api-php-linter-dry-run:
-    desc: Check api linter rules to PHP sources
+    desc: Check API linter rules to PHP sources
     cmds:
       - docker-compose run --rm --no-deps api-cli vendor/bin/php-cs-fixer fix -v --show-progress=dots --diff-format=udiff --dry-run
+    deps:
+      - api-dependencies
+
+  api-php-static-analysis:
+    desc: Analyse API PHP sources
+    cmds:
+      - docker-compose run --rm --no-deps api-cli vendor/bin/phpstan analyse
     deps:
       - api-dependencies
