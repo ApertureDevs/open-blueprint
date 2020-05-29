@@ -70,6 +70,10 @@ jobs:
         run: |
           task api-database-schema-validate --summary
           task api-database-schema-validate
+      - name: PHP linter
+        run: |
+          task api-php-linter-dry-run --summary
+          task api-php-linter-dry-run
       - name: Build Prod
         run: |
           task frontend-build --summary

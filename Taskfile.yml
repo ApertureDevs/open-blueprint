@@ -244,3 +244,17 @@ tasks:
       - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:schema:validate
     deps:
       - api-dependencies
+
+  api-php-linter:
+    desc: Apply api linter rules to PHP sources
+    cmds:
+      - docker-compose run --rm --no-deps api-cli vendor/bin/php-cs-fixer fix -v --show-progress=dots --diff-format=udiff
+    deps:
+      - api-dependencies
+
+  api-php-linter-dry-run:
+    desc: Check api linter rules to PHP sources
+    cmds:
+      - docker-compose run --rm --no-deps api-cli vendor/bin/php-cs-fixer fix -v --show-progress=dots --diff-format=udiff --dry-run
+    deps:
+      - api-dependencies
