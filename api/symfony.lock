@@ -145,6 +145,9 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.0.4"
     },
+    "maglnet/composer-require-checker": {
+        "version": "2.1.0"
+    },
     "myclabs/deep-copy": {
         "version": "1.9.5"
     },
@@ -172,6 +175,9 @@
         "files": [
             "config/packages/nelmio_cors.yaml"
         ]
+    },
+    "nikic/php-parser": {
+        "version": "v4.4.0"
     },
     "ocramius/package-versions": {
         "version": "1.8.0"
@@ -479,6 +485,12 @@
     },
     "webmozart/assert": {
         "version": "1.8.0"
+    },
+    "webmozart/glob": {
+        "version": "4.1.0"
+    },
+    "webmozart/path-util": {
+        "version": "2.3.0"
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"

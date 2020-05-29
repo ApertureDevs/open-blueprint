@@ -32,6 +32,7 @@ tasks:
       - task: api-php-static-analysis
       - task: test
       - task: api-database-test
+      - task: api-composer-check
 
   test:
     desc: Launch tests suites
@@ -281,5 +282,12 @@ tasks:
     desc: Analyse API PHP sources
     cmds:
       - docker-compose run --rm --no-deps api-cli vendor/bin/phpstan analyse
+    deps:
+      - api-dependencies
+
+  api-composer-check:
+    desc: Analyse API composer dependencies and verify that no unknown symbols are used in the sources of a package
+    cmds:
+      - docker-compose run --rm --no-deps api-cli vendor/bin/composer-require-checker check composer.json --config-file=.composer-require-checker.json
     deps:
       - api-dependencies
