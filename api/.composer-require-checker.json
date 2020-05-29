@@ -1,0 +1,11 @@
+{
+  "scan-files": [
+    "bin/console",
+    "public/index.php"
+  ],
+  "symbol-whitelist" : [
+    "null", "true", "false",
+    "static", "self", "parent",
+    "array", "string", "int", "float", "bool", "iterable", "callable", "void", "object"
+  ]
+}

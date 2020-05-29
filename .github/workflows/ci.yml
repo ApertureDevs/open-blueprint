@@ -66,6 +66,10 @@ jobs:
         run: |
           task api-php-static-analysis --summary
           task api-php-static-analysis
+      - name: PHP dependencies check
+        run: |
+          task api-composer-check --summary
+          task api-composer-check
       - name: Build Prod
         run: |
           task frontend-build --summary
