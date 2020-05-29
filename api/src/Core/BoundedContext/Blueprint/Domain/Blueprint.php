@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Core\BoundedContext\Blueprint\Domain;
 
 class Blueprint
@@ -11,16 +12,13 @@ class Blueprint
     {
         $uuid = uuid_create(UUID_TYPE_RANDOM);
 
-        if ($uuid === null) {
+        if (null === $uuid) {
             throw new \RuntimeException('Uuid cannot be null.');
         }
         $this->id = $uuid;
         $this->name = $name;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;

@@ -16,6 +16,12 @@
             "src/Entity/.gitignore"
         ]
     },
+    "composer/semver": {
+        "version": "1.5.1"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.4.1"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -98,6 +104,18 @@
     "fig/link-util": {
         "version": "1.1.1"
     },
+    "friendsofphp/php-cs-fixer": {
+        "version": "2.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.2",
+            "ref": "cc05ab6abf6894bddb9bbd6a252459010ebe040b"
+        },
+        "files": [
+            ".php_cs.dist"
+        ]
+    },
     "fzaninotto/faker": {
         "version": "v1.9.1"
     },
@@ -163,6 +181,9 @@
     },
     "php": {
         "version": "7.4"
+    },
+    "php-cs-fixer/diff": {
+        "version": "v1.3.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.1.0"
@@ -296,6 +317,9 @@
     "symfony/mime": {
         "version": "v5.0.8"
     },
+    "symfony/options-resolver": {
+        "version": "v5.0.8"
+    },
     "symfony/polyfill-intl-idn": {
         "version": "v1.17.0"
     },
@@ -307,6 +331,9 @@
     },
     "symfony/polyfill-uuid": {
         "version": "v1.17.0"
+    },
+    "symfony/process": {
+        "version": "v5.0.8"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.4"
