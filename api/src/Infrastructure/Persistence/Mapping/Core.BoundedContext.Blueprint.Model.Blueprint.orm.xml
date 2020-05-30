@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                   https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Core\BoundedContext\Blueprint\Domain\Blueprint">
+    <entity name="App\Core\BoundedContext\Blueprint\Model\Blueprint">
         <id name="id" type="string" length="36">
             <generator strategy="NONE"/>
         </id>

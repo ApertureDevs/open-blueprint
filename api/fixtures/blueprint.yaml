@@ -1,4 +1,4 @@
-App\Core\BoundedContext\Blueprint\Domain\Blueprint:
+App\Core\BoundedContext\Blueprint\Model\Blueprint:
     blueprint_simple:
         __construct:
             name: 'simple blueprint'

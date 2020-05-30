@@ -1,0 +1,20 @@
+paths:
+  - src
+  - vendor
+layers:
+  - name: Core
+    collectors:
+      - type: directory
+        regex: src/Core/.*
+  - name: Infrastructure
+    collectors:
+      - type: directory
+        regex: src/Infrastructure/.*
+  - name: Vendor
+    collectors:
+      - type: directory
+        regex: vendor/.*
+ruleset:
+  Infrastructure:
+    - Vendor
+    - Core

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7aaef7fc3cd48e3959130812d5dc2c3d",
+    "content-hash": "dd6d0ae4a10ffdb354b2e5e8178a9a20",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -7186,6 +7186,51 @@
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
             "time": "2020-02-07T06:18:20+00:00"
+        },
+        {
+            "name": "sensiolabs-de/deptrac-shim",
+            "version": "0.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sensiolabs-de/deptrac-shim.git",
+                "reference": "868702d0626996bd41953ac7f28a8fcbcc4165ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sensiolabs-de/deptrac-shim/zipball/868702d0626996bd41953ac7f28a8fcbcc4165ec",
+                "reference": "868702d0626996bd41953ac7f28a8fcbcc4165ec",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-tokenizer": "*",
+                "ext-zlib": "*",
+                "php": "^7.2"
+            },
+            "replace": {
+                "sensiolabs-de/astrunner": "^1.0",
+                "sensiolabs-de/deptrac": "self.version"
+            },
+            "suggest": {
+                "ext-dom": "For using the JUnit output formatter"
+            },
+            "bin": [
+                "deptrac"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Mönch",
+                    "email": "simon.moench@sensiolabs.de",
+                    "role": "maintainer"
+                }
+            ],
+            "description": "deptrac phar distribution",
+            "time": "2020-05-04T10:24:43+00:00"
         },
         {
             "name": "symfony/options-resolver",

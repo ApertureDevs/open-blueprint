@@ -14,3 +14,7 @@
 ###< friendsofphp/php-cs-fixer ###
 
 /dist
+
+###> sensiolabs-de/deptrac-shim ###
+/.deptrac.cache
+###< sensiolabs-de/deptrac-shim ###

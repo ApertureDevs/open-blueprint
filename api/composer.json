@@ -30,6 +30,7 @@
         "phpstan/phpstan-doctrine": "^0.12.13",
         "phpstan/phpstan-phpunit": "^0.12.8",
         "phpstan/phpstan-symfony": "^0.12.6",
+        "sensiolabs-de/deptrac-shim": "^0.7.1",
         "symfony/profiler-pack": "^1.0"
     },
     "config": {
