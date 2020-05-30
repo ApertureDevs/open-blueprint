@@ -29,7 +29,8 @@ tasks:
     cmds:
       - task: lint
       - task: frontend-html-linter-dry-run
-      - task: api-php-static-analysis
+      - task: api-phpstan-analysis
+      - task: api-layers-analysis
       - task: test
       - task: api-database-test
       - task: api-composer-check
@@ -278,8 +279,8 @@ tasks:
     deps:
       - api-dependencies
 
-  api-php-static-analysis:
-    desc: Analyse API PHP sources
+  api-phpstan-analysis:
+    desc: Analyse API PHP sources with phpstan
     cmds:
       - docker-compose run --rm --no-deps api-cli vendor/bin/phpstan analyse
     deps:
@@ -289,5 +290,12 @@ tasks:
     desc: Analyse API composer dependencies and verify that no unknown symbols are used in the sources of a package
     cmds:
       - docker-compose run --rm --no-deps api-cli vendor/bin/composer-require-checker check composer.json --config-file=.composer-require-checker.json
+    deps:
+      - api-dependencies
+
+  api-layers-analysis:
+    desc: Analyse dependencies between API layers with deptrac
+    cmds:
+      - docker-compose run --rm --no-deps api-cli vendor/bin/deptrac analyze depfile.yaml
     deps:
       - api-dependencies

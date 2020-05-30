@@ -62,14 +62,18 @@ jobs:
         run: |
           task api-php-linter-dry-run --summary
           task api-php-linter-dry-run
-      - name: PHP static analysis
+      - name: PHPStan analysis
         run: |
-          task api-php-static-analysis --summary
-          task api-php-static-analysis
+          task api-phpstan-analysis --summary
+          task api-phpstan-analysis
       - name: PHP dependencies check
         run: |
           task api-composer-check --summary
           task api-composer-check
+      - name: PHP layers dependencies analysis
+        run: |
+          task api-layers-analysis --summary
+          task api-layers-analysis
       - name: Build Prod
         run: |
           task frontend-build --summary

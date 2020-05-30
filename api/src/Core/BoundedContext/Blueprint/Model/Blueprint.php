@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\BoundedContext\Blueprint\Domain;
+namespace App\Core\BoundedContext\Blueprint\Model;
 
 class Blueprint
 {
