@@ -2,9 +2,9 @@ version: '2'
 
 tasks:
 
-  ##########
-  # GLOBAL #
-  ##########
+  ########
+  # MAIN #
+  ########
 
   install:
     desc: Install Open Blueprint Project
@@ -28,9 +28,10 @@ tasks:
     desc: Check and fix sources
     cmds:
       - task: lint
-      - task: frontend-html-linter-dry-run
-      - task: api-phpstan-analysis
-      - task: api-layers-analysis
+      - task: frontend-html-linter-check
+      - task: global-yaml-linter-check
+      - task: api-phpstan-check
+      - task: api-layers-check
       - task: test
       - task: api-database-test
       - task: api-composer-check
@@ -47,6 +48,15 @@ tasks:
       - task: frontend-sass-linter
       - task: frontend-ts-linter
       - task: api-php-linter
+
+  ##########
+  # GLOBAL #
+  ##########
+
+  global-yaml-linter-check:
+    desc: Check linter rules to YAML files
+    cmds:
+      - docker-compose run --rm yaml-linter yamllint -c .yamllint.yaml .
 
   ############
   # FRONTEND #
@@ -128,7 +138,7 @@ tasks:
     deps:
       - frontend-dependencies
 
-  frontend-sass-linter-dry-run:
+  frontend-sass-linter-check:
     desc: Check frontend linter rules to SASS sources
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npx stylelint 'src/**/*.scss'
@@ -142,14 +152,14 @@ tasks:
     deps:
       - frontend-dependencies
 
-  frontend-ts-linter-dry-run:
+  frontend-ts-linter-check:
     desc: Check frontend linter rules to Typescript sources
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npx tslint -p .
     deps:
       - frontend-dependencies
 
-  frontend-html-linter-dry-run:
+  frontend-html-linter-check:
     desc: Check frontend linter rules to HTML sources
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npx htmlhint 'src/**/*.html' -c .htmlhintrc
@@ -230,7 +240,7 @@ tasks:
       - task: api-database-create
       - task: api-database-migration
       - task: api-database-fixture
-      - task: api-database-schema-validate
+      - task: api-database-schema-check
 
   api-database-create:
     desc: Create/Recreate API database
@@ -258,7 +268,7 @@ tasks:
     sources:
       - api/src/fixtures
 
-  api-database-schema-validate:
+  api-database-schema-check:
     desc: Check if there is a difference between API database and ORM data mapping
     cmds:
       - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:schema:validate
@@ -272,15 +282,15 @@ tasks:
     deps:
       - api-dependencies
 
-  api-php-linter-dry-run:
+  api-php-linter-check:
     desc: Check API linter rules to PHP sources
     cmds:
       - docker-compose run --rm --no-deps api-cli vendor/bin/php-cs-fixer fix -v --show-progress=dots --diff-format=udiff --dry-run
     deps:
       - api-dependencies
 
-  api-phpstan-analysis:
-    desc: Analyse API PHP sources with phpstan
+  api-phpstan-check:
+    desc: Check API PHP sources with phpstan
     cmds:
       - docker-compose run --rm --no-deps api-cli vendor/bin/phpstan analyse
     deps:
@@ -293,8 +303,8 @@ tasks:
     deps:
       - api-dependencies
 
-  api-layers-analysis:
-    desc: Analyse dependencies between API layers with deptrac
+  api-layers-check:
+    desc: Check dependencies between API layers with deptrac
     cmds:
       - docker-compose run --rm --no-deps api-cli vendor/bin/deptrac analyze depfile.yaml
     deps:

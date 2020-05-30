@@ -4,7 +4,7 @@ services:
     frontend-webserver:
         image: node:lts
         expose:
-          - 4200
+            - 4200
         command: npx ng serve --host 0.0.0.0 --disable-host-check --poll=5000
         volumes:
             - ./frontend:/app:delegated
@@ -69,5 +69,11 @@ services:
             POSTGRES_DB: openblueprint
             POSTGRES_PASSWORD: password
 
+    yaml-linter:
+        build:
+            context: docker/yaml-linter
+        volumes:
+            - ./:/app:delegated
+        working_dir: /app
 volumes:
     api-database-data: ~

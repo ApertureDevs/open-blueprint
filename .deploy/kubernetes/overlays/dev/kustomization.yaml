@@ -4,8 +4,8 @@ namespace: obp-dev
 commonLabels:
   tier: dev
 resources:
-- ../../base
-- dev-namespace.yaml
-- api-database-migration-job.yaml
+  - ../../base
+  - dev-namespace.yaml
+  - api-database-migration-job.yaml
 patchesStrategicMerge:
-- api-configmap.yaml
+  - api-configmap.yaml

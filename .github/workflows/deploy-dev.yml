@@ -3,7 +3,7 @@ name: Build and Deploy to GKE on dev stage
 on:
   push:
     branches:
-    - develop
+      - develop
 
 env:
   GKE_PROJECT: aperture-devs
@@ -15,47 +15,39 @@ jobs:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
-
-    - name: Checkout
-      uses: actions/checkout@master
-
-    - name: GCP Authentication
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        version: '270.0.0'
-        service_account_email: ${{ secrets.GKE_EMAIL }}
-        service_account_key: ${{ secrets.GKE_KEY }}
-
-    - name: Add Task runner
-      run: |
-        curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
-
-    - name: Build "frontend" Docker Image
-      run: |
-        task frontend-build --summary
-        BUILD_ENV=dev task frontend-build
-        docker build --file .deploy/docker/frontend-webserver/Dockerfile --build-arg DIST_DIR=frontend/dist/dev --tag eu.gcr.io/"$GKE_PROJECT"/obp-frontend-webserver:${{ github.sha }} .
-
-    - name: Build "api" Docker Image
-      run: |
-        task api-build --summary
-        BUILD_ENV=dev task api-build
-        docker build --file .deploy/docker/api-php/Dockerfile --build-arg DIST_DIR=api/dist/dev --tag eu.gcr.io/"$GKE_PROJECT"/obp-api-php:${{ github.sha }} .
-
-    - name: Publish Docker Images
-      run: |
-        gcloud auth configure-docker
-        docker push eu.gcr.io/$GKE_PROJECT/obp-frontend-webserver:${{ github.sha }}
-        docker push eu.gcr.io/$GKE_PROJECT/obp-api-php:${{ github.sha }}
-
-    - name: Customize deployment manifest for dev stage
-      id: manifest-customization
-      uses: ./.github/actions/deploy-customization
-      with:
-        stage: 'dev'
-        commit-hash: ${{ github.sha }}
-
-    - name: Deploy
-      run: |
-        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
-        cat ${{ steps.manifest-customization.outputs.manifest-path }} | kubectl apply -f -
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: GCP Authentication
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: '270.0.0'
+          service_account_email: ${{ secrets.GKE_EMAIL }}
+          service_account_key: ${{ secrets.GKE_KEY }}
+      - name: Add Task runner
+        run: |
+          curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
+      - name: Build "frontend" Docker Image
+        run: |
+          task frontend-build --summary
+          BUILD_ENV=dev task frontend-build
+          docker build --file .deploy/docker/frontend-webserver/Dockerfile --build-arg DIST_DIR=frontend/dist/dev --tag eu.gcr.io/"$GKE_PROJECT"/obp-frontend-webserver:${{ github.sha }} .
+      - name: Build "api" Docker Image
+        run: |
+          task api-build --summary
+          BUILD_ENV=dev task api-build
+          docker build --file .deploy/docker/api-php/Dockerfile --build-arg DIST_DIR=api/dist/dev --tag eu.gcr.io/"$GKE_PROJECT"/obp-api-php:${{ github.sha }} .
+      - name: Publish Docker Images
+        run: |
+          gcloud auth configure-docker
+          docker push eu.gcr.io/$GKE_PROJECT/obp-frontend-webserver:${{ github.sha }}
+          docker push eu.gcr.io/$GKE_PROJECT/obp-api-php:${{ github.sha }}
+      - name: Customize deployment manifest for dev stage
+        id: manifest-customization
+        uses: ./.github/actions/deploy-customization
+        with:
+          stage: 'dev'
+          commit-hash: ${{ github.sha }}
+      - name: Deploy
+        run: |
+          gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+          cat ${{ steps.manifest-customization.outputs.manifest-path }} | kubectl apply -f -

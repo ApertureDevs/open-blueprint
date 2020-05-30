@@ -20,15 +20,15 @@ spec:
         layer: frontend
     spec:
       containers:
-      - name: frontend-webserver
-        image: eu.gcr.io/aperture-devs/obp-frontend-webserver:stable
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 80
-        resources:
-          limits:
-            cpu: "200m"
-            memory: "248Mi"
-          requests:
-            cpu: "100m"
-            memory: "128Mi"
+        - name: frontend-webserver
+          image: eu.gcr.io/aperture-devs/obp-frontend-webserver:stable
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "248Mi"
+            requests:
+              cpu: "100m"
+              memory: "128Mi"

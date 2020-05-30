@@ -3,6 +3,19 @@ name: Continuous Integration checks
 on: push
 
 jobs:
+  global-ci:
+    name: Global CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Add Task runner
+        run: |
+          curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
+      - name: YAML linter
+        run: |
+          task global-yaml-linter-check --summary
+          task global-yaml-linter-check
   frontend-ci:
     name: Frontend CI
     runs-on: ubuntu-latest
@@ -18,16 +31,16 @@ jobs:
           task frontend-npm-audit-check
       - name: Typescript linter
         run: |
-          task frontend-ts-linter-dry-run --summary
-          task frontend-ts-linter-dry-run
+          task frontend-ts-linter-check --summary
+          task frontend-ts-linter-check
       - name: SASS linter
         run: |
-          task frontend-sass-linter-dry-run --summary
-          task frontend-sass-linter-dry-run
+          task frontend-sass-linter-check --summary
+          task frontend-sass-linter-check
       - name: HTML linter
         run: |
-          task frontend-html-linter-dry-run --summary
-          task frontend-html-linter-dry-run
+          task frontend-html-linter-check --summary
+          task frontend-html-linter-check
       - name: Karma Test
         run: |
           task frontend-karma --summary
@@ -60,20 +73,20 @@ jobs:
           task api-database-test
       - name: PHP linter
         run: |
-          task api-php-linter-dry-run --summary
-          task api-php-linter-dry-run
+          task api-php-linter-check --summary
+          task api-php-linter-check
       - name: PHPStan analysis
         run: |
-          task api-phpstan-analysis --summary
-          task api-phpstan-analysis
+          task api-phpstan-check --summary
+          task api-phpstan-check
       - name: PHP dependencies check
         run: |
           task api-composer-check --summary
           task api-composer-check
       - name: PHP layers dependencies analysis
         run: |
-          task api-layers-analysis --summary
-          task api-layers-analysis
+          task api-layers-check --summary
+          task api-layers-check
       - name: Build Prod
         run: |
           task frontend-build --summary
