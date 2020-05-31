@@ -18,6 +18,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php -r "unlink('composer-setup.php');"
 
 FROM php:7.4
+ARG XDEBUG_VERSION=2.9.6
+ENV XDEBUG_IDE_KEY='serverName=local.api.openblueprint.aperturedevs.com'
 RUN apt update \
     && apt install -y git \
     && rm -rf /var/lib/apt/lists/*
@@ -29,7 +31,11 @@ RUN apt update \
     && apt install -y unzip zlib1g-dev libzip-dev \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install zip
-
+RUN pecl install xdebug-${XDEBUG_VERSION}
+COPY php.ini /usr/local/etc/php/
 COPY --from=symfony-installer /root/.symfony/bin/symfony /usr/local/bin/symfony
 COPY --from=composer-installer /composer.phar /usr/local/bin/composer
 COPY --from=dockerize-installer /root/dockerize /usr/local/bin/dockerize
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
