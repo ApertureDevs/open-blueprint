@@ -47,6 +47,9 @@ spec:
           volumeMounts:
             - name: shared-files
               mountPath: /var/www/html
+            - name: php-config-volume
+              mountPath: /usr/local/etc/php/php.ini
+              subPath: php.ini
           lifecycle:
             postStart:
               exec:
@@ -54,7 +57,7 @@ spec:
           resources:
             limits:
               cpu: "500m"
-              memory: "248Mi"
+              memory: "384Mi"
             requests:
               cpu: "100m"
               memory: "128Mi"
@@ -80,5 +83,8 @@ spec:
         - name: shared-files
           emptyDir: {}
         - name: nginx-config-volume
+          configMap:
+            name: api-configmap
+        - name: php-config-volume
           configMap:
             name: api-configmap
