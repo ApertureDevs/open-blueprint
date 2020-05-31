@@ -25,10 +25,10 @@ jobs:
       - name: Add Task runner
         run: |
           curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
-      - name: NPM audit
+      - name: NPM vulnerability check
         run: |
-          task frontend-npm-audit-check --summary
-          task frontend-npm-audit-check
+          task frontend-npm-security-check --summary
+          task frontend-npm-security-check
       - name: Typescript linter
         run: |
           task frontend-ts-linter-check --summary
@@ -67,6 +67,10 @@ jobs:
       - name: Add Task runner
         run: |
           curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
+      - name: Composer vulnerability check
+        run: |
+          task api-composer-security-check --summary
+          task api-composer-security-check
       - name: Test Database
         run: |
           task api-database-test --summary
