@@ -1,8 +1,9 @@
 extends: default
 
 ignore: |
-  api/vendor
+  api/bin
   api/dist
+  api/vendor
   frontend/dist
   frontend/node_modules
 
