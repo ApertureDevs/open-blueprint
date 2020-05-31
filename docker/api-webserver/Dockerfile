@@ -11,6 +11,7 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install pdo pdo_pgsql
 RUN pecl install xdebug-${XDEBUG_VERSION}
+RUN docker-php-ext-install opcache
 COPY php.ini /usr/local/etc/php/
 COPY --from=symfony-installer /root/.symfony/bin/symfony /usr/local/bin/symfony
 COPY entrypoint.sh /entrypoint.sh

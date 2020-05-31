@@ -7,6 +7,8 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install pdo pdo_pgsql
 
+RUN docker-php-ext-install opcache
+
 COPY $DIST_DIR /app
 
 COPY .deploy/docker/api-php/pod-start.sh /pod-start.sh
