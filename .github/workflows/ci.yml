@@ -91,6 +91,10 @@ jobs:
         run: |
           task api-layers-check --summary
           task api-layers-check
+      - name: PHP unit tests
+        run: |
+          task api-phpunit --summary
+          task api-phpunit
       - name: Build Prod
         run: |
           task frontend-build --summary

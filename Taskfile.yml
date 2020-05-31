@@ -314,3 +314,8 @@ tasks:
     desc: Check API dependencies known security vulnerabilities
     cmds:
       - docker-compose run --rm --no-deps api-cli symfony security:check
+
+  api-phpunit:
+    desc: Execute API PHPUnit unit test suites
+    cmds:
+      - docker-compose run --rm --no-deps api-cli bin/phpunit
