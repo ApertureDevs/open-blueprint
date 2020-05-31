@@ -6,16 +6,29 @@ on:
 
 jobs:
   frontend-audit:
-    name: Frontend Security Audit
+    name: Frontend Security Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@master
-
       - name: Add Task runner
         run: |
           curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
-
-      - name: Audit NPM modules
+      - name: Check NPM modules
         run: |
-          task frontend-npm-audit-check
+          task frontend-npm-security-check --summary
+          task frontend-npm-security-check
+
+  api-audit:
+    name: API Security Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Add Task runner
+        run: |
+          curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
+      - name: Check Composer vendors
+        run: |
+          task api-composer-security-check --summary
+          task api-composer-security-check

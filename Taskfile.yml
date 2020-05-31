@@ -117,14 +117,14 @@ tasks:
     deps:
       - frontend-dependencies
 
-  frontend-npm-audit-check:
+  frontend-npm-security-check:
     desc: Execute frontend NPM security audit
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npm audit --production
     deps:
       - frontend-dependencies
 
-  frontend-npm-audit:
+  frontend-npm-security:
     desc: Resolve frontend NPM security vulnerabilities
     cmds:
       - docker-compose run --rm --no-deps frontend-cli npm audit fix
@@ -309,3 +309,8 @@ tasks:
       - docker-compose run --rm --no-deps api-cli vendor/bin/deptrac analyze depfile.yaml
     deps:
       - api-dependencies
+
+  api-composer-security-check:
+    desc: Check API dependencies known security vulnerabilities
+    cmds:
+      - docker-compose run --rm --no-deps api-cli symfony security:check
