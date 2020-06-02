@@ -13,7 +13,5 @@ parameters:
         - fixtures
         - public
         - src
-    autoload_directories:
-        - src/Infrastructure/Persistence/Migration
     symfony:
         container_xml_path: 'var/cache/dev/App_KernelDevDebugContainer.xml'

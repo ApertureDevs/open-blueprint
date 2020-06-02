@@ -2,10 +2,18 @@ paths:
   - src
   - vendor
 layers:
-  - name: Core
+  - name: Core/Craft
     collectors:
       - type: directory
-        regex: src/Core/.*
+        regex: src/Core/Component/Craft/.*
+  - name: Core/Team
+    collectors:
+      - type: directory
+        regex: src/Core/Component/Team/.*
+  - name: Core/SharedKernel
+    collectors:
+      - type: directory
+        regex: src/Core/SharedKernel/.*
   - name: Infrastructure
     collectors:
       - type: directory
@@ -17,4 +25,10 @@ layers:
 ruleset:
   Infrastructure:
     - Vendor
-    - Core
+    - Core/Craft
+    - Core/Team
+    - Core/SharedKernel
+  Core/Craft:
+    - Core/SharedKernel
+  Core/Team:
+    - Core/SharedKernel

@@ -1,7 +1,31 @@
-App\Core\BoundedContext\Blueprint\Model\Blueprint:
-    blueprint_simple:
-        __construct:
-            name: 'simple blueprint'
-    blueprint_with_multiple_releases:
-        __construct:
-            name: 'blueprint with multiple releases'
+App\Core\SharedKernel\Domain\Event\Craft\BlueprintCreated:
+  blueprint_1.event.blueprint_created:
+    __construct:
+      id: 'dadcd1ef-5654-4929-9a27-dd8dd46fa599'
+      name: 'pampa'
+      createDate: "<(new \\DateTimeImmutable('2020-01-01'))>"
+
+App\Core\SharedKernel\Domain\Event\Craft\BlueprintInformationUpdated:
+  blueprint_1.event.blueprint_information_updated_1:
+    __construct:
+      id: 'dadcd1ef-5654-4929-9a27-dd8dd46fa599'
+      name: 'new pampa'
+      updateDate: "<(new \\DateTimeImmutable('2020-01-02'))>"
+
+App\Core\SharedKernel\Domain\Event\EventRecord:
+  blueprint_1.record_1:
+    __factory: { fromEventStore: ['5d3b50cc-f2c9-46b4-b739-31dd15005d6a', 'dadcd1ef-5654-4929-9a27-dd8dd46fa599', 0, '@blueprint_1.event.blueprint_created', "<(new \\DateTimeImmutable('2020-01-01'))>"] }
+  blueprint_1.record_2:
+    __factory: { fromEventStore: ['c7bcea12-6f6a-43fe-93fd-9078d9264e8d', 'dadcd1ef-5654-4929-9a27-dd8dd46fa599', 1, '@blueprint_1.event.blueprint_information_updated_1', "<(new \\DateTimeImmutable('2020-01-02'))>"] }
+
+App\Infrastructure\Persistence\EventStore\StorableEventRecord:
+  blueprint_1.storable_record_1:
+    __factory: { createFromEventRecord: ['@blueprint_1.record_1', '{"id":"dadcd1ef-5654-4929-9a27-dd8dd46fa599","name":"pampa","createDate":"2020-01-01T00:00:00+00:00"}', 'blueprint_created', 'craft'] }
+  blueprint_1.storable_record_2:
+    __factory: { createFromEventRecord: ['@blueprint_1.record_2', '{"id":"dadcd1ef-5654-4929-9a27-dd8dd46fa599","name":"new pampa","updateDate":"2020-01-02T00:00:00+00:00"}', 'blueprint_information_updated', 'craft'] }
+
+App\Infrastructure\Projection\RelationalModel\Model\Blueprint:
+  blueprint_1.relational_model:
+    name: "new pampa"
+    updateDate: "<(new \\DateTimeImmutable('2020-01-02'))>"
+    __factory: { create: ['dadcd1ef-5654-4929-9a27-dd8dd46fa599', 'pampa', "<(new \\DateTimeImmutable('2020-01-01'))>"] }

@@ -40,11 +40,33 @@ services:
         working_dir: /app
         depends_on:
             - api-database
+            - api-message-broker
         environment:
             APP_ENV: dev
             APP_SECRET: secret
             CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
-            DATABASE_URL: postgresql://obp:password@api-database:5432/openblueprint?serverVersion=12&charset=utf8
+            EVENT_STORE_URL: postgresql://obp:password@api-database:5432/openblueprint_event_store?serverVersion=12&charset=utf8
+            RELATIONAL_DATABASE_URL: postgresql://obp:password@api-database:5432/openblueprint_relational_model?serverVersion=12&charset=utf8
+            MESSENGER_TRANSPORT_DSN: amqp://obp:password@api-message-broker:5672/%2f/messages
+
+    api-worker:
+        build:
+            context: docker/api-cli
+        volumes:
+            - ./api:/app:delegated
+        working_dir: /app
+        depends_on:
+            - api-database
+            - api-message-broker
+        restart: on-failure
+        environment:
+            APP_ENV: dev
+            APP_SECRET: secret
+            CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
+            EVENT_STORE_URL: postgresql://obp:password@api-database:5432/openblueprint_event_store?serverVersion=12&charset=utf8
+            RELATIONAL_DATABASE_URL: postgresql://obp:password@api-database:5432/openblueprint_relational_model?serverVersion=12&charset=utf8
+            MESSENGER_TRANSPORT_DSN: amqp://obp:password@api-message-broker:5672/%2f/messages
+        command: bin/console messenger:consume message_broker -vv
 
     api-cli:
         build:
@@ -54,11 +76,14 @@ services:
         working_dir: /app
         depends_on:
             - api-database
+            - api-message-broker
         environment:
             APP_ENV: dev
             APP_SECRET: secret
             CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
-            DATABASE_URL: postgresql://obp:password@api-database:5432/openblueprint?serverVersion=12&charset=utf8
+            EVENT_STORE_URL: postgresql://obp:password@api-database:5432/openblueprint_event_store?serverVersion=12&charset=utf8
+            RELATIONAL_DATABASE_URL: postgresql://obp:password@api-database:5432/openblueprint_relational_model?serverVersion=12&charset=utf8
+            MESSENGER_TRANSPORT_DSN: amqp://obp:password@api-message-broker:5672/%2f/messages
 
     api-database:
         image: postgres:12.3
@@ -68,6 +93,12 @@ services:
             POSTGRES_USER: obp
             POSTGRES_DB: openblueprint
             POSTGRES_PASSWORD: password
+
+    api-message-broker:
+        image: rabbitmq:3-management
+        environment:
+            RABBITMQ_DEFAULT_USER: "obp"
+            RABBITMQ_DEFAULT_PASS: "password"
 
     yaml-linter:
         build:

@@ -1,0 +1,19 @@
+create_blueprint:
+  path: /api/blueprint
+  methods: POST
+  controller: App\Presentation\Api\Controller\Craft\CreateBlueprintController
+
+update_blueprint:
+  path: /api/blueprint/{id}
+  methods: PUT
+  controller: App\Presentation\Api\Controller\Craft\UpdateBlueprintController
+
+show_blueprint_item:
+  path: /api/blueprint/{id}
+  methods: GET
+  controller: App\Presentation\Api\Controller\Craft\ShowBlueprintItemController
+
+show_team_item:
+  path: /api/team/{id}
+  methods: GET
+  controller: App\Presentation\Api\Controller\Team\ShowTeamItemController

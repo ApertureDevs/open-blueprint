@@ -1,2 +1,2 @@
-hautelook_alice:
-    fixtures_path: fixtures
+imports:
+    - { resource: ../test/hautelook_alice.yaml }

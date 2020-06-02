@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-event-store
+  labels:
+    project: obp
+    app: api-event-store
+    layer: api
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-event-store
+  template:
+    metadata:
+      labels:
+        project: obp
+        app: api-event-store
+        layer: api
+    spec:
+      containers:
+        - name: api-event-store
+          image: postgres:12.3
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: obp-secret
+                  key: api-event-store-password
+          volumeMounts:
+            - name: api-event-store-storage
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres-data
+          resources:
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+      volumes:
+        - name: api-event-store-storage
+          persistentVolumeClaim:
+            claimName: api-event-store-pvc
