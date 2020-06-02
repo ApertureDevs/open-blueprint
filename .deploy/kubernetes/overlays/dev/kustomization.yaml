@@ -6,6 +6,7 @@ commonLabels:
 resources:
   - ../../base
   - dev-namespace.yaml
-  - api-database-migration-job.yaml
+  - api-relational-database-migration-job.yaml
+  - api-event-store-migration-job.yaml
 patchesStrategicMerge:
   - api-configmap.yaml

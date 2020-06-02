@@ -1,11 +1,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - frontend-webserver-http-service.yaml
-  - api-webserver-http-service.yaml
+  - frontend-webserver/frontend-webserver-http-service.yaml
+  - api-webserver/api-webserver-http-service.yaml
   - api-configmap.yaml
-  - frontend-webserver-deployment.yaml
-  - api-webserver-deployment.yaml
-  - api-database-deployment.yaml
-  - api-database-pvc.yaml
-  - api-database-service.yaml
+  - frontend-webserver/frontend-webserver-deployment.yaml
+  - api-webserver/api-webserver-deployment.yaml
+  - api-relational-database/api-relational-database-deployment.yaml
+  - api-relational-database/api-relational-database-pvc.yaml
+  - api-relational-database/api-relational-database-service.yaml
+  - api-event-store/api-event-store-deployment.yaml
+  - api-event-store/api-event-store-pvc.yaml
+  - api-event-store/api-event-store-service.yaml
+  - api-message-broker/api-message-broker-deployment.yaml
+  - api-message-broker/api-message-broker-amqp-service.yaml
+  - api-event-worker-deployment.yaml

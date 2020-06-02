@@ -10,6 +10,11 @@ RUN apt update \
     && apt install -y libpq-dev \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install pdo pdo_pgsql
+RUN apt update \
+    && apt install -y librabbitmq-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    && pecl install amqp \
+    && docker-php-ext-enable amqp
 RUN pecl install xdebug-${XDEBUG_VERSION}
 RUN docker-php-ext-install opcache
 COPY php.ini /usr/local/etc/php/

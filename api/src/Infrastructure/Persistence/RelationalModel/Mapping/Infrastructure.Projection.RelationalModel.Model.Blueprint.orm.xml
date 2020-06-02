@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Infrastructure\Projection\RelationalModel\Model\Blueprint">
+        <id name="id" type="string" length="36">
+            <generator strategy="NONE"/>
+        </id>
+
+        <field name="name" type="string" length="50" />
+
+        <field name="createDate" type="datetime_immutable" />
+
+        <field name="updateDate" type="datetime_immutable" />
+
+        <one-to-one field="team" target-entity="App\Infrastructure\Projection\RelationalModel\Model\Team" mapped-by="blueprint" />
+    </entity>
+
+</doctrine-mapping>

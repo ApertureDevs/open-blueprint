@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-message-broker
+  labels:
+    project: obp
+    app: api-message-broker
+    layer: api
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-message-broker
+  template:
+    metadata:
+      labels:
+        project: obp
+        app: api-message-broker
+        layer: api
+    spec:
+      containers:
+        - name: api-message-broker
+          image: rabbitmq:3-management
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 15672
+              name: http
+            - containerPort: 5672
+              name: amqp
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: obp-secret
+                  key: api-message-broker-user
+            - name: RABBITMQ_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: obp-secret
+                  key: api-message-broker-password
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
+            requests:
+              cpu: "100m"
+              memory: "128Mi"

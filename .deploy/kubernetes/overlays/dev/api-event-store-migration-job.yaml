@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: api-relational-database-migration-job
+  labels:
+    project: obp
+    layer: api
+spec:
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: api-relational-database-migration-job
+          image: eu.gcr.io/aperture-devs/obp-api-php:stable
+          command: ["/bin/sh", "-c", "./bin/console doctrine:database:drop --force --if-exists --connection=event_store && ./bin/console doctrine:database:create --connection=event_store && ./bin/console doctrine:migrations:migrate --configuration=src/Infrastructure/Persistence/EventStore/Migration/doctrine_migrations.yaml --db event_store --no-interaction && ./bin/console hautelook:fixtures:load --manager=event_store --append --no-interaction"]
+          env:
+            - name: EVENT_STORE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: obp-secret
+                  key: api-event-store-url
+            - name: RELATIONAL_DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: obp-secret
+                  key: api-relational-database-url
+            - name: MESSENGER_TRANSPORT_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: obp-secret
+                  key: api-messenger-transport-dsn
+            - name: APP_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: obp-secret
+                  key: api-secret
+            - name: APP_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: api-configmap
+                  key: environment
+            - name: CORS_ALLOW_ORIGIN
+              valueFrom:
+                configMapKeyRef:
+                  name: api-configmap
+                  key: cors

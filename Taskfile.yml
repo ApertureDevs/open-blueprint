@@ -20,6 +20,7 @@ tasks:
     cmds:
       - docker-compose up -d frontend-webserver
       - docker-compose up -d api-webserver
+      - docker-compose up -d api-worker
     deps:
       - frontend-dependencies
       - api-dependencies
@@ -245,24 +246,36 @@ tasks:
   api-database-create:
     desc: Create/Recreate API database
     cmds:
-      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:drop --force --if-exists
-      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:create
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:drop --force --if-exists --connection=event_store
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:create --connection=event_store
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:drop --force --if-exists --connection=relational_model
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:create --connection=relational_model
     deps:
       - api-dependencies
 
   api-database-migration:
     desc: Execute API database migrations
     cmds:
-      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:migrate --no-interaction
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:migrate --configuration=src/Infrastructure/Persistence/EventStore/Migration/doctrine_migrations.yaml --db event_store --no-interaction
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:migrate --configuration=src/Infrastructure/Persistence/RelationalModel/Migration/doctrine_migrations.yaml --db relational_model --no-interaction
     deps:
       - api-dependencies
     sources:
       - api/src/Infrastructure/Persistence/Migration
 
+  api-database-migration-diff:
+    desc: Generate API database migrations
+    cmds:
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:diff --configuration=src/Infrastructure/Persistence/EventStore/Migration/doctrine_migrations.yaml --em event_store --no-interaction
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:diff --configuration=src/Infrastructure/Persistence/RelationalModel/Migration/doctrine_migrations.yaml --em relational_model --no-interaction
+    deps:
+      - api-dependencies
+
   api-database-fixture:
     desc: Generate API database fixtures
     cmds:
-      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console hautelook:fixtures:load --no-interaction
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console hautelook:fixtures:load --manager=event_store --append --no-interaction
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console hautelook:fixtures:load --manager=relational_model --append --no-interaction
     deps:
       - api-dependencies
     sources:

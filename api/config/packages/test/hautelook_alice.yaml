@@ -1,2 +1,10 @@
-imports:
-    - { resource: ../dev/hautelook_alice.yaml }
+hautelook_alice:
+    fixtures_path: fixtures
+
+services:
+    Nelmio\Alice\PropertyAccess\ReflectionPropertyAccessor:
+        class: Nelmio\Alice\PropertyAccess\ReflectionPropertyAccessor
+        public: false
+        decorates: nelmio_alice.property_accessor
+        decoration_priority: -10
+        arguments: ['@Nelmio\Alice\PropertyAccess\ReflectionPropertyAccessor.inner']

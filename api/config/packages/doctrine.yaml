@@ -1,13 +1,31 @@
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%'
+        connections:
+            event_store:
+                url: '%env(resolve:EVENT_STORE_URL)%'
+            relational_model:
+                url: '%env(resolve:RELATIONAL_DATABASE_URL)%'
+
     orm:
         auto_generate_proxy_classes: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        auto_mapping: true
-        mappings:
-            App:
-                is_bundle: false
-                type: xml
-                dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Mapping'
-                prefix: 'App'
+        entity_managers:
+            event_store:
+                auto_mapping: false
+                naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+                connection: event_store
+                mappings:
+                    event_store:
+                        is_bundle: false
+                        type: xml
+                        dir: '%kernel.project_dir%/src/Infrastructure/Persistence/EventStore/Mapping'
+                        prefix: 'App'
+            relational_model:
+                auto_mapping: false
+                naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+                connection: relational_model
+                mappings:
+                    relational_model:
+                        is_bundle: false
+                        type: xml
+                        dir: '%kernel.project_dir%/src/Infrastructure/Persistence/RelationalModel/Mapping'
+                        prefix: 'App'

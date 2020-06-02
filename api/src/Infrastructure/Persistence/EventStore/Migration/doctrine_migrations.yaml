@@ -1,0 +1,4 @@
+name: Event Store Migrations
+migrations_namespace: EventStoreMigrations
+table_name: migration_versions
+migrations_directory: src/Infrastructure/Persistence/EventStore/Migration
