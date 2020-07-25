@@ -16,6 +16,10 @@ jobs:
         run: |
           task global-yaml-linter-check --summary
           task global-yaml-linter-check
+      - name: Markdown linter
+        run: |
+          task global-markdown-linter-check --summary
+          task global-markdown-linter-check
   frontend-ci:
     name: Frontend CI
     runs-on: ubuntu-latest
