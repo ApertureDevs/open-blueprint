@@ -31,6 +31,7 @@ tasks:
       - task: lint
       - task: frontend-html-linter-check
       - task: global-yaml-linter-check
+      - task: global-markdown-linter-check
       - task: api-phpstan-check
       - task: api-layers-check
       - task: test
@@ -46,6 +47,7 @@ tasks:
   lint:
     desc: Lint sources
     cmds:
+      - task: global-markdown-linter
       - task: frontend-sass-linter
       - task: frontend-ts-linter
       - task: api-php-linter
@@ -58,6 +60,16 @@ tasks:
     desc: Check linter rules to YAML files
     cmds:
       - docker-compose run --rm yaml-linter yamllint -c .yamllint.yaml .
+
+  global-markdown-linter:
+    desc: Apply linter rules to markdown files
+    cmds:
+      - docker-compose run --rm markdown-linter markdownlint '**/*.md' -c .markdownlint.yaml --ignore frontend/node_modules --ignore frontend/dist --ignore api/vendor --ignore api/dist --fix
+
+  global-markdown-linter-check:
+    desc: Check linter rules to markdown files
+    cmds:
+      - docker-compose run --rm markdown-linter markdownlint '**/*.md' -c .markdownlint.yaml --ignore frontend/node_modules --ignore frontend/node_modules --ignore api/vendor --ignore api/dist
 
   ############
   # FRONTEND #

@@ -106,5 +106,13 @@ services:
         volumes:
             - ./:/app:delegated
         working_dir: /app
+
+    markdown-linter:
+        build:
+            context: docker/markdown-linter
+        volumes:
+            - ./:/app:delegated
+        working_dir: /app
+
 volumes:
     api-database-data: ~
