@@ -27,6 +27,11 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install pdo pdo_pgsql
 RUN apt update \
+    && apt install -y libicu-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl
+RUN apt update \
     && apt install -y librabbitmq-dev \
     && rm -rf /var/lib/apt/lists/* \
     && pecl install amqp \
