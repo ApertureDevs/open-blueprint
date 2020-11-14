@@ -13,7 +13,7 @@ RUN apt update \
 
 FROM php:7.4 AS composer-installer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php \
+    && php composer-setup.php --1 \
     && php -r "unlink('composer-setup.php');"
 
 FROM php:7.4
