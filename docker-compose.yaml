@@ -7,14 +7,14 @@ services:
             - 4200
         command: npx ng serve --host 0.0.0.0 --disable-host-check --poll=5000
         volumes:
-            - ./frontend:/app:delegated
+            - ./frontend:/app
         working_dir: /app
 
     frontend-cli:
         build:
             context: docker/frontend-cli
         volumes:
-            - ./frontend:/app:delegated
+            - ./frontend:/app
         working_dir: /app
         depends_on:
             - selenium-hub
@@ -36,7 +36,7 @@ services:
         build:
             context: docker/api-webserver
         volumes:
-            - ./api:/app:delegated
+            - ./api:/app
         working_dir: /app
         depends_on:
             - api-database
@@ -53,7 +53,7 @@ services:
         build:
             context: docker/api-cli
         volumes:
-            - ./api:/app:delegated
+            - ./api:/app
         working_dir: /app
         depends_on:
             - api-database
@@ -72,7 +72,7 @@ services:
         build:
             context: docker/api-cli
         volumes:
-            - ./api:/app:delegated
+            - ./api:/app
         working_dir: /app
         depends_on:
             - api-database
@@ -104,14 +104,14 @@ services:
         build:
             context: docker/yaml-linter
         volumes:
-            - ./:/app:delegated
+            - ./:/app
         working_dir: /app
 
     markdown-linter:
         build:
             context: docker/markdown-linter
         volumes:
-            - ./:/app:delegated
+            - ./:/app
         working_dir: /app
 
 volumes:

@@ -24,10 +24,17 @@
         "symfony/polyfill-uuid": "^1.17",
         "symfony/routing": "^5.0",
         "symfony/serializer": "^5.0",
+        "symfony/translation": "^5.0",
         "symfony/twig-pack": "^1.0",
         "symfony/yaml": "^5.0"
     },
     "require-dev": {
+        "behat/behat": "^3.8",
+        "behatch/contexts": "^3.3",
+        "friends-of-behat/mink": "^1.8",
+        "friends-of-behat/mink-browserkit-driver": "^1.4",
+        "friends-of-behat/mink-extension": "^2.4",
+        "friends-of-behat/symfony-extension": "^2.0",
         "friendsofphp/php-cs-fixer": "^2.16",
         "hautelook/alice-bundle": "^2.7",
         "maglnet/composer-require-checker": "^2.1",

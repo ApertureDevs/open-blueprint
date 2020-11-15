@@ -1,0 +1,16 @@
+default:
+    suites:
+        default:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - Behatch\Context\RestContext
+                - Behatch\Context\JsonContext
+    extensions:
+        FriendsOfBehat\SymfonyExtension:
+            kernel:
+                environment: test
+        Behat\MinkExtension:
+            sessions:
+                symfony:
+                    symfony: ~
+        Behatch\Extension: ~

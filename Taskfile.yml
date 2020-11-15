@@ -34,8 +34,8 @@ tasks:
       - task: global-markdown-linter-check
       - task: api-phpstan-check
       - task: api-layers-check
-      - task: test
       - task: api-database-test
+      - task: test
       - task: api-composer-check
 
   test:
@@ -43,6 +43,8 @@ tasks:
     cmds:
       - task: frontend-protractor
       - task: frontend-karma
+      - task: api-phpunit
+      - task: api-behat
 
   lint:
     desc: Lint sources
@@ -340,3 +342,12 @@ tasks:
     desc: Execute API PHPUnit unit test suites
     cmds:
       - docker-compose run --rm --no-deps api-cli bin/phpunit
+    deps:
+      - api-dependencies
+
+  api-behat:
+    desc: Execute API Behat test suites
+    cmds:
+      - docker-compose run --rm --no-deps api-cli vendor/bin/behat --verbose --stop-on-failure --rerun
+    deps:
+      - api-dependencies
