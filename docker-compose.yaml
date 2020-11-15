@@ -22,10 +22,10 @@ services:
             - frontend-webserver
 
     selenium-hub:
-        image: selenium/hub:4
+        image: selenium/hub:3
 
     selenium-chrome:
-        image: selenium/node-chrome:4
+        image: selenium/node-chrome:3
         depends_on:
             - selenium-hub
         environment:

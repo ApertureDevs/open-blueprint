@@ -13,7 +13,7 @@ exports.config = {
     './src/**/*.e2e-spec.ts'
   ],
   baseUrl: 'http://frontend-webserver:4200/',
-  seleniumAddress: 'http://selenium-hub:4444',
+  seleniumAddress: 'http://selenium-hub:4444/wd/hub',
   multiCapabilities: [
     {
       browserName: 'chrome',
