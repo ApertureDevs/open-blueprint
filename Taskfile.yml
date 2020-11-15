@@ -272,8 +272,6 @@ tasks:
       - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:migrate --configuration=src/Infrastructure/Persistence/RelationalModel/Migration/doctrine_migrations.yaml --db relational_model --no-interaction
     deps:
       - api-dependencies
-    sources:
-      - api/src/Infrastructure/Persistence/Migration
 
   api-database-migration-diff:
     desc: Generate API database migrations
@@ -290,8 +288,6 @@ tasks:
       - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console hautelook:fixtures:load --manager=relational_model --append --no-interaction
     deps:
       - api-dependencies
-    sources:
-      - api/src/fixtures
 
   api-database-schema-check:
     desc: Check if there is a difference between API database and ORM data mapping
