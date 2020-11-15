@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MenuItem } from './menu-item';
 import { MenuItemComponent } from './menu-item.component';
@@ -8,7 +8,7 @@ describe('MenuGroupComponent', () => {
   let component: MenuItemComponent;
   let fixture: ComponentFixture<MenuItemComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ MenuItemComponent ],
       imports: [

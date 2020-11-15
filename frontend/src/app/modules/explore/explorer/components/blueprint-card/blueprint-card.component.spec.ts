@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Difficulty } from '@model/domain/blueprint/difficulty';
 import { MemberStatus } from '@model/domain/team/member-status';
 import { BlueprintCardComponent } from './blueprint-card.component';
@@ -8,7 +8,7 @@ describe('BlueprintCardComponent', () => {
   let component: BlueprintCardComponent;
   let fixture: ComponentFixture<BlueprintCardComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ BlueprintCardComponent ],
       schemas: [

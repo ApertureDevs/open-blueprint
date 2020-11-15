@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ReleaseSelectorComponent } from './release-selector.component';
 
@@ -7,7 +7,7 @@ describe('ReleaseSelectorComponent', () => {
   let component: ReleaseSelectorComponent;
   let fixture: ComponentFixture<ReleaseSelectorComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ReleaseSelectorComponent ],
       schemas: [
