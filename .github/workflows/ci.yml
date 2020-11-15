@@ -11,7 +11,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Add Task runner
         run: |
-          curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
+          curl -sL https://taskfile.dev/install.sh | sh && echo "./bin" >> $GITHUB_PATH
       - name: YAML linter
         run: |
           task global-yaml-linter-check --summary
@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Add Task runner
         run: |
-          curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
+          curl -sL https://taskfile.dev/install.sh | sh && echo "./bin" >> $GITHUB_PATH
       - name: NPM vulnerability check
         run: |
           task frontend-npm-security-check --summary
@@ -70,7 +70,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Add Task runner
         run: |
-          curl -sL https://taskfile.dev/install.sh | sh && echo "::add-path::./bin"
+          curl -sL https://taskfile.dev/install.sh | sh && echo "./bin" >> $GITHUB_PATH
       - name: Composer vulnerability check
         run: |
           task api-composer-security-check --summary
