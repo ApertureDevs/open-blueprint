@@ -9,3 +9,5 @@ Feature:
         }
         """
         Then the response status code should be 201
+        And the JSON node "id" should exist
+        And the JSON node "id" should not be null

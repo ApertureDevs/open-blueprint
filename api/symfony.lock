@@ -183,6 +183,19 @@
             "config/packages/test/nelmio_alice.yaml"
         ]
     },
+    "nelmio/api-doc-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "c8e0c38e1a280ab9e37587a8fa32b251d5bc1c94"
+        },
+        "files": [
+            "config/packages/nelmio_api_doc.yaml",
+            "config/routes/nelmio_api_doc.yaml"
+        ]
+    },
     "nikic/php-parser": {
         "version": "v4.4.0"
     },
@@ -197,6 +210,15 @@
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
+    },
+    "phpdocumentor/reflection-common": {
+        "version": "2.2.0"
+    },
+    "phpdocumentor/reflection-docblock": {
+        "version": "5.2.2"
+    },
+    "phpdocumentor/type-resolver": {
+        "version": "1.4.0"
     },
     "phpstan/phpstan": {
         "version": "0.12.25"
@@ -248,6 +270,9 @@
     },
     "symfony/amqp-messenger": {
         "version": "v5.1.2"
+    },
+    "symfony/asset": {
+        "version": "v5.1.8"
     },
     "symfony/browser-kit": {
         "version": "v5.0.9"
@@ -549,5 +574,8 @@
     },
     "webmozart/path-util": {
         "version": "2.3.0"
+    },
+    "zircote/swagger-php": {
+        "version": "3.1.0"
     }
 }

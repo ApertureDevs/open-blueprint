@@ -193,7 +193,7 @@ tasks:
     cmds:
       - docker-compose run --rm --no-deps api-cli mkdir -p {{.BUILD_DIR}}
       - docker-compose run --rm --no-deps api-cli rm -rf {{.BUILD_DIR}}/*
-      - docker-compose run --rm --no-deps api-cli cp -r bin config public fixtures src templates .env composer.json composer.lock symfony.lock {{.BUILD_DIR}}
+      - docker-compose run --rm --no-deps api-cli cp -r bin config public fixtures src .env composer.json composer.lock symfony.lock {{.BUILD_DIR}}
       - docker-compose run --rm --no-deps -e APP_ENV={{.APP_ENV}} api-cli composer install {{.BUILD_OPTIONS}} --working-dir {{.BUILD_DIR}}
       - docker-compose run --rm --no-deps -e APP_ENV={{.APP_ENV}} api-cli {{.BUILD_DIR}}/bin/console cache:warmup
     deps:

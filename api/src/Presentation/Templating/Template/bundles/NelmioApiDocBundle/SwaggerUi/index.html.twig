@@ -1,0 +1,10 @@
+{% extends '@!NelmioApiDoc/SwaggerUi/index.html.twig' %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" href="{{ asset('assets/stylesheets/style.css') }}">
+{% endblock stylesheets %}
+
+{% block header %}
+  <a id="logo" href="{{ path('app.swagger_ui') }}"><img src="{{ asset('assets/images/obp-logo.png') }}" alt="open blueprint logo"></a>
+{% endblock header %}
