@@ -35,6 +35,7 @@
     "require-dev": {
         "behat/behat": "^3.8",
         "behatch/contexts": "^3.3",
+        "dama/doctrine-test-bundle": "^6.4",
         "friends-of-behat/mink": "^1.8",
         "friends-of-behat/mink-browserkit-driver": "^1.4",
         "friends-of-behat/mink-extension": "^2.4",

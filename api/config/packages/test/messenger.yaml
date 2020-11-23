@@ -1,0 +1,7 @@
+# Use synchronous bus for database transaction rollback (event store & projections)
+framework:
+    messenger:
+        transports:
+            sync: 'sync://'
+        routing:
+            'App\Core\SharedKernel\Domain\Event\Event': sync
