@@ -86,12 +86,11 @@ services:
             MESSENGER_TRANSPORT_DSN: amqp://obp:password@api-message-broker:5672/%2f/messages
 
     api-database:
-        image: postgres:12.3
+        image: postgres:13
         volumes:
             - api-database-data:/var/lib/postgresql/data
         environment:
             POSTGRES_USER: obp
-            POSTGRES_DB: openblueprint
             POSTGRES_PASSWORD: password
 
     api-message-broker:

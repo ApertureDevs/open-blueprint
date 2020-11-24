@@ -21,11 +21,16 @@ spec:
     spec:
       containers:
         - name: api-relational-database
-          image: postgres:12.3
+          image: postgres:13
           imagePullPolicy: Always
           ports:
             - containerPort: 5432
           env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: obp-secret
+                  key: api-relational-database-user
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
