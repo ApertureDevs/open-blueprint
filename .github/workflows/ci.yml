@@ -20,6 +20,11 @@ jobs:
         run: |
           task global-markdown-linter-check --summary
           task global-markdown-linter-check
+      - name: Commit linter
+        run: |
+          task global-commit-linter-check --summary
+          task global-commit-linter-check
+
   frontend-ci:
     name: Frontend CI
     runs-on: ubuntu-latest

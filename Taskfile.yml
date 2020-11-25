@@ -49,6 +49,7 @@ tasks:
   lint:
     desc: Lint sources
     cmds:
+      - task: global-commit-linter-check
       - task: global-markdown-linter
       - task: frontend-sass-linter
       - task: frontend-ts-linter
@@ -72,6 +73,11 @@ tasks:
     desc: Check linter rules to markdown files
     cmds:
       - docker-compose run --rm markdown-linter markdownlint '**/*.md' -c .markdownlint.yaml --ignore frontend/node_modules --ignore frontend/node_modules --ignore api/vendor --ignore api/dist
+
+  global-commit-linter-check:
+    desc: Checks if commit messages meet the conventional commit format
+    cmds:
+      - docker-compose run --rm commit-linter commitlint --from $(git rev-list --max-parents=0 HEAD)
 
   ############
   # FRONTEND #

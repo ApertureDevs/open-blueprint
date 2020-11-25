@@ -113,5 +113,12 @@ services:
             - ./:/app
         working_dir: /app
 
+    commit-linter:
+        build:
+            context: docker/commit-linter
+        volumes:
+            - ./:/app
+        working_dir: /app
+
 volumes:
     api-database-data: ~
