@@ -34,13 +34,16 @@ tasks:
       - task: global-markdown-linter-check
       - task: api-phpstan-check
       - task: api-layers-check
-      - task: api-database-test
       - task: test
+      - task: api-database-schema-check
       - task: api-composer-check
 
   test:
     desc: Launch tests suites
     cmds:
+      - task: api-database-create-test
+      - task: api-database-migration-test
+      - task: api-database-fixture-test
       - task: frontend-protractor
       - task: frontend-karma
       - task: api-phpunit
@@ -203,7 +206,7 @@ tasks:
       - docker-compose run --rm --no-deps -e APP_ENV={{.APP_ENV}} api-cli composer install {{.BUILD_OPTIONS}} --working-dir {{.BUILD_DIR}}
       - docker-compose run --rm --no-deps -e APP_ENV={{.APP_ENV}} api-cli {{.BUILD_DIR}}/bin/console cache:warmup
     deps:
-      - frontend-dependencies
+      - api-dependencies
     vars:
       BUILD_OPTIONS:
         sh: |
@@ -255,14 +258,6 @@ tasks:
       - api/vendor/**/*
     method: checksum
 
-  api-database-test:
-    desc: Test API database
-    cmds:
-      - task: api-database-create
-      - task: api-database-migration
-      - task: api-database-fixture
-      - task: api-database-schema-check
-
   api-database-create:
     desc: Create/Recreate API database
     cmds:
@@ -273,11 +268,29 @@ tasks:
     deps:
       - api-dependencies
 
+  api-database-create-test:
+    desc: Create/Recreate API database for test suites
+    cmds:
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:drop --force --if-exists --connection=event_store --env=test
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:create --connection=event_store --env=test
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:drop --force --if-exists --connection=relational_model --env=test
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:create --connection=relational_model --env=test
+    deps:
+      - api-dependencies
+
   api-database-migration:
     desc: Execute API database migrations
     cmds:
       - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:migrate --configuration=src/Infrastructure/Persistence/EventStore/Migration/doctrine_migrations.yaml --db event_store --no-interaction
       - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:migrate --configuration=src/Infrastructure/Persistence/RelationalModel/Migration/doctrine_migrations.yaml --db relational_model --no-interaction
+    deps:
+      - api-dependencies
+
+  api-database-migration-test:
+    desc: Execute API database migrations for test suites
+    cmds:
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:migrate --configuration=src/Infrastructure/Persistence/EventStore/Migration/doctrine_migrations.yaml --db event_store --no-interaction --env=test
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:migration:migrate --configuration=src/Infrastructure/Persistence/RelationalModel/Migration/doctrine_migrations.yaml --db relational_model --no-interaction --env=test
     deps:
       - api-dependencies
 
@@ -297,10 +310,18 @@ tasks:
     deps:
       - api-dependencies
 
+  api-database-fixture-test:
+    desc: Generate API database fixtures for test suites
+    cmds:
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console hautelook:fixtures:load --manager=event_store --append --no-interaction --env=test
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console hautelook:fixtures:load --manager=relational_model --append --no-interaction --env=test
+    deps:
+      - api-dependencies
+
   api-database-schema-check:
     desc: Check if there is a difference between API database and ORM data mapping
     cmds:
-      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:schema:validate
+      - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:schema:validate --env=test
     deps:
       - api-dependencies
 

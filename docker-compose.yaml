@@ -42,12 +42,7 @@ services:
             - api-database
             - api-message-broker
         environment:
-            APP_ENV: dev
-            APP_SECRET: secret
             CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
-            EVENT_STORE_URL: postgresql://obp:password@api-database:5432/openblueprint_event_store?serverVersion=12&charset=utf8
-            RELATIONAL_DATABASE_URL: postgresql://obp:password@api-database:5432/openblueprint_relational_model?serverVersion=12&charset=utf8
-            MESSENGER_TRANSPORT_DSN: amqp://obp:password@api-message-broker:5672/%2f/messages
 
     api-worker:
         build:
@@ -60,12 +55,7 @@ services:
             - api-message-broker
         restart: on-failure
         environment:
-            APP_ENV: dev
-            APP_SECRET: secret
             CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
-            EVENT_STORE_URL: postgresql://obp:password@api-database:5432/openblueprint_event_store?serverVersion=12&charset=utf8
-            RELATIONAL_DATABASE_URL: postgresql://obp:password@api-database:5432/openblueprint_relational_model?serverVersion=12&charset=utf8
-            MESSENGER_TRANSPORT_DSN: amqp://obp:password@api-message-broker:5672/%2f/messages
         command: bin/console messenger:consume message_broker -vv
 
     api-cli:
@@ -78,12 +68,7 @@ services:
             - api-database
             - api-message-broker
         environment:
-            APP_ENV: dev
-            APP_SECRET: secret
             CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
-            EVENT_STORE_URL: postgresql://obp:password@api-database:5432/openblueprint_event_store?serverVersion=12&charset=utf8
-            RELATIONAL_DATABASE_URL: postgresql://obp:password@api-database:5432/openblueprint_relational_model?serverVersion=12&charset=utf8
-            MESSENGER_TRANSPORT_DSN: amqp://obp:password@api-message-broker:5672/%2f/messages
 
     api-database:
         image: postgres:13

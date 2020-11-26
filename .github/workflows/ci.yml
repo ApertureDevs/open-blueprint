@@ -82,8 +82,14 @@ jobs:
           task api-composer-security-check
       - name: Test Database
         run: |
-          task api-database-test --summary
-          task api-database-test
+          task api-database-create-test --summary
+          task api-database-create-test
+          task api-database-migration-test --summary
+          task api-database-migration-test
+          task api-database-fixture-test --summary
+          task api-database-fixture-test
+          task api-database-schema-check --summary
+          task api-database-schema-check
       - name: PHP linter
         run: |
           task api-php-linter-check --summary
