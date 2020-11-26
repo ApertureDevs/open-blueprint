@@ -261,6 +261,7 @@ tasks:
   api-database-create:
     desc: Create/Recreate API database
     cmds:
+      - docker-compose run --rm shell-runner /app/scripts/confirmation.sh "All data in database will be lost when executing this task. Are you sure?"
       - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:drop --force --if-exists --connection=event_store
       - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:create --connection=event_store
       - docker-compose run --rm api-cli dockerize -wait tcp://api-database:5432 bin/console doctrine:database:drop --force --if-exists --connection=relational_model

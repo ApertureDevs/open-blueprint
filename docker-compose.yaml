@@ -105,5 +105,10 @@ services:
             - ./:/app
         working_dir: /app
 
+    shell-runner:
+        image: bash:5
+        volumes:
+            - ./:/app
+
 volumes:
     api-database-data: ~
