@@ -5,6 +5,8 @@ default:
                 - Behat\MinkExtension\Context\MinkContext
                 - Behatch\Context\RestContext
                 - Behatch\Context\JsonContext
+            paths:
+                - '%paths.base%/tests/Behat/features'
     extensions:
         FriendsOfBehat\SymfonyExtension:
             kernel:
