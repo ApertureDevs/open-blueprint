@@ -105,6 +105,12 @@ services:
             - ./:/app
         working_dir: /app
 
+    shell-linter:
+        build:
+            context: docker/shell-linter
+        volumes:
+            - ./:/app
+
     shell-runner:
         image: bash:5
         volumes:
