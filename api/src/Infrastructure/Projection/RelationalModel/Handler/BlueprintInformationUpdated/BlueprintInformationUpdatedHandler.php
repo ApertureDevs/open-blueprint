@@ -5,6 +5,7 @@ namespace App\Infrastructure\Projection\RelationalModel\Handler\BlueprintInforma
 use App\Core\SharedKernel\Application\EventHandlerInterface;
 use App\Core\SharedKernel\Domain\Event\Craft\BlueprintInformationUpdated;
 use App\Infrastructure\Persistence\RelationalModel\Repository\BlueprintRepository;
+use App\Infrastructure\Projection\RelationalModel\Model\Blueprint;
 
 class BlueprintInformationUpdatedHandler implements EventHandlerInterface
 {
@@ -21,6 +22,10 @@ class BlueprintInformationUpdatedHandler implements EventHandlerInterface
 
         if (null === $blueprint) {
             throw new \RuntimeException("Given event has no existing relational model projection entity with id \"{$event->getId()}\".");
+        }
+
+        if (!$blueprint instanceof Blueprint) {
+            throw new \RuntimeException('Invalid entity returned.');
         }
 
         $blueprint->update($event->getName(), $event->getUpdateDate());

@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Projection\RelationalModel\Model;
 
-class Team
+class Team implements EntityInterface
 {
     private string $id;
     private Blueprint $blueprint;

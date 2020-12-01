@@ -2,9 +2,8 @@
 
 namespace App\Core\Component\Craft\Application\ShowBlueprintItem;
 
-use App\Core\SharedKernel\Application\QueryInterface;
+use App\Core\SharedKernel\Application\QueryItem;
 
-class ShowBlueprintItemQuery implements QueryInterface
+class ShowBlueprintItemQuery extends QueryItem
 {
-    public string $id;
 }

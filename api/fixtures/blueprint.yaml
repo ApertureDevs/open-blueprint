@@ -2,30 +2,84 @@ App\Core\SharedKernel\Domain\Event\Craft\BlueprintCreated:
   blueprint_1.event.blueprint_created:
     __construct:
       id: 'dadcd1ef-5654-4929-9a27-dd8dd46fa599'
-      name: 'pampa'
+      name: 'aperturedevs key ring'
       createDate: "<(new \\DateTimeImmutable('2020-01-01'))>"
+  blueprint_2.event.blueprint_created:
+    __construct:
+      id: '60495201-ef04-4f33-944a-cf11db09620b'
+      name: 'aperturedevs tshirt'
+      createDate: "<(new \\DateTimeImmutable('2020-02-01'))>"
 
 App\Core\SharedKernel\Domain\Event\Craft\BlueprintInformationUpdated:
   blueprint_1.event.blueprint_information_updated_1:
     __construct:
       id: 'dadcd1ef-5654-4929-9a27-dd8dd46fa599'
-      name: 'new pampa'
+      name: 'new aperturedevs key ring'
       updateDate: "<(new \\DateTimeImmutable('2020-01-02'))>"
 
 App\Core\SharedKernel\Domain\Event\EventRecord:
   blueprint_1.record_1:
-    __factory: { fromEventStore: ['5d3b50cc-f2c9-46b4-b739-31dd15005d6a', 'dadcd1ef-5654-4929-9a27-dd8dd46fa599', 0, '@blueprint_1.event.blueprint_created', "<(new \\DateTimeImmutable('2020-01-01'))>"] }
+    __factory:
+      fromEventStore:
+        id: '5d3b50cc-f2c9-46b4-b739-31dd15005d6a'
+        aggregateRootId: 'dadcd1ef-5654-4929-9a27-dd8dd46fa599'
+        playHead: 0
+        event: '@blueprint_1.event.blueprint_created'
+        recordDate: "<(new \\DateTimeImmutable('2020-01-01'))>"
   blueprint_1.record_2:
-    __factory: { fromEventStore: ['c7bcea12-6f6a-43fe-93fd-9078d9264e8d', 'dadcd1ef-5654-4929-9a27-dd8dd46fa599', 1, '@blueprint_1.event.blueprint_information_updated_1', "<(new \\DateTimeImmutable('2020-01-02'))>"] }
+    __factory:
+      fromEventStore:
+        id: 'c7bcea12-6f6a-43fe-93fd-9078d9264e8d'
+        aggregateRootId: 'dadcd1ef-5654-4929-9a27-dd8dd46fa599'
+        playHead: 1
+        event: '@blueprint_1.event.blueprint_information_updated_1'
+        recordDate: "<(new \\DateTimeImmutable('2020-01-02'))>"
+  blueprint_2.record_1:
+    __factory:
+      fromEventStore:
+        id: '919cd1af-8301-46d1-8b1a-60d3e4cc06e1'
+        aggregateRootId: '60495201-ef04-4f33-944a-cf11db09620b'
+        playHead: 0
+        event: '@blueprint_2.event.blueprint_created'
+        recordDate: "<(new \\DateTimeImmutable('2020-02-01'))>"
 
 App\Infrastructure\Persistence\EventStore\StorableEventRecord:
   blueprint_1.storable_record_1:
-    __factory: { createFromEventRecord: ['@blueprint_1.record_1', '{"id":"dadcd1ef-5654-4929-9a27-dd8dd46fa599","name":"pampa","createDate":"2020-01-01T00:00:00+00:00"}', 'blueprint_created', 'craft'] }
+    __factory:
+      createFromEventRecord:
+        eventRecord: '@blueprint_1.record_1'
+        event: '{"id":"dadcd1ef-5654-4929-9a27-dd8dd46fa599","name":"aperturedevs key ring","createDate":"2020-01-01T00:00:00+00:00"}'
+        eventType: 'blueprint_created'
+        context: 'craft'
   blueprint_1.storable_record_2:
-    __factory: { createFromEventRecord: ['@blueprint_1.record_2', '{"id":"dadcd1ef-5654-4929-9a27-dd8dd46fa599","name":"new pampa","updateDate":"2020-01-02T00:00:00+00:00"}', 'blueprint_information_updated', 'craft'] }
+    __factory:
+      createFromEventRecord:
+        eventRecord: '@blueprint_1.record_2'
+        event: '{"id":"dadcd1ef-5654-4929-9a27-dd8dd46fa599","name":"new aperturedevs key ring","updateDate":"2020-01-02T00:00:00+00:00"}'
+        eventType: 'blueprint_information_updated'
+        context: 'craft'
+  blueprint_2.storable_record_1:
+    __factory:
+      createFromEventRecord:
+        eventRecord: '@blueprint_2.record_1'
+        event: '{"id":"60495201-ef04-4f33-944a-cf11db09620b","name":"aperturedevs tshirt","createDate":"2020-02-01T00:00:00+00:00"}'
+        eventType: 'blueprint_created'
+        context: 'craft'
 
 App\Infrastructure\Projection\RelationalModel\Model\Blueprint:
   blueprint_1.relational_model:
-    name: "new pampa"
-    updateDate: "<(new \\DateTimeImmutable('2020-01-02'))>"
-    __factory: { create: ['dadcd1ef-5654-4929-9a27-dd8dd46fa599', 'pampa', "<(new \\DateTimeImmutable('2020-01-01'))>"] }
+    __factory:
+      create:
+        id: 'dadcd1ef-5654-4929-9a27-dd8dd46fa599'
+        name: 'aperturedevs key ring'
+        createDate: "<(new \\DateTimeImmutable('2020-01-01'))>"
+    __calls:
+      - update:
+          - 'new aperturedevs key ring'
+          - "<(new \\DateTimeImmutable('2020-01-02'))>"
+  blueprint_2.relational_model:
+    __factory:
+      create:
+        id: '60495201-ef04-4f33-944a-cf11db09620b'
+        name: 'aperturedevs tshirt'
+        createDate: "<(new \\DateTimeImmutable('2020-02-01'))>"

@@ -2,9 +2,9 @@
 
 namespace App\Core\Component\Team\Application\ShowTeamItem;
 
-use App\Core\SharedKernel\Application\QueryResponseInterface;
+use App\Core\SharedKernel\Application\QueryItemResponse;
 
-class ShowTeamItemResponse implements QueryResponseInterface
+class ShowTeamItemResponse extends QueryItemResponse
 {
     public string $id;
 

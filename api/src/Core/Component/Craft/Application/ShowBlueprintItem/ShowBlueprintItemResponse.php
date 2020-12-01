@@ -2,12 +2,10 @@
 
 namespace App\Core\Component\Craft\Application\ShowBlueprintItem;
 
-use App\Core\SharedKernel\Application\QueryResponseInterface;
+use App\Core\SharedKernel\Application\QueryItemResponse;
 
-class ShowBlueprintItemResponse implements QueryResponseInterface
+class ShowBlueprintItemResponse extends QueryItemResponse
 {
-    public string $id;
-
     public string $name;
 
     public \DateTimeImmutable $createDate;

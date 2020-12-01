@@ -2,18 +2,58 @@ App\Core\SharedKernel\Domain\Event\Team\TeamCreated:
   team_1.event.team_created:
     __construct:
       id: 'a1d59288-6ddf-4672-a170-9431ec99453d'
-      blueprintId: '9e2e66f4-e42d-4aba-bbe9-9b2c8cda7677'
+      blueprintId: 'dadcd1ef-5654-4929-9a27-dd8dd46fa599'
       createDate: "<(new \\DateTimeImmutable('2020-01-01'))>"
+  team_2.event.team_created:
+    __construct:
+      id: 'c3b5a7d2-35ad-11eb-adc1-0242ac120002'
+      blueprintId: '60495201-ef04-4f33-944a-cf11db09620b'
+      createDate: "<(new \\DateTimeImmutable('2020-02-01'))>"
 
 App\Core\SharedKernel\Domain\Event\EventRecord:
   team_1.record_1:
-    __factory: { fromEventStore: ['69ca89dc-03c8-4061-837f-166366bfc5b2', 'a1d59288-6ddf-4672-a170-9431ec99453d', 0, '@team_1.event.team_created', "<(new \\DateTimeImmutable('2020-01-01'))>"] }
+    __factory:
+      fromEventStore:
+        id: '69ca89dc-03c8-4061-837f-166366bfc5b2'
+        aggregateRootId: 'a1d59288-6ddf-4672-a170-9431ec99453d'
+        playHead: 0
+        event: '@team_1.event.team_created'
+        recordDate: "<(new \\DateTimeImmutable('2020-01-01'))>"
+  team_2.record_1:
+    __factory:
+      fromEventStore:
+        id: '0f616901-e503-457f-bb5d-972c75e3b694'
+        aggregateRootId: 'c3b5a7d2-35ad-11eb-adc1-0242ac120002'
+        playHead: 0
+        event: '@team_2.event.team_created'
+        recordDate: "<(new \\DateTimeImmutable('2020-02-01'))>"
 
 App\Infrastructure\Persistence\EventStore\StorableEventRecord:
   team_1.storable_record_1:
-    __factory: { createFromEventRecord: ['@team_1.record_1', '{"id":"a1d59288-6ddf-4672-a170-9431ec99453d","blueprintId":"9e2e66f4-e42d-4aba-bbe9-9b2c8cda7677","createDate":"2020-01-01T00:00:00+00:00"}', 'team_created', 'team'] }
+    __factory:
+      createFromEventRecord:
+        eventRecord: '@team_1.record_1'
+        event: '{"id":"a1d59288-6ddf-4672-a170-9431ec99453d","blueprintId":"9e2e66f4-e42d-4aba-bbe9-9b2c8cda7677","createDate":"2020-01-01T00:00:00+00:00"}'
+        eventType: 'team_created'
+        context: 'team'
+  team_2.storable_record_1:
+    __factory:
+      createFromEventRecord:
+        eventRecord: '@team_2.record_1'
+        event: '{"id":"c3b5a7d2-35ad-11eb-adc1-0242ac120002","blueprintId":"60495201-ef04-4f33-944a-cf11db09620b","createDate":"2020-02-01T00:00:00+00:00"}'
+        eventType: 'team_created'
+        context: 'team'
 
 App\Infrastructure\Projection\RelationalModel\Model\Team:
   team_1.relational_model:
-    updateDate: "<(new \\DateTimeImmutable('2020-01-01'))>"
-    __factory: { create: ['a1d59288-6ddf-4672-a170-9431ec99453d', '@blueprint_1.relational_model', "<(new \\DateTimeImmutable('2020-01-01'))>"] }
+    __factory:
+      create:
+        id: 'a1d59288-6ddf-4672-a170-9431ec99453d'
+        blueprint: '@blueprint_1.relational_model'
+        createDate: "<(new \\DateTimeImmutable('2020-01-01'))>"
+  team_2.relational_model:
+    __factory:
+      create:
+        id: '08438721-9b84-42a9-b8a8-b08dd24354b1'
+        blueprint: '@blueprint_2.relational_model'
+        createDate: "<(new \\DateTimeImmutable('2020-02-01'))>"

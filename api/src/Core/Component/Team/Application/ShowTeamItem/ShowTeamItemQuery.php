@@ -2,9 +2,8 @@
 
 namespace App\Core\Component\Team\Application\ShowTeamItem;
 
-use App\Core\SharedKernel\Application\QueryInterface;
+use App\Core\SharedKernel\Application\QueryItem;
 
-class ShowTeamItemQuery implements QueryInterface
+class ShowTeamItemQuery extends QueryItem
 {
-    public string $id;
 }

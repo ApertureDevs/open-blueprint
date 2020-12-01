@@ -13,6 +13,11 @@ show_blueprint_item:
   methods: GET
   controller: App\Presentation\Api\Controller\Craft\ShowBlueprintItemController
 
+show_blueprint_collection:
+  path: /api/blueprint
+  methods: GET
+  controller: App\Presentation\Api\Controller\Craft\ShowBlueprintCollectionController
+
 show_team_item:
   path: /api/team/{id}
   methods: GET

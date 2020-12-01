@@ -4,7 +4,9 @@ namespace App\Presentation\Api\Controller;
 
 use App\Core\SharedKernel\Application\CommandInterface;
 use App\Core\SharedKernel\Application\CommandResponse;
+use App\Presentation\Api\CommandGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
@@ -14,11 +16,20 @@ abstract class CommandController extends AbstractController
 {
     protected MessageBusInterface $commandBus;
     protected SerializerInterface $serializer;
+    protected CommandGenerator $commandGenerator;
 
-    public function __construct(MessageBusInterface $commandBus, SerializerInterface $serializer)
+    public function __construct(MessageBusInterface $commandBus, SerializerInterface $serializer, CommandGenerator $commandGenerator)
     {
         $this->commandBus = $commandBus;
         $this->serializer = $serializer;
+        $this->commandGenerator = $commandGenerator;
+    }
+
+    public function __invoke(Request $request): JsonResponse
+    {
+        $result = $this->handle($request);
+
+        return new JsonResponse(['id' => $result->getResourceId()], $this->getSuccessfulHttpCode());
     }
 
     protected function dispatchCommand(CommandInterface $command): CommandResponse
@@ -39,28 +50,12 @@ abstract class CommandController extends AbstractController
         return $result;
     }
 
-    protected function generateCommandFromRequest(Request $request): CommandInterface
-    {
-        $command = $this->serializer->deserialize($request->getContent(), $this->getCommandClass(), 'json');
-        $id = $request->get('id');
-
-        if (null !== $id) {
-            $command->id = $id;
-        }
-
-        if (!$command instanceof CommandInterface) {
-            throw new \RuntimeException('Command controller should deserialize only one command.');
-        }
-
-        return $command;
-    }
-
     protected function handle(Request $request): CommandResponse
     {
-        $command = $this->generateCommandFromRequest($request);
-
-        return $this->dispatchCommand($command);
+        return $this->dispatchCommand($this->commandGenerator->generate($request, $this->getCommandClass()));
     }
 
     abstract protected function getCommandClass(): string;
+
+    abstract protected function getSuccessfulHttpCode(): int;
 }

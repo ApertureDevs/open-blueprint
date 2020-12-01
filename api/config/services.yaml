@@ -33,3 +33,12 @@ services:
             public: true
             tags:
                 - { name: messenger.message_handler, bus: event.bus }
+
+        App\Infrastructure\Persistence\RelationalModel\Filter\FilterConverter:
+            public: true
+            tags:
+                - { name: app.filter_convertor }
+
+    App\Infrastructure\Persistence\RelationalModel\Filter\FilterConverterCollection:
+        arguments:
+            - !tagged_iterator { tag: app.filter_convertor }

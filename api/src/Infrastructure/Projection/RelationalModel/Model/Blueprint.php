@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure\Projection\RelationalModel\Model;
 
-class Blueprint
+class Blueprint implements EntityInterface
 {
     private string $id;
     private string $name;

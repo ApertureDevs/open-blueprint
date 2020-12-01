@@ -4,24 +4,11 @@ namespace App\Infrastructure\Persistence\RelationalModel\Repository;
 
 use App\Core\Component\Team\Application\ShowTeamItem\TeamItem;
 use App\Core\Component\Team\Port\GetTeamItemRepositoryInterface;
+use App\Infrastructure\Projection\RelationalModel\Model\EntityInterface;
 use App\Infrastructure\Projection\RelationalModel\Model\Team;
-use Doctrine\ORM\EntityManagerInterface;
 
-class TeamRepository implements GetTeamItemRepositoryInterface
+class TeamRepository extends Repository implements GetTeamItemRepositoryInterface
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $relationalModelEntityManager)
-    {
-        $this->entityManager = $relationalModelEntityManager;
-    }
-
-    public function save(Team $team): void
-    {
-        $this->entityManager->persist($team);
-        $this->entityManager->flush();
-    }
-
     public function getTeamItem(string $id): ?TeamItem
     {
         $entity = $this->getEntity($id);
@@ -30,27 +17,26 @@ class TeamRepository implements GetTeamItemRepositoryInterface
             return null;
         }
 
-        $blueprint = new TeamItem();
-        $blueprint->id = $entity->getId();
-        $blueprint->blueprintId = $entity->getBlueprint()->getId();
-        $blueprint->createDate = $entity->getCreateDate();
-        $blueprint->updateDate = $entity->getUpdateDate();
-
-        return $blueprint;
+        return $this->createDTOFromEntity($entity);
     }
 
-    public function getEntity(string $id): ?Team
+    protected function getEntityClass(): string
     {
-        $entity = $this->entityManager->find(Team::class, $id);
+        return Team::class;
+    }
 
-        if (null === $entity) {
-            return null;
-        }
-
+    private function createDTOFromEntity(EntityInterface $entity): TeamItem
+    {
         if (!$entity instanceof Team) {
-            throw new \RuntimeException('Invalid entity instance generated.');
+            throw new \RuntimeException('Invalid entity returned.');
         }
 
-        return $entity;
+        $team = new TeamItem();
+        $team->id = $entity->getId();
+        $team->blueprintId = $entity->getBlueprint()->getId();
+        $team->createDate = $entity->getCreateDate();
+        $team->updateDate = $entity->getUpdateDate();
+
+        return $team;
     }
 }
