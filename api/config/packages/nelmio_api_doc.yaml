@@ -1,191 +1,191 @@
 nelmio_api_doc:
-    documentation:
-        info:
-            title: Open Blueprint
-            description: An open platform to increase creativity
-            version: 1.0.0
-            contact:
-                name: ApertureDevs
-                url: https://github.com/ApertureDevs
-                email: contact@aperturedevs.com
-            license:
-                name: MIT License
-                url: https://github.com/ApertureDevs/open-blueprint/blob/master/LICENSE
-        paths:
-            /api/blueprint:
-                get:
-                    summary: Search and show information about Blueprints
-                    operationId: showBlueprints
-                    tags: ["craft"]
-                    responses:
-                        200:
-                            description: Successful Blueprints informations display
-                            content:
-                                application/json:
-                                    schema:
-                                        $ref: '#/components/schemas/BlueprintCollection'
-                post:
-                    summary: Create a Blueprint
-                    operationId: createBlueprint
-                    tags: ["craft"]
-                    requestBody:
-                        description: Blueprint information
-                        required: true
-                        content:
-                            application/json:
-                                schema:
-                                    type: object
-                                    properties:
-                                        name:
-                                            type: string
-                                            example: A Great Blueprint
-                                    required:
-                                        - name
-                    responses:
-                        201:
-                            description: Successful Blueprint creation
-                            content:
-                                application/json:
-                                    schema:
-                                        type: object
-                                        properties:
-                                            id:
-                                                type: string
-                                                description: Blueprint Id
-                                                example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
-                            links:
-                                ShowBlueprint:
-                                    operationId: showBlueprint
-                                    parameters:
-                                        id: '$response.body#/id'
-            /api/blueprint/{id}:
-                get:
-                    summary: Show information about a Blueprint
-                    operationId: showBlueprint
-                    tags: ["craft"]
-                    parameters:
-                        - name: id
-                          in: path
-                          required: true
-                          description: Blueprint Id
-                          example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
-                          schema:
-                              type: string
-                    responses:
-                        200:
-                            description: Successful Blueprint information display
-                            content:
-                                application/json:
-                                    schema:
-                                        $ref: '#/components/schemas/Blueprint'
-                put:
-                    summary: Update information about a Blueprint
-                    operationId: updateBlueprint
-                    tags: ["craft"]
-                    parameters:
-                        - name: id
-                          in: path
-                          required: true
-                          description: Blueprint Id
-                          example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
-                          schema:
-                              type: string
-                    requestBody:
-                        description: Blueprint information
-                        required: true
-                        content:
-                            application/json:
-                                schema:
-                                    type: object
-                                    properties:
-                                        name:
-                                            type: string
-                                            example: A Great Blueprint
-                                    required:
-                                        - name
-                    responses:
-                        200:
-                            description: Successful Blueprint information update
-                            content:
-                                application/json:
-                                    schema:
-                                        type: string
-                                        example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
-                            links:
-                                ShowBlueprint:
-                                    operationId: showBlueprint
-                                    parameters:
-                                        id: '$response.body#/id'
-            /api/team/{id}:
-                get:
-                    summary: Show information about a Team
-                    operationId: showTeam
-                    tags: ["team"]
-                    parameters:
-                        - name: id
-                          in: path
-                          required: true
-                          description: Team Id
-                          example: a1d59288-6ddf-4672-a170-9431ec99453d
-                          schema:
-                              type: string
-                    responses:
-                        200:
-                            description: Successful Blueprint information display
-                            content:
-                                application/json:
-                                    schema:
-                                        $ref: '#/components/schemas/Team'
-        components:
-            schemas:
-                BlueprintCollection:
+  documentation:
+    info:
+      title: Open Blueprint
+      description: An open platform to increase creativity
+      version: 1.0.0
+      contact:
+        name: ApertureDevs
+        url: https://github.com/ApertureDevs
+        email: contact@aperturedevs.com
+      license:
+        name: MIT License
+        url: https://github.com/ApertureDevs/open-blueprint/blob/master/LICENSE
+    paths:
+      /api/blueprint:
+        get:
+          summary: Search and show information about Blueprints
+          operationId: showBlueprints
+          tags: ["craft"]
+          responses:
+            200:
+              description: Successful Blueprints informations display
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/BlueprintCollection'
+        post:
+          summary: Create a Blueprint
+          operationId: createBlueprint
+          tags: ["craft"]
+          requestBody:
+            description: Blueprint information
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: A Great Blueprint
+                  required:
+                    - name
+          responses:
+            201:
+              description: Successful Blueprint creation
+              content:
+                application/json:
+                  schema:
                     type: object
                     properties:
-                        items:
-                            type: array
-                            items:
-                                $ref: '#/components/schemas/Blueprint'
-                        totalItems:
-                            type: integer
-                            example: 1
-                Blueprint:
-                    type: object
-                    properties:
-                        id:
-                            type: string
-                            example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
-                        name:
-                            type: string
-                            example: A Great Blueprint
-                        createDate:
-                            $ref: '#/components/schemas/Datetime'
-                        updateDate:
-                            $ref: '#/components/schemas/Datetime'
-                Team:
-                    type: object
-                    properties:
-                        id:
-                            type: string
-                            example: a1d59288-6ddf-4672-a170-9431ec99453d
-                        blueprintId:
-                            type: string
-                            example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
-                        createDate:
-                            $ref: '#/components/schemas/Datetime'
-                        updateDate:
-                            $ref: '#/components/schemas/Datetime'
-                Datetime:
-                    type: object
-                    properties:
-                        date:
-                            type: string
-                            example: "2020-01-01 00:00:00.000000"
-                        timezone_type:
-                            type: int
-                            example: 3
-                        timezone:
-                            type: string
-                            example: UTC
-    areas:
-        path_patterns:
-            - ^/api/(?!(doc|doc.json)$)
+                      id:
+                        type: string
+                        description: Blueprint Id
+                        example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
+              links:
+                ShowBlueprint:
+                  operationId: showBlueprint
+                  parameters:
+                    id: '$response.body#/id'
+      /api/blueprint/{id}:
+        get:
+          summary: Show information about a Blueprint
+          operationId: showBlueprint
+          tags: ["craft"]
+          parameters:
+            - name: id
+              in: path
+              required: true
+              description: Blueprint Id
+              example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
+              schema:
+                type: string
+          responses:
+            200:
+              description: Successful Blueprint information display
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Blueprint'
+        put:
+          summary: Update information about a Blueprint
+          operationId: updateBlueprint
+          tags: ["craft"]
+          parameters:
+            - name: id
+              in: path
+              required: true
+              description: Blueprint Id
+              example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
+              schema:
+                type: string
+          requestBody:
+            description: Blueprint information
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: A Great Blueprint
+                  required:
+                    - name
+          responses:
+            200:
+              description: Successful Blueprint information update
+              content:
+                application/json:
+                  schema:
+                    type: string
+                    example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
+              links:
+                ShowBlueprint:
+                  operationId: showBlueprint
+                  parameters:
+                    id: '$response.body#/id'
+      /api/team/{id}:
+        get:
+          summary: Show information about a Team
+          operationId: showTeam
+          tags: ["team"]
+          parameters:
+            - name: id
+              in: path
+              required: true
+              description: Team Id
+              example: a1d59288-6ddf-4672-a170-9431ec99453d
+              schema:
+                type: string
+          responses:
+            200:
+              description: Successful Blueprint information display
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Team'
+    components:
+      schemas:
+        BlueprintCollection:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/Blueprint'
+            totalItems:
+              type: integer
+              example: 1
+        Blueprint:
+          type: object
+          properties:
+            id:
+              type: string
+              example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
+            name:
+              type: string
+              example: A Great Blueprint
+            createDate:
+              $ref: '#/components/schemas/Datetime'
+            updateDate:
+              $ref: '#/components/schemas/Datetime'
+        Team:
+          type: object
+          properties:
+            id:
+              type: string
+              example: a1d59288-6ddf-4672-a170-9431ec99453d
+            blueprintId:
+              type: string
+              example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
+            createDate:
+              $ref: '#/components/schemas/Datetime'
+            updateDate:
+              $ref: '#/components/schemas/Datetime'
+        Datetime:
+          type: object
+          properties:
+            date:
+              type: string
+              example: "2020-01-01 00:00:00.000000"
+            timezone_type:
+              type: int
+              example: 3
+            timezone:
+              type: string
+              example: UTC
+  areas:
+    path_patterns:
+      - ^/api/(?!(doc|doc.json)$)

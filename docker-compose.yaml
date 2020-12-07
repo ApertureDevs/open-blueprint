@@ -1,120 +1,120 @@
 version: '3.7'
 
 services:
-    frontend-webserver:
-        image: node:lts
-        expose:
-            - 4200
-        command: npx ng serve --host 0.0.0.0 --disable-host-check --poll=5000
-        volumes:
-            - ./frontend:/app
-        working_dir: /app
+  frontend-webserver:
+    image: node:lts
+    expose:
+      - 4200
+    command: npx ng serve --host 0.0.0.0 --disable-host-check --poll=5000
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
 
-    frontend-cli:
-        build:
-            context: docker/frontend-cli
-        volumes:
-            - ./frontend:/app
-        working_dir: /app
-        depends_on:
-            - selenium-hub
-            - selenium-chrome
-            - frontend-webserver
+  frontend-cli:
+    build:
+      context: docker/frontend-cli
+    volumes:
+      - ./frontend:/app
+    working_dir: /app
+    depends_on:
+      - selenium-hub
+      - selenium-chrome
+      - frontend-webserver
 
-    selenium-hub:
-        image: selenium/hub:3
+  selenium-hub:
+    image: selenium/hub:3
 
-    selenium-chrome:
-        image: selenium/node-chrome:3
-        depends_on:
-            - selenium-hub
-        environment:
-            HUB_HOST: selenium-hub
-            HUB_PORT: 4444
+  selenium-chrome:
+    image: selenium/node-chrome:3
+    depends_on:
+      - selenium-hub
+    environment:
+      HUB_HOST: selenium-hub
+      HUB_PORT: 4444
 
-    api-webserver:
-        build:
-            context: docker/api-webserver
-        volumes:
-            - ./api:/app
-        working_dir: /app
-        depends_on:
-            - api-database
-            - api-message-broker
-        environment:
-            CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
+  api-webserver:
+    build:
+      context: docker/api-webserver
+    volumes:
+      - ./api:/app
+    working_dir: /app
+    depends_on:
+      - api-database
+      - api-message-broker
+    environment:
+      CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
 
-    api-worker:
-        build:
-            context: docker/api-cli
-        volumes:
-            - ./api:/app
-        working_dir: /app
-        depends_on:
-            - api-database
-            - api-message-broker
-        restart: on-failure
-        environment:
-            CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
-        command: bin/console messenger:consume message_broker -vv
+  api-worker:
+    build:
+      context: docker/api-cli
+    volumes:
+      - ./api:/app
+    working_dir: /app
+    depends_on:
+      - api-database
+      - api-message-broker
+    restart: on-failure
+    environment:
+      CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
+    command: bin/console messenger:consume message_broker -vv
 
-    api-cli:
-        build:
-            context: docker/api-cli
-        volumes:
-            - ./api:/app
-        working_dir: /app
-        depends_on:
-            - api-database
-            - api-message-broker
-        environment:
-            CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
+  api-cli:
+    build:
+      context: docker/api-cli
+    volumes:
+      - ./api:/app
+    working_dir: /app
+    depends_on:
+      - api-database
+      - api-message-broker
+    environment:
+      CORS_ALLOW_ORIGIN: ^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$$
 
-    api-database:
-        image: postgres:13
-        volumes:
-            - api-database-data:/var/lib/postgresql/data
-        environment:
-            POSTGRES_USER: obp
-            POSTGRES_PASSWORD: password
+  api-database:
+    image: postgres:13
+    volumes:
+      - api-database-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: obp
+      POSTGRES_PASSWORD: password
 
-    api-message-broker:
-        image: rabbitmq:3-management
-        environment:
-            RABBITMQ_DEFAULT_USER: "obp"
-            RABBITMQ_DEFAULT_PASS: "password"
+  api-message-broker:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: "obp"
+      RABBITMQ_DEFAULT_PASS: "password"
 
-    yaml-linter:
-        build:
-            context: docker/yaml-linter
-        volumes:
-            - ./:/app
-        working_dir: /app
+  yaml-linter:
+    build:
+      context: docker/yaml-linter
+    volumes:
+      - ./:/app
+    working_dir: /app
 
-    markdown-linter:
-        build:
-            context: docker/markdown-linter
-        volumes:
-            - ./:/app
-        working_dir: /app
+  markdown-linter:
+    build:
+      context: docker/markdown-linter
+    volumes:
+      - ./:/app
+    working_dir: /app
 
-    commit-linter:
-        build:
-            context: docker/commit-linter
-        volumes:
-            - ./:/app
-        working_dir: /app
+  commit-linter:
+    build:
+      context: docker/commit-linter
+    volumes:
+      - ./:/app
+    working_dir: /app
 
-    shell-linter:
-        build:
-            context: docker/shell-linter
-        volumes:
-            - ./:/app
+  shell-linter:
+    build:
+      context: docker/shell-linter
+    volumes:
+      - ./:/app
 
-    shell-runner:
-        image: bash:5
-        volumes:
-            - ./:/app
+  shell-runner:
+    image: bash:5
+    volumes:
+      - ./:/app
 
 volumes:
-    api-database-data: ~
+  api-database-data: ~

@@ -1,44 +1,44 @@
 parameters:
-    container.dumper.inline_factories: true
-    container.dumper.inline_class_loader: true
+  container.dumper.inline_factories: true
+  container.dumper.inline_class_loader: true
 
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        bind:
-            Doctrine\ORM\EntityManagerInterface $eventStoreEntityManager: '@doctrine.orm.event_store_entity_manager'
-            Doctrine\ORM\EntityManagerInterface $relationalModelEntityManager: '@doctrine.orm.relational_model_entity_manager'
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    bind:
+      Doctrine\ORM\EntityManagerInterface $eventStoreEntityManager: '@doctrine.orm.event_store_entity_manager'
+      Doctrine\ORM\EntityManagerInterface $relationalModelEntityManager: '@doctrine.orm.relational_model_entity_manager'
 
-    App\:
-        resource: '../src/*'
-        exclude:
-            - ../src/Core/Component/*/Domain
-            - ../src/Core/SharedKernel/Domain
-            - ../src/Kernel.php
-            - ../src/Infrastructure/Persistence/*/Migration
+  App\:
+    resource: '../src/*'
+    exclude:
+      - ../src/Core/Component/*/Domain
+      - ../src/Core/SharedKernel/Domain
+      - ../src/Kernel.php
+      - ../src/Infrastructure/Persistence/*/Migration
 
-    _instanceof:
-        App\Core\SharedKernel\Application\CommandHandlerInterface:
-            public: true
-            tags:
-                - { name: messenger.message_handler, bus: command.bus }
+  _instanceof:
+    App\Core\SharedKernel\Application\CommandHandlerInterface:
+      public: true
+      tags:
+        - { name: messenger.message_handler, bus: command.bus }
 
-        App\Core\SharedKernel\Application\QueryHandlerInterface:
-            public: true
-            tags:
-                - { name: messenger.message_handler, bus: query.bus }
+    App\Core\SharedKernel\Application\QueryHandlerInterface:
+      public: true
+      tags:
+        - { name: messenger.message_handler, bus: query.bus }
 
-        App\Core\SharedKernel\Application\EventHandlerInterface:
-            public: true
-            tags:
-                - { name: messenger.message_handler, bus: event.bus }
+    App\Core\SharedKernel\Application\EventHandlerInterface:
+      public: true
+      tags:
+        - { name: messenger.message_handler, bus: event.bus }
 
-        App\Infrastructure\Persistence\RelationalModel\Filter\FilterConverter:
-            public: true
-            tags:
-                - { name: app.filter_convertor }
+    App\Infrastructure\Persistence\RelationalModel\Filter\FilterConverter:
+      public: true
+      tags:
+        - { name: app.filter_convertor }
 
-    App\Infrastructure\Persistence\RelationalModel\Filter\FilterConverterCollection:
-        arguments:
-            - !tagged_iterator { tag: app.filter_convertor }
+  App\Infrastructure\Persistence\RelationalModel\Filter\FilterConverterCollection:
+    arguments:
+      - !tagged_iterator { tag: app.filter_convertor }
