@@ -11,7 +11,9 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 
 /**
- * @covers App\Infrastructure\Persistence\RelationalModel\Filter\TextFilterConverter
+ * @covers \App\Infrastructure\Persistence\RelationalModel\Filter\TextFilterConverter
+ *
+ * @internal
  */
 class TextFilterConverterTest extends TestCase
 {

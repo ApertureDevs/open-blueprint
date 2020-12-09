@@ -2,22 +2,19 @@
 
 namespace App\Infrastructure\Persistence\EventStore;
 
-use App\Core\SharedKernel\Domain\Event\Event;
-use App\Core\SharedKernel\Domain\Event\EventRecord;
 use App\Core\SharedKernel\Domain\Event\EventRecords;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class EventStore
 {
     private EntityManagerInterface $entityManager;
-    private SerializerInterface $serializer;
+    private EventRecordTransformer $eventRecordTransformer;
     private EventMap $eventMap;
 
-    public function __construct(EntityManagerInterface $eventStoreEntityManager, SerializerInterface $serializer, EventMap $eventMap)
+    public function __construct(EntityManagerInterface $eventStoreEntityManager, EventRecordTransformer $eventRecordTransformer, EventMap $eventMap)
     {
         $this->entityManager = $eventStoreEntityManager;
-        $this->serializer = $serializer;
+        $this->eventRecordTransformer = $eventRecordTransformer;
         $this->eventMap = $eventMap;
     }
 
@@ -27,7 +24,7 @@ class EventStore
 
         try {
             foreach ($eventRecords as $eventRecord) {
-                $serializedEventRecord = $this->convertIntoStorableEventRecord($eventRecord);
+                $serializedEventRecord = $this->eventRecordTransformer->convertIntoStorableEventRecord($eventRecord);
                 $this->entityManager->persist($serializedEventRecord);
             }
             $this->entityManager->flush();
@@ -45,7 +42,7 @@ class EventStore
         $results = $repository->findBy(['aggregateRootId' => $rootAggregateId], ['playHead' => 'ASC']);
 
         $results = array_map(function ($storableEventRecord) {
-            return $this->convertIntoDomainEventRecord($storableEventRecord);
+            return $this->eventRecordTransformer->convertIntoDomainEventRecord($storableEventRecord);
         }, $results);
 
         return new EventRecords($results);
@@ -57,38 +54,29 @@ class EventStore
         $results = $repository->findBy([], ['recordDate' => 'ASC']);
 
         $results = array_map(function ($storableEventRecord) {
-            return $this->convertIntoDomainEventRecord($storableEventRecord);
+            return $this->eventRecordTransformer->convertIntoDomainEventRecord($storableEventRecord);
         }, $results);
 
         return new EventRecords($results);
     }
 
-    public function convertIntoStorableEventRecord(EventRecord $eventRecord): StorableEventRecord
+    public function findRootAggregateId(string $eventAttributeName, string $eventAttributeValue, string $eventClass): ?string
     {
-        $storableEvent = $this->serializer->serialize($eventRecord->getEvent(), 'json');
+        $eventType = $this->eventMap::getEventType($eventClass);
+        $connection = $this->entityManager->getConnection();
+        $sql = 'SELECT aggregate_root_id FROM events WHERE event ->> :eventAttributeName = :eventAttributeValue AND event_type = :eventType LIMIT 1';
+        $statement = $connection->prepare($sql);
+        $statement->execute([
+            'eventAttributeName' => $eventAttributeName,
+            'eventAttributeValue' => $eventAttributeValue,
+            'eventType' => $eventType,
+        ]);
+        $result = $statement->fetchOne();
 
-        return StorableEventRecord::createFromEventRecord(
-            $eventRecord,
-            $storableEvent,
-            $this->eventMap::getEventType(get_class($eventRecord->getEvent())),
-            $this->eventMap::getContext(get_class($eventRecord->getEvent()))
-        );
-    }
-
-    private function convertIntoDomainEventRecord(StorableEventRecord $storableEventRecord): EventRecord
-    {
-        $event = $this->serializer->deserialize($storableEventRecord->getEvent(), $this->eventMap::getClassName($storableEventRecord->getEventType(), $storableEventRecord->getContext()), 'json');
-
-        if (!$event instanceof Event) {
-            throw new \RuntimeException('Deserialize object should be an Event instance.');
+        if (is_string($result)) {
+            return $result;
         }
 
-        return EventRecord::fromEventStore(
-            $storableEventRecord->getId(),
-            $storableEventRecord->getAggregateRootId(),
-            $storableEventRecord->getPlayHead(),
-            $event,
-            $storableEventRecord->getRecordDate()
-        );
+        return null;
     }
 }

@@ -109,13 +109,41 @@ nelmio_api_doc:
               content:
                 application/json:
                   schema:
-                    type: string
-                    example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Blueprint Id
+                        example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
               links:
                 ShowBlueprint:
                   operationId: showBlueprint
                   parameters:
                     id: '$response.body#/id'
+        delete:
+          summary: Delete a Blueprint
+          operationId: deleteBlueprint
+          tags: ["craft"]
+          parameters:
+            - name: id
+              in: path
+              required: true
+              description: Blueprint Id
+              example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
+              schema:
+                type: string
+          responses:
+            200:
+              description: Successful Blueprint deletion
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Blueprint Id
+                        example: dadcd1ef-5654-4929-9a27-dd8dd46fa599
       /api/team/{id}:
         get:
           summary: Show information about a Team

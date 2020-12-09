@@ -4,7 +4,7 @@ namespace App\Core\Component\Craft\Application\ShowBlueprintItem;
 
 use App\Core\Component\Craft\Port\GetBlueprintItemRepositoryInterface;
 use App\Core\SharedKernel\Application\QueryHandlerInterface;
-use App\Core\SharedKernel\Domain\Exception\ResourceNotFound;
+use App\Core\SharedKernel\Domain\Exception\ResourceNotFoundException;
 
 class ShowBlueprintItemHandler implements QueryHandlerInterface
 {
@@ -20,7 +20,7 @@ class ShowBlueprintItemHandler implements QueryHandlerInterface
         $blueprint = $this->blueprintRepository->getBlueprintItem($query->id);
 
         if (null === $blueprint) {
-            throw new ResourceNotFound(BlueprintItem::class, $query->id);
+            throw ResourceNotFoundException::createResourceNotFoundWithIdException(BlueprintItem::class, $query->id);
         }
 
         $response = new ShowBlueprintItemResponse();

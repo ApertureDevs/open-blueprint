@@ -10,3 +10,7 @@ Feature:
         And the JSON node "createDate" should not be null
         And the JSON node "updateDate" should exist
         And the JSON node "updateDate" should not be null
+
+    Scenario: Request a deleted Team
+        When I send a "GET" request to "/api/blueprint/0190df71-0b86-454a-a18c-f69f3e908b93"
+        Then the response status code should be 500

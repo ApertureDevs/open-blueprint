@@ -29,6 +29,12 @@ abstract class Repository
         $this->entityManager->flush();
     }
 
+    public function remove(EntityInterface $entity): void
+    {
+        $this->entityManager->remove($entity);
+        $this->entityManager->flush();
+    }
+
     public function getEntity(string $id): ?EntityInterface
     {
         $entity = $this->entityManager->find($this->getEntityClass(), $id);

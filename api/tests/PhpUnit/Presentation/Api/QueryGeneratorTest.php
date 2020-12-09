@@ -1,22 +1,24 @@
 <?php
 
-namespace App\Tests\PhpUnit\Presentation\Api;
+namespace Tests\App\Infrastructure\Presentation\Api;
 
-use App\Core\Component\Craft\Application\CreateBlueprint\CreateBlueprintCommand;
 use App\Core\Component\Craft\Application\ShowBlueprintCollection\ShowBlueprintCollectionQuery;
 use App\Core\Component\Craft\Application\ShowBlueprintItem\ShowBlueprintItemQuery;
-use App\Core\Component\Craft\Application\UpdateBlueprintInformation\UpdateBlueprintInformationCommand;
 use App\Core\Component\Craft\Domain\Blueprint;
 use App\Core\SharedKernel\Application\Filter\DateFilter;
 use App\Core\SharedKernel\Application\Filter\TextFilter;
-use App\Presentation\Api\CommandGenerator;
 use App\Presentation\Api\QueryGenerator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @covers \App\Infrastructure\Presentation\Api\QueryGenerator
+ *
+ * @internal
+ */
 class QueryGeneratorTest extends WebTestCase
 {
-    public function testItShouldGenerateShowItemQuery()
+    public function testItShouldGenerateShowItemQuery(): void
     {
         $queryClass = ShowBlueprintItemQuery::class;
         $request = new Request(['id' => '60495201-ef04-4f33-944a-cf11db09620b']);
@@ -27,7 +29,7 @@ class QueryGeneratorTest extends WebTestCase
         self::assertInstanceOf(ShowBlueprintItemQuery::class, $query);
     }
 
-    public function testItShouldThrowExceptionOnGenerateShowItemQueryWithoutId()
+    public function testItShouldThrowExceptionOnGenerateShowItemQueryWithoutId(): void
     {
         $queryClass = ShowBlueprintItemQuery::class;
         $request = new Request();
@@ -37,7 +39,7 @@ class QueryGeneratorTest extends WebTestCase
         $generator->generate($request, $queryClass);
     }
 
-    public function testItShouldGenerateShowCollectionQuery()
+    public function testItShouldGenerateShowCollectionQuery(): void
     {
         $queryClass = ShowBlueprintCollectionQuery::class;
         $request = new Request();
@@ -48,7 +50,7 @@ class QueryGeneratorTest extends WebTestCase
         self::assertInstanceOf(ShowBlueprintCollectionQuery::class, $query);
     }
 
-    public function testItShouldGenerateShowCollectionQueryWithFilter()
+    public function testItShouldGenerateShowCollectionQueryWithFilter(): void
     {
         $queryClass = ShowBlueprintCollectionQuery::class;
         $request = new Request([
@@ -65,7 +67,7 @@ class QueryGeneratorTest extends WebTestCase
         self::assertInstanceOf(DateFilter::class, $query->filters[1]);
     }
 
-    public function testItShouldThrowExceptionOnInvalidClassGiven()
+    public function testItShouldThrowExceptionOnInvalidClassGiven(): void
     {
         $queryClass = Blueprint::class;
         $request = new Request();
@@ -74,5 +76,4 @@ class QueryGeneratorTest extends WebTestCase
         self::expectException(\InvalidArgumentException::class);
         $generator->generate($request, $queryClass);
     }
-
 }

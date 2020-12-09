@@ -3,8 +3,10 @@
 namespace App\Infrastructure\Persistence\EventStore;
 
 use App\Core\SharedKernel\Domain\Event\Craft\BlueprintCreated;
+use App\Core\SharedKernel\Domain\Event\Craft\BlueprintDeleted;
 use App\Core\SharedKernel\Domain\Event\Craft\BlueprintInformationUpdated;
 use App\Core\SharedKernel\Domain\Event\Team\TeamCreated;
+use App\Core\SharedKernel\Domain\Event\Team\TeamDeleted;
 
 class EventMap
 {
@@ -20,9 +22,17 @@ class EventMap
             'context' => self::CONTEXT_CRAFT,
             'event_type' => 'blueprint_information_updated',
         ],
+        BlueprintDeleted::class => [
+            'context' => self::CONTEXT_CRAFT,
+            'event_type' => 'blueprint_deleted',
+        ],
         TeamCreated::class => [
             'context' => self::CONTEXT_TEAM,
             'event_type' => 'team_created',
+        ],
+        TeamDeleted::class => [
+            'context' => self::CONTEXT_TEAM,
+            'event_type' => 'team_deleted',
         ],
     ];
 

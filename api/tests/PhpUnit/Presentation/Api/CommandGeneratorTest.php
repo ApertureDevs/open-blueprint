@@ -1,18 +1,22 @@
 <?php
 
-namespace App\Tests\PhpUnit\Presentation\Api;
+namespace Tests\App\Infrastructure\Presentation\Api;
 
 use App\Core\Component\Craft\Application\CreateBlueprint\CreateBlueprintCommand;
 use App\Core\Component\Craft\Application\UpdateBlueprintInformation\UpdateBlueprintInformationCommand;
 use App\Core\Component\Craft\Domain\Blueprint;
 use App\Presentation\Api\CommandGenerator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @covers \App\Infrastructure\Presentation\Api\CommandGenerator
+ *
+ * @internal
+ */
 class CommandGeneratorTest extends WebTestCase
 {
-    public function testItShouldGenerateCommandWithEmptyRequest()
+    public function testItShouldGenerateCommandWithEmptyRequest(): void
     {
         $client = self::createClient();
         $container = $client->getContainer();
@@ -26,7 +30,7 @@ class CommandGeneratorTest extends WebTestCase
         self::assertInstanceOf(CreateBlueprintCommand::class, $command);
     }
 
-    public function testItShouldGenerateCommandWithRequestWithData()
+    public function testItShouldGenerateCommandWithRequestWithData(): void
     {
         $client = self::createClient();
         $container = $client->getContainer();
@@ -42,7 +46,7 @@ class CommandGeneratorTest extends WebTestCase
         self::assertSame('aperture toaster', $command->name);
     }
 
-    public function testItShouldThrowExceptionOnInvalidClassGiven()
+    public function testItShouldThrowExceptionOnInvalidClassGiven(): void
     {
         $client = self::createClient();
         $container = $client->getContainer();
@@ -54,5 +58,4 @@ class CommandGeneratorTest extends WebTestCase
         self::expectException(\InvalidArgumentException::class);
         $generator->generate($request, $queryClass);
     }
-
 }

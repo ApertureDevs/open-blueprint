@@ -6,7 +6,7 @@ use App\Core\Component\Craft\Domain\Blueprint;
 use App\Core\Component\Craft\Port\BlueprintRepositoryInterface;
 use App\Core\SharedKernel\Application\CommandHandlerInterface;
 use App\Core\SharedKernel\Application\CommandResponse;
-use App\Core\SharedKernel\Domain\Exception\ResourceNotFound;
+use App\Core\SharedKernel\Domain\Exception\ResourceNotFoundException;
 
 class UpdateBlueprintInformationHandler implements CommandHandlerInterface
 {
@@ -22,7 +22,7 @@ class UpdateBlueprintInformationHandler implements CommandHandlerInterface
         $blueprint = $this->blueprintRepository->load($command->id);
 
         if (null === $blueprint) {
-            throw new ResourceNotFound(Blueprint::class, $command->id);
+            throw ResourceNotFoundException::createResourceNotFoundWithIdException(Blueprint::class, $command->id);
         }
 
         $blueprint->updateInformation($command->name);

@@ -4,7 +4,7 @@ namespace App\Core\Component\Team\Application\ShowTeamItem;
 
 use App\Core\Component\Team\Port\GetTeamItemRepositoryInterface;
 use App\Core\SharedKernel\Application\QueryHandlerInterface;
-use App\Core\SharedKernel\Domain\Exception\ResourceNotFound;
+use App\Core\SharedKernel\Domain\Exception\ResourceNotFoundException;
 
 class ShowTeamItemHandler implements QueryHandlerInterface
 {
@@ -20,7 +20,7 @@ class ShowTeamItemHandler implements QueryHandlerInterface
         $team = $this->teamRepository->getTeamItem($query->id);
 
         if (null === $team) {
-            throw new ResourceNotFound(TeamItem::class, $query->id);
+            throw ResourceNotFoundException::createResourceNotFoundWithIdException(TeamItem::class, $query->id);
         }
 
         $response = new ShowTeamItemResponse();

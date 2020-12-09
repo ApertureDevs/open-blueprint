@@ -9,6 +9,11 @@ App\Core\SharedKernel\Domain\Event\Craft\BlueprintCreated:
       id: '60495201-ef04-4f33-944a-cf11db09620b'
       name: 'aperturedevs tshirt'
       createDate: "<(new \\DateTimeImmutable('2020-02-01'))>"
+  blueprint_3.event.blueprint_created:
+    __construct:
+      id: '0210624e-46cb-45dd-8c77-16874d45994c'
+      name: 'aperturedevs flash light'
+      createDate: "<(new \\DateTimeImmutable('2020-03-01'))>"
 
 App\Core\SharedKernel\Domain\Event\Craft\BlueprintInformationUpdated:
   blueprint_1.event.blueprint_information_updated_1:
@@ -16,6 +21,12 @@ App\Core\SharedKernel\Domain\Event\Craft\BlueprintInformationUpdated:
       id: 'dadcd1ef-5654-4929-9a27-dd8dd46fa599'
       name: 'new aperturedevs key ring'
       updateDate: "<(new \\DateTimeImmutable('2020-01-02'))>"
+
+App\Core\SharedKernel\Domain\Event\Craft\BlueprintDeleted:
+  blueprint_3.event.blueprint_deleted:
+    __construct:
+      id: '0210624e-46cb-45dd-8c77-16874d45994c'
+      deleteDate: "<(new \\DateTimeImmutable('2020-04-01'))>"
 
 App\Core\SharedKernel\Domain\Event\EventRecord:
   blueprint_1.record_1:
@@ -42,6 +53,22 @@ App\Core\SharedKernel\Domain\Event\EventRecord:
         playHead: 0
         event: '@blueprint_2.event.blueprint_created'
         recordDate: "<(new \\DateTimeImmutable('2020-02-01'))>"
+  blueprint_3.record_1:
+    __factory:
+      fromEventStore:
+        id: '111c2e0d-bc94-4653-9d5b-15b7a6bb86c9'
+        aggregateRootId: '0210624e-46cb-45dd-8c77-16874d45994c'
+        playHead: 0
+        event: '@blueprint_3.event.blueprint_created'
+        recordDate: "<(new \\DateTimeImmutable('2020-03-01'))>"
+  blueprint_3.record_2:
+    __factory:
+      fromEventStore:
+        id: 'b22adb42-3341-49e5-9cae-402c55974261'
+        aggregateRootId: '0210624e-46cb-45dd-8c77-16874d45994c'
+        playHead: 1
+        event: '@blueprint_3.event.blueprint_deleted'
+        recordDate: "<(new \\DateTimeImmutable('2020-04-01'))>"
 
 App\Infrastructure\Persistence\EventStore\StorableEventRecord:
   blueprint_1.storable_record_1:
@@ -64,6 +91,20 @@ App\Infrastructure\Persistence\EventStore\StorableEventRecord:
         eventRecord: '@blueprint_2.record_1'
         event: '{"id":"60495201-ef04-4f33-944a-cf11db09620b","name":"aperturedevs tshirt","createDate":"2020-02-01T00:00:00+00:00"}'
         eventType: 'blueprint_created'
+        context: 'craft'
+  blueprint_3.storable_record_1:
+    __factory:
+      createFromEventRecord:
+        eventRecord: '@blueprint_3.record_1'
+        event: '{"id":"0210624e-46cb-45dd-8c77-16874d45994c","name":"aperturedevs flash light","createDate":"2020-03-01T00:00:00+00:00"}'
+        eventType: 'blueprint_created'
+        context: 'craft'
+  blueprint_3.storable_record_2:
+    __factory:
+      createFromEventRecord:
+        eventRecord: '@blueprint_3.record_2'
+        event: '{"id":"0210624e-46cb-45dd-8c77-16874d45994c","deleteDate":"2020-04-01T00:00:00+00:00"}'
+        eventType: 'blueprint_deleted'
         context: 'craft'
 
 App\Infrastructure\Projection\RelationalModel\Model\Blueprint:

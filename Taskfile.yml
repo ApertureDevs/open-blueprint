@@ -14,6 +14,9 @@ tasks:
       - task: api-database-create
       - task: api-database-migration
       - task: api-database-fixture
+      - task: api-database-create-test
+      - task: api-database-migration-test
+      - task: api-database-fixture-test
 
   serve:
     desc: Start a local development stack

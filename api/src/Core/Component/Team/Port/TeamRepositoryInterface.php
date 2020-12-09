@@ -9,4 +9,6 @@ interface TeamRepositoryInterface
     public function store(Team $team): void;
 
     public function load(string $id): ?Team;
+
+    public function findIdWithBlueprintId(string $blueprintId): ?string;
 }

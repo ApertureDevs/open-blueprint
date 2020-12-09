@@ -5,6 +5,8 @@ doctrine:
         url: '%env(resolve:EVENT_STORE_URL)%'
       relational_model:
         url: '%env(resolve:RELATIONAL_DATABASE_URL)%'
+    types:
+      serialize: App\Infrastructure\Persistence\EventStore\Type\SerializeType
 
   orm:
     auto_generate_proxy_classes: true

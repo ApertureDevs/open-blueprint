@@ -8,6 +8,11 @@ update_blueprint:
   methods: PUT
   controller: App\Presentation\Api\Controller\Craft\UpdateBlueprintController
 
+delete_blueprint:
+  path: /api/blueprint/{id}
+  methods: DELETE
+  controller: App\Presentation\Api\Controller\Craft\DeleteBlueprintController
+
 show_blueprint_item:
   path: /api/blueprint/{id}
   methods: GET

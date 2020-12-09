@@ -5,14 +5,15 @@ namespace Tests\App\Infrastructure\Persistence\RelationalModel\Filter;
 use App\Core\SharedKernel\Application\Filter\DateFilter;
 use App\Core\SharedKernel\Application\Filter\TextFilter;
 use App\Infrastructure\Persistence\RelationalModel\Filter\DateFilterConverter;
-use App\Infrastructure\Persistence\RelationalModel\Filter\TextFilterConverter;
 use App\Infrastructure\Persistence\RelationalModel\QueryNameGenerator;
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 
 /**
- * @covers App\Infrastructure\Persistence\RelationalModel\Filter\DateFilterConverter
+ * @covers \App\Infrastructure\Persistence\RelationalModel\Filter\DateFilterConverter
+ *
+ * @internal
  */
 class DateFilterConverterTest extends TestCase
 {

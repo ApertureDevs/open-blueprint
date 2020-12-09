@@ -9,6 +9,17 @@ App\Core\SharedKernel\Domain\Event\Team\TeamCreated:
       id: 'c3b5a7d2-35ad-11eb-adc1-0242ac120002'
       blueprintId: '60495201-ef04-4f33-944a-cf11db09620b'
       createDate: "<(new \\DateTimeImmutable('2020-02-01'))>"
+  team_3.event.team_created:
+    __construct:
+      id: '0190df71-0b86-454a-a18c-f69f3e908b93'
+      blueprintId: '0210624e-46cb-45dd-8c77-16874d45994c'
+      createDate: "<(new \\DateTimeImmutable('2020-03-01'))>"
+
+App\Core\SharedKernel\Domain\Event\Team\TeamDeleted:
+  team_3.event.team_deleted:
+    __construct:
+      id: '0190df71-0b86-454a-a18c-f69f3e908b93'
+      deleteDate: "<(new \\DateTimeImmutable('2020-04-01'))>"
 
 App\Core\SharedKernel\Domain\Event\EventRecord:
   team_1.record_1:
@@ -27,13 +38,29 @@ App\Core\SharedKernel\Domain\Event\EventRecord:
         playHead: 0
         event: '@team_2.event.team_created'
         recordDate: "<(new \\DateTimeImmutable('2020-02-01'))>"
+  team_3.record_1:
+    __factory:
+      fromEventStore:
+        id: '3991f906-e280-476e-87d9-1d32938d3340'
+        aggregateRootId: '0190df71-0b86-454a-a18c-f69f3e908b93'
+        playHead: 0
+        event: '@team_3.event.team_created'
+        recordDate: "<(new \\DateTimeImmutable('2020-03-01'))>"
+  team_3.record_2:
+    __factory:
+      fromEventStore:
+        id: '22d6998c-2519-4d2b-82b1-be8a1f0d72ba'
+        aggregateRootId: '0190df71-0b86-454a-a18c-f69f3e908b93'
+        playHead: 1
+        event: '@team_3.event.team_deleted'
+        recordDate: "<(new \\DateTimeImmutable('2020-04-01'))>"
 
 App\Infrastructure\Persistence\EventStore\StorableEventRecord:
   team_1.storable_record_1:
     __factory:
       createFromEventRecord:
         eventRecord: '@team_1.record_1'
-        event: '{"id":"a1d59288-6ddf-4672-a170-9431ec99453d","blueprintId":"9e2e66f4-e42d-4aba-bbe9-9b2c8cda7677","createDate":"2020-01-01T00:00:00+00:00"}'
+        event: '{"id":"a1d59288-6ddf-4672-a170-9431ec99453d","blueprintId":"dadcd1ef-5654-4929-9a27-dd8dd46fa599","createDate":"2020-01-01T00:00:00+00:00"}'
         eventType: 'team_created'
         context: 'team'
   team_2.storable_record_1:
@@ -42,6 +69,20 @@ App\Infrastructure\Persistence\EventStore\StorableEventRecord:
         eventRecord: '@team_2.record_1'
         event: '{"id":"c3b5a7d2-35ad-11eb-adc1-0242ac120002","blueprintId":"60495201-ef04-4f33-944a-cf11db09620b","createDate":"2020-02-01T00:00:00+00:00"}'
         eventType: 'team_created'
+        context: 'team'
+  team_3.storable_record_1:
+    __factory:
+      createFromEventRecord:
+        eventRecord: '@team_3.record_1'
+        event: '{"id":"0190df71-0b86-454a-a18c-f69f3e908b93","blueprintId":"0210624e-46cb-45dd-8c77-16874d45994c","createDate":"2020-03-01T00:00:00+00:00"}'
+        eventType: 'team_created'
+        context: 'team'
+  team_3.storable_record_2:
+    __factory:
+      createFromEventRecord:
+        eventRecord: '@team_3.record_2'
+        event: '{"id":"0190df71-0b86-454a-a18c-f69f3e908b93","deleteDate":"2020-04-01T00:00:00+00:00"}'
+        eventType: 'team_deleted'
         context: 'team'
 
 App\Infrastructure\Projection\RelationalModel\Model\Team:

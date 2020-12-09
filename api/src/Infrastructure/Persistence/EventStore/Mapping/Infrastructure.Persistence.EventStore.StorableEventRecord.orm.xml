@@ -15,7 +15,11 @@
 
         <field name="playHead" type="integer" />
 
-        <field name="event" type="text" />
+        <field name="event" type="serialize">
+            <options>
+                <option name="jsonb">true</option>
+            </options>
+        </field>
 
         <field name="eventType" type="string" length="50" />
 
