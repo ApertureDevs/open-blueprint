@@ -2,66 +2,66 @@
 
 namespace App\Infrastructure\Persistence\EventStore;
 
-use App\Core\SharedKernel\Domain\Event\Craft\BlueprintCreated;
-use App\Core\SharedKernel\Domain\Event\Craft\BlueprintDeleted;
-use App\Core\SharedKernel\Domain\Event\Craft\BlueprintInformationUpdated;
-use App\Core\SharedKernel\Domain\Event\Team\TeamCreated;
-use App\Core\SharedKernel\Domain\Event\Team\TeamDeleted;
-
 class EventMap
 {
-    private const CONTEXT_CRAFT = 'craft';
-    private const CONTEXT_TEAM = 'team';
-
-    private const MAPPING = [
-        BlueprintCreated::class => [
-            'context' => self::CONTEXT_CRAFT,
-            'event_type' => 'blueprint_created',
-        ],
-        BlueprintInformationUpdated::class => [
-            'context' => self::CONTEXT_CRAFT,
-            'event_type' => 'blueprint_information_updated',
-        ],
-        BlueprintDeleted::class => [
-            'context' => self::CONTEXT_CRAFT,
-            'event_type' => 'blueprint_deleted',
-        ],
-        TeamCreated::class => [
-            'context' => self::CONTEXT_TEAM,
-            'event_type' => 'team_created',
-        ],
-        TeamDeleted::class => [
-            'context' => self::CONTEXT_TEAM,
-            'event_type' => 'team_deleted',
-        ],
-    ];
+    private const EVENT_DIR = 'App\\Core\\SharedKernel\\Domain\\Event\\';
 
     public static function getClassName(string $eventType, string $context): string
     {
-        foreach (self::MAPPING as $className => $mapping) {
-            if ($mapping['context'] === $context && $mapping['event_type'] === $eventType) {
-                return $className;
-            }
+        $className = self::EVENT_DIR.self::toUpperCamelCase($context).'\\'.self::toUpperCamelCase($eventType);
+
+        if (false === class_exists($className)) {
+            throw new \RuntimeException("Unknown class name for \"{$eventType}\" event type in \"{$context}\" context.");
         }
 
-        throw new \RuntimeException("Unknown class name for \"{$eventType}\" event type in \"{$context}\" context.");
+        return $className;
     }
 
     public static function getContext(string $eventClassName): string
     {
-        if (!array_key_exists($eventClassName, self::MAPPING)) {
-            throw new \RuntimeException("Unknown context for \"{$eventClassName}\".");
+        if (false === strpos($eventClassName, self::EVENT_DIR)) {
+            throw new \RuntimeException('Given class name is not an event.');
         }
 
-        return self::MAPPING[$eventClassName]['context'];
+        $eventContext = str_replace(self::EVENT_DIR, '', $eventClassName);
+        $eventContext = explode('\\', $eventContext)[0];
+
+        return self::toSnakeCase($eventContext);
     }
 
     public static function getEventType(string $eventClassName): string
     {
-        if (!array_key_exists($eventClassName, self::MAPPING)) {
-            throw new \RuntimeException("Unknown event type for \"{$eventClassName}\".");
+        if (false === strpos($eventClassName, self::EVENT_DIR)) {
+            throw new \RuntimeException('Given class name is not an event.');
         }
 
-        return self::MAPPING[$eventClassName]['event_type'];
+        $eventContext = str_replace(self::EVENT_DIR, '', $eventClassName);
+        $eventContext = explode('\\', $eventContext)[1];
+
+        return self::toSnakeCase($eventContext);
+    }
+
+    private static function toSnakeCase(string $value): string
+    {
+        $value = preg_replace('/[A-Z]/', '_\\0', lcfirst($value));
+
+        if (false === is_string($value)) {
+            throw new \RuntimeException('Cannot convert given string into snake case string.');
+        }
+
+        return strtolower($value);
+    }
+
+    private static function toUpperCamelCase(string $value): string
+    {
+        $value = preg_replace_callback('/(^|_|\.)+(.)/', function ($match) {
+            return ('.' === $match[1] ? '_' : '').strtoupper($match[2]);
+        }, $value);
+
+        if (false === is_string($value)) {
+            throw new \RuntimeException('Cannot convert given string into upper camel case string.');
+        }
+
+        return $value;
     }
 }
