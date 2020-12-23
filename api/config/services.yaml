@@ -17,6 +17,7 @@ services:
       - ../src/Core/SharedKernel/Domain
       - ../src/Kernel.php
       - ../src/Infrastructure/Persistence/*/Migration
+      - ../src/Infrastructure/Fixture
 
   _instanceof:
     App\Core\SharedKernel\Application\CommandHandlerInterface:

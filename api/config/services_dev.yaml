@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Infrastructure\Fixture\EventRecordLoader:
+    decorates: 'fidry_alice_data_fixtures.loader.simple'
+    arguments:
+      $decoratedLoader: '@App\Infrastructure\Fixture\EventRecordLoader.inner'
