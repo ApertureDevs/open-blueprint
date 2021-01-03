@@ -18,7 +18,7 @@ export class FavoriteCounterComponent implements OnInit {
   @Output() public favoriteToggle: EventEmitter<boolean> = new EventEmitter();
 
   public ngOnInit(): void {
-    this.favoritesCount = this.blueprint.favoritesCount
+    this.favoritesCount = this.blueprint.favoritesCount;
   }
 
   public onFavoriteToggle(): void {

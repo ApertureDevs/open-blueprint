@@ -59,7 +59,7 @@ export class MenuComponent implements OnInit, OnDestroy {
         icon: 'store',
         link: 'store',
       },
-    ]
+    ];
   }
 
   public ngOnInit(): void {

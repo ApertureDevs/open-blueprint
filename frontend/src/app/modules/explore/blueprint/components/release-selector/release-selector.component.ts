@@ -20,7 +20,7 @@ export class ReleaseSelectorComponent implements OnInit {
     const selectedRelease = this.availableReleases.find((availableRelease) => availableRelease.tag === tag);
 
     if (typeof selectedRelease === 'undefined') {
-      throw new Error('Unknown release selected.')
+      throw new Error('Unknown release selected.');
     }
     this.selectedRelease = selectedRelease;
     this.selectedReleaseTag = this.selectedRelease !== null ? this.selectedRelease.tag : null;

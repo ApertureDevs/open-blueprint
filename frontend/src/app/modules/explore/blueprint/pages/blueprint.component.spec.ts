@@ -8,7 +8,7 @@ class ActivatedRouteStub {
   get paramMap(): Observable<ParamMap> {
     return of({
       has(): boolean {
-        return true
+        return true;
       },
       get(): string {
         return '78af4a17-1bc6-4662-83b5-4115036c3912';
@@ -17,8 +17,8 @@ class ActivatedRouteStub {
         return [];
       },
       keys: ['id'],
-    })
-  };
+    });
+  }
 }
 
 describe('BlueprintComponent', () => {

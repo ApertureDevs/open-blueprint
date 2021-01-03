@@ -5,7 +5,7 @@ import { Release } from '@model/domain/blueprint/release';
 
 interface ListItem {
   quantity: number;
-  description: string
+  description: string;
 }
 
 @Component({
@@ -27,10 +27,10 @@ export class ComponentsListComponent implements OnChanges {
           quantity: listItem.quantity,
           description: listItem.component.description,
         },
-      )
-    })
+      );
+    });
 
-    this.dataSource = new MatTableDataSource<ListItem>(list)
+    this.dataSource = new MatTableDataSource<ListItem>(list);
     this.dataSource.sort = this.sort;
   }
 }

@@ -8,9 +8,9 @@ describe('Project App', () => {
     page = new AppPage();
   });
 
-  it('should display a browser title', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('OpenBlueprint');
+  it('should display a browser title', async () => {
+    await page.navigateTo();
+    expect(await page.getTitleText()).toEqual('OpenBlueprint');
   });
 
   afterEach(async () => {

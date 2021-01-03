@@ -380,13 +380,13 @@ export class BlueprintService {
         const blueprint: Blueprint | undefined = this.blueprints.find((item) => item.id === id);
 
         if (typeof blueprint === 'undefined') {
-          subscriber.error(new Error(`No Blueprint found with id \"${id}\"`))
+          subscriber.error(new Error(`No Blueprint found with id \"${id}\"`));
           subscriber.complete();
         }
 
         subscriber.next(this.blueprints[0]);
         subscriber.complete();
-      }, 1000)
+      }, 1000);
     });
   }
 
@@ -396,7 +396,7 @@ export class BlueprintService {
       setTimeout(() => {
         subscriber.next(this.blueprints);
         subscriber.complete();
-      }, 1000)
+      }, 1000);
     });
   }
 }

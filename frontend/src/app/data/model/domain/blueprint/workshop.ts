@@ -1,15 +1,15 @@
 import { Uuid } from '@model/shared/uuid';
 
-export type Workshop = ElectronicWorkshop | PrintWorkshop | AssemblyWorkshop
+export type Workshop = ElectronicWorkshop | PrintWorkshop | AssemblyWorkshop;
 
 export interface ElectronicWorkshop {
-  id: Uuid
+  id: Uuid;
 }
 
 export interface PrintWorkshop {
-  id: Uuid
+  id: Uuid;
 }
 
 export interface AssemblyWorkshop {
-  id: Uuid
+  id: Uuid;
 }

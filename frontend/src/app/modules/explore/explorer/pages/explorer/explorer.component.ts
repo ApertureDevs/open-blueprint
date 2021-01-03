@@ -20,7 +20,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     const subscription = this.blueprintService.getCollection().subscribe((blueprints) => this.blueprints = blueprints);
 
-    this.subscriptions.push(subscription)
+    this.subscriptions.push(subscription);
   }
 
   public ngOnDestroy(): void {
