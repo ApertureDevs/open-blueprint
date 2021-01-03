@@ -11,7 +11,7 @@ services:
       Doctrine\ORM\EntityManagerInterface $relationalModelEntityManager: '@doctrine.orm.relational_model_entity_manager'
 
   App\:
-    resource: '../src/*'
+    resource: '../src/'
     exclude:
       - ../src/Core/Component/*/Domain
       - ../src/Core/SharedKernel/Domain
