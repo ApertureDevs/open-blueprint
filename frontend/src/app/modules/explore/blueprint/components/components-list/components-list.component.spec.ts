@@ -14,7 +14,7 @@ describe('ComponentListComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

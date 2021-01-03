@@ -14,7 +14,7 @@ describe('UserBadgeComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

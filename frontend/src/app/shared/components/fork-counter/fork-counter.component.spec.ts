@@ -16,7 +16,7 @@ describe('ForkCounterComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

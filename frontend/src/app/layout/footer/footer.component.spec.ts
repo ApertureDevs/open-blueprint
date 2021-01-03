@@ -14,7 +14,7 @@ describe('FooterComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

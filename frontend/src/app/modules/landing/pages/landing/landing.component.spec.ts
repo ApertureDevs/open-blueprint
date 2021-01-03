@@ -13,7 +13,7 @@ describe('LandingComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

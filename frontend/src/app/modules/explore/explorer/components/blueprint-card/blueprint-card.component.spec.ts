@@ -15,7 +15,7 @@ describe('BlueprintCardComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -52,7 +52,7 @@ describe('BlueprintCardComponent', () => {
             status: MemberStatus.Enable,
             grants: [],
             invitation: null,
-        }],
+          }],
       },
       releases: [],
       createDate: new Date('2020-01-01'),

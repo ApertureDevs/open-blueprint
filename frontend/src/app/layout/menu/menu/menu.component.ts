@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(
+  public constructor(
     public menuService: MenuService,
   ) {
     this.items = [

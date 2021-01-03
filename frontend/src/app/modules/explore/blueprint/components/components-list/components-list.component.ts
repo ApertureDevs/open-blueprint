@@ -15,9 +15,9 @@ interface ListItem {
 })
 export class ComponentsListComponent implements OnChanges {
 
+  @ViewChild(MatSort, { static: true}) public sort!: MatSort;
   @Input() public release!: Release;
   public dataSource!: MatTableDataSource<ListItem>;
-  @ViewChild(MatSort, { static: true}) public sort!: MatSort;
 
   public ngOnChanges(): void {
     const list: ListItem[] = [];

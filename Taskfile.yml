@@ -181,14 +181,14 @@ tasks:
   frontend-ts-linter:
     desc: Apply frontend linter rules to Typescript sources
     cmds:
-      - docker-compose run --rm --no-deps frontend-cli npx tslint -p . --fix
+      - docker-compose run --rm --no-deps frontend-cli npx eslint 'src/**/*.{ts,html}' --fix
     deps:
       - frontend-dependencies
 
   frontend-ts-linter-check:
     desc: Check frontend linter rules to Typescript sources
     cmds:
-      - docker-compose run --rm --no-deps frontend-cli npx tslint -p .
+      - docker-compose run --rm --no-deps frontend-cli npx eslint 'src/**/*.{ts,html}'
     deps:
       - frontend-dependencies
 

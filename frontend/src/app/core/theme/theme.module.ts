@@ -55,7 +55,7 @@ import { CustomIconService } from './custom-icon.service';
   ],
 })
 export class ThemeModule {
-  constructor(
+  public constructor(
     private customIconService: CustomIconService,
   ) {
     this.customIconService.init();

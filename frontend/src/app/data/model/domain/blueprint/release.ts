@@ -10,7 +10,10 @@ export interface Release {
   changelog: string | null;
   requirements: {
     skills: Skill[];
-    components: { quantity: number, component: Component }[]
+    components: {
+      quantity: number;
+      component: Component;
+    }[];
   };
   size: Size;
   photos: string[];

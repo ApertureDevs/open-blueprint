@@ -13,7 +13,7 @@ export class ButtonComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(
+  public constructor(
     private menuService: MenuService,
   ) { }
 

@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   providedIn: 'root',
 })
 export class CustomIconService {
-  constructor(
+  public constructor(
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
   ) { }

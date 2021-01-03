@@ -5,17 +5,11 @@ import { Observable, of } from 'rxjs';
 import { BlueprintComponent } from './blueprint.component';
 
 class ActivatedRouteStub {
-  get paramMap(): Observable<ParamMap> {
+  public get paramMap(): Observable<ParamMap> {
     return of({
-      has(): boolean {
-        return true;
-      },
-      get(): string {
-        return '78af4a17-1bc6-4662-83b5-4115036c3912';
-      },
-      getAll(): string[] {
-        return [];
-      },
+      has: () => true,
+      get: () => '78af4a17-1bc6-4662-83b5-4115036c3912',
+      getAll: () => [],
       keys: ['id'],
     });
   }
@@ -38,7 +32,7 @@ describe('BlueprintComponent', () => {
         CUSTOM_ELEMENTS_SCHEMA,
       ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

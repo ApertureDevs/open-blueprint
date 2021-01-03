@@ -3,7 +3,7 @@ import { Label } from '@model/domain/issue/label';
 import { Member } from '@model/domain/team/member';
 import { User } from '@model/domain/user/user';
 import { Uuid } from '@model/shared/uuid';
-import { Status } from 'tslint/lib/runner';
+import { Status } from '@model/domain/issue/status';
 
 export interface Issue {
   id: Uuid;

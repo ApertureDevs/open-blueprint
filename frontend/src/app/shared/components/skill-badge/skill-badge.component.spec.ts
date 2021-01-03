@@ -10,7 +10,7 @@ describe('SkillBadgeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ SkillBadgeComponent ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

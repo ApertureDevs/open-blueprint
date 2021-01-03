@@ -9,13 +9,13 @@ import { Blueprint } from '@model/domain/blueprint/blueprint';
 export class FavoriteCounterComponent implements OnInit {
   @Input() public blueprint!: Blueprint;
   @Input() public isFavorite!: boolean;
+  @Output() public favoriteToggle: EventEmitter<boolean> = new EventEmitter();
   public favoritesCount!: number;
   public labelMapping = {
     '=0' : 'favorite',
     '=1' : 'favorite',
     other : 'favorites',
   };
-  @Output() public favoriteToggle: EventEmitter<boolean> = new EventEmitter();
 
   public ngOnInit(): void {
     this.favoritesCount = this.blueprint.favoritesCount;

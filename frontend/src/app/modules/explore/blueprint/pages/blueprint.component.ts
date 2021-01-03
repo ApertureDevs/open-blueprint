@@ -20,7 +20,7 @@ export class BlueprintComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(
+  public constructor(
     private route: ActivatedRoute,
     private blueprintService: BlueprintService,
   ) { }

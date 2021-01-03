@@ -13,7 +13,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(
+  public constructor(
     private blueprintService: BlueprintService,
   ) { }
 
