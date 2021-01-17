@@ -68,6 +68,10 @@
           "always-multiline"
         ],
         "import/order": "error",
+        "indent": [
+          "error",
+          2
+        ],
         "max-classes-per-file": [
           "error",
           1
