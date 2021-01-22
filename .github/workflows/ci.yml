@@ -120,9 +120,9 @@ jobs:
           task api-behat
       - name: Build Prod
         run: |
-          task frontend-build --summary
+          task api-build --summary
           BUILD_ENV=prod task api-build
       - name: Build Dev
         run: |
-          task frontend-build --summary
+          task api-build --summary
           BUILD_ENV=dev task api-build

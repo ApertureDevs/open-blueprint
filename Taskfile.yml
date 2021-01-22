@@ -32,7 +32,9 @@ tasks:
     desc: Check and fix sources
     cmds:
       - task: lint
+      - task: global-commit-linter-check
       - task: frontend-html-linter-check
+      - task: global-shell-linter-check
       - task: global-yaml-linter-check
       - task: global-markdown-linter-check
       - task: api-phpstan-check
@@ -55,9 +57,7 @@ tasks:
   lint:
     desc: Lint sources
     cmds:
-      - task: global-commit-linter-check
       - task: global-markdown-linter
-      - task: global-shell-linter-check
       - task: frontend-sass-linter
       - task: frontend-ts-linter
       - task: api-php-linter
